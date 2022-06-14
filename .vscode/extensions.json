@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "vue.volar",
+    "streetsidesoftware.code-spell-checker",
+    "vivaxy.vscode-conventional-commits",
+    "usernamehw.errorlens",
+    "mhutchie.git-graph",
+    "oderwat.indent-rainbow",
+    "esbenp.prettier-vscode",
+    "visualstudioexptteam.vscodeintellicode",
+    "ms-vsliveshare.vsliveshare-pack",
+    "dariofuzinato.vue-peek",
+    "octref.vetur"
+  ]
+}
