@@ -5,11 +5,12 @@
     "vivaxy.vscode-conventional-commits",
     "usernamehw.errorlens",
     "mhutchie.git-graph",
-    "oderwat.indent-rainbow",
     "esbenp.prettier-vscode",
     "visualstudioexptteam.vscodeintellicode",
     "ms-vsliveshare.vsliveshare-pack",
     "dariofuzinato.vue-peek",
-    "octref.vetur"
+    "octref.vetur",
+    "orta.vscode-jest",
+    "eamodio.gitlens"
   ]
 }
