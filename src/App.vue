@@ -1,7 +1,9 @@
-<script setup lang="ts">
+<script>
+export default {};
 </script>
 
 <template>
+  <router-view></router-view>
 </template>
 
 <style>
