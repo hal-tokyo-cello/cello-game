@@ -1,10 +1,10 @@
-import { createApp } from "vue";
-import { createRouter, createWebHashHistory } from "vue-router";
 import PrimeVue from "primevue/config";
+import { createApp } from "vue";
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 
 import App from "./App.vue";
 
-const routes = [];
+const routes: RouteRecordRaw[] = [];
 
 const router = createRouter({
   history: createWebHashHistory(),
