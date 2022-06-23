@@ -2,14 +2,18 @@
   <div class="main">
     <h1>クエスト一覧画面</h1>
     <div class="wrapper">
+      <!-- 各クエストを表示するボックス -->
       <div class="box" v-for="(list, key) in data" :key="key">
+        <!-- クエストのタイトル部分 -->
         <div class="title-block">
           <h4 class="title">{{ list.title }}</h4>
         </div>
         <div class="title-tri"></div>
 
+        <!-- クエストのジャンル表示部分 -->
         <p class="genre">{{ list.main }}</p>
 
+        <!-- クエストの経験値バッジ部分 -->
         <div class="point-badge">
           <p class="points">
             {{ list.point }}
