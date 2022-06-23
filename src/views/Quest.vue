@@ -73,6 +73,9 @@ export default {
 </script>
 
 <style>
+.main {
+  background-color: #f8f8f8;
+}
 .wrapper {
   width: 799px;
   margin: 0px auto;
@@ -86,6 +89,8 @@ export default {
   height: 115px;
   border: 1px solid #fc8c0d;
   margin-bottom: 40px;
+  overflow: hidden;
+  position: relative;
 }
 
 /*   box upper   */
@@ -114,6 +119,7 @@ export default {
 
 /*   box bottom   */
 .genre {
+  /* width: 100%; */
   margin-top: 1rem;
   text-align: center;
   font: normal normal bold 8px/10px Segoe UI;
@@ -121,8 +127,11 @@ export default {
   color: #707070;
 }
 .point-badge {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
   width: 44px;
-  height: 44px;
+  height: 43px;
   background: #71afe5 0% 0% no-repeat padding-box;
   border: 1px solid #ffffff;
   border-radius: 50%;
