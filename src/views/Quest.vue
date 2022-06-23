@@ -15,6 +15,8 @@
             {{ list.point }}
           </p>
         </div>
+
+        <Dialog header="Header" v-model:visible="display"> Content </Dialog>
       </div>
     </div>
   </div>
@@ -91,6 +93,7 @@ export default {
   margin-bottom: 40px;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
 }
 
 /*   box upper   */
