@@ -6,6 +6,7 @@ import "primevue/resources/themes/fluent-light/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 
+import Dialog from "primevue/dialog";
 import Quest from "./views/Quest.vue";
 
 const routes: RouteRecordRaw[] = [
