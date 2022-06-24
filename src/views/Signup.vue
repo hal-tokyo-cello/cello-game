@@ -1,6 +1,6 @@
 <template>
     <main>
-        <h1>ログイン</h1>
+        <h1>新規登録</h1>
         <span class="p-float-label">
 	        <InputText id="username" type="text" v-model="value" />
 	        <label for="username">メールアドレス</label>
@@ -16,6 +16,5 @@
     </main>
 </template>
 <script>
-export default {
-}
+export default {};
 </script>
