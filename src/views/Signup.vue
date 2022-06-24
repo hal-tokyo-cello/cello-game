@@ -35,6 +35,7 @@
   </main>
 </template>
 <script>
+import validator from "validator";
 export default {};
 </script>
 <style>

@@ -9,6 +9,9 @@
       <template v-if="mailFlag == true">
         <p class="error">※メールアドレスが入力されていません</p>
       </template>
+      <template v-if="mailValFlag == true">
+        <p class="error">※メールアドレスではありません</p>
+      </template>
       <span class="p-float-label spacer">
         <Password id="password" v-model="password" />
         <label for="password">パスワード</label>
@@ -44,6 +47,7 @@
   </main>
 </template>
 <script>
+import validator from "validator";
 export default {
   data() {
     return {
@@ -51,13 +55,21 @@ export default {
       password: "",
       mailFlag: false,
       passFlag: false,
+      mailValFlag: false,
     };
   },
   methods: {
     Signin() {
       this.mailFlag = false;
       this.passFlag = false;
+      this.mailValFlag = false;
+      //入力判定
       if (this.mail.length && this.password.length) {
+        //メール正規表現
+        if (validator.isEmail(this.mail)) {
+        } else {
+          this.mailValFlag = true;
+        }
       } else {
         if (this.mail.length == 0) {
           this.mailFlag = true;
