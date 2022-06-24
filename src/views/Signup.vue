@@ -28,7 +28,7 @@
       <Button label="サインアップ" />
     </div>
     <div class="link">
-      <router-link style="text-decoration: none" to="/login">
+      <router-link style="text-decoration: none" to="/signin">
         <Button label="サインインはこちら" class="p-button-link p-button-sm" />
       </router-link>
     </div>

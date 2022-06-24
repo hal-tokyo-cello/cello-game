@@ -2,7 +2,7 @@ import PrimeVue from "primevue/config";
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import App from "./App.vue";
-import Login from "./views/Login.vue";
+import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
 import Varification from "./views/Varification.vue";
 import "primevue/resources/themes/fluent-light/theme.css";
@@ -16,7 +16,7 @@ import Button from 'primevue/button';
 
 
 const routes: RouteRecordRaw[] = [
-  { path: '/login', name: 'login', component: Login },
+  { path: '/signin', name: 'signin', component: Signin },
   { path: '/signup', name: 'signup', component: Signup },
   { path: '/varification', name: 'varification', component: Varification },
 ];
