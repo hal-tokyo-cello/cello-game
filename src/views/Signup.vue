@@ -8,7 +8,12 @@
       </span>
       <span class="p-float-label spacer">
         <Password id="password" v-model="value11" />
-        <label for="password">パスワード</label>
+        <label for="password"
+          >パスワード
+          <span style="font-size: 12px">
+            ※半角英数字記号を含む8文字以上32文字以下
+          </span>
+        </label>
       </span>
       <span class="p-float-label spacer">
         <Password id="checkPass" v-model="value11" />
@@ -21,6 +26,11 @@
         <Button label="キャンセル" class="p-button-outlined" />
       </div>
       <Button label="サインアップ" />
+    </div>
+    <div class="link">
+      <router-link style="text-decoration: none" to="/login">
+        <Button label="サインインはこちら" class="p-button-link p-button-sm" />
+      </router-link>
     </div>
   </main>
 </template>
@@ -57,5 +67,9 @@ main {
 }
 .spacer {
   margin-top: 50px;
+}
+.link {
+  margin-top: 20px;
+  text-align: center;
 }
 </style>
