@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1>ログイン</h1>
+    <h1>サインイン</h1>
     <div class="input">
       <span class="p-float-label spacer">
         <InputText id="email" type="text" v-model="mail" />
@@ -60,25 +60,30 @@ export default {
   },
   methods: {
     Signin() {
+      var error = false;
       this.mailFlag = false;
       this.passFlag = false;
       this.mailValFlag = false;
       //入力判定
-      if (this.mail.length && this.password.length) {
-        //メール正規表現
+      if (this.mail.length) {
         if (validator.isEmail(this.mail)) {
         } else {
           this.mailValFlag = true;
+          error = true;
         }
       } else {
-        if (this.mail.length == 0) {
-          this.mailFlag = true;
-          if (this.password.length == 0) {
-            this.passFlag = true;
-          }
-        } else {
-          this.passFlag = true;
-        }
+        this.mailFlag = true;
+        error = true;
+      }
+      if (this.password.length == 0) {
+        this.passFlag = true;
+        error = true;
+      }
+      if (error) {
+        return;
+      } else {
+        //API処理
+        return;
       }
     },
   },

@@ -1,10 +1,11 @@
 <template>
   <main>
-    <h1>二段階認証</h1>
+    <h1>ワンタイムパス入力画面</h1>
+    <p class="text">**********に4桁の認証コードを送信しました。</p>
     <div class="input">
       <span class="p-float-label spacer">
         <InputText id="email" type="text" v-model="value" />
-        <label for="email">メールアドレス</label>
+        <label for="email">メール記載の認証コードを入力してください。</label>
       </span>
     </div>
     <div class="buttonArea">
@@ -20,6 +21,10 @@ export default {};
 </script>
 <style>
 h1 {
+  text-align: center;
+}
+.text {
+  margin-top: 50px;
   text-align: center;
 }
 main {

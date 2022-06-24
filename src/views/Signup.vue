@@ -3,11 +3,18 @@
     <h1>新規登録</h1>
     <div class="input">
       <span class="p-float-label spacer">
-        <InputText id="email" type="text" v-model="value" />
+        <InputText id="email" type="text" v-model="mail" />
         <label for="username">メールアドレス</label>
       </span>
+      <!-- メールアドレスエラー -->
+      <template v-if="mailFlag == true">
+        <p class="error">※メールアドレスが入力されていません</p>
+      </template>
+      <template v-if="mailValFlag == true">
+        <p class="error">※メールアドレスではありません</p>
+      </template>
       <span class="p-float-label spacer">
-        <Password id="password" v-model="value11" />
+        <Password id="password" v-model="password" />
         <label for="password"
           >パスワード
           <span style="font-size: 12px">
@@ -15,17 +22,28 @@
           </span>
         </label>
       </span>
+      <!-- パスワードエラー -->
+      <template v-if="passFlag == true">
+        <p class="error">※パスワードが入力されていません</p>
+      </template>
+      <template v-if="passwordCheckFlag == true">
+        <p class="error">※確認用パスワードと一致しません</p>
+      </template>
       <span class="p-float-label spacer">
-        <Password id="checkPass" v-model="value11" />
+        <Password id="checkPass" v-model="confPassword" />
         <label for="password">確認用パスワード</label>
       </span>
+      <!-- 確認パスワードエラー -->
+      <template v-if="confPassFlag == true">
+        <p class="error">※確認用パスワードが入力されていません</p>
+      </template>
     </div>
 
     <div class="buttonArea">
       <div class="button">
         <Button label="キャンセル" class="p-button-outlined" />
       </div>
-      <Button label="サインアップ" />
+      <Button label="サインアップ" @click="Signup()" />
     </div>
     <div class="link">
       <router-link style="text-decoration: none" to="/signin">
@@ -36,7 +54,67 @@
 </template>
 <script>
 import validator from "validator";
-export default {};
+export default {
+  data() {
+    return {
+      mail: "",
+      password: "",
+      confPassword: "",
+      mailFlag: false,
+      passFlag: false,
+      confPassFlag: false,
+      mailValFlag: false,
+      passwordCheckFlag: false,
+    };
+  },
+  methods: {
+    Signup() {
+      var error = false;
+      this.mailFlag = false;
+      this.passFlag = false;
+      this.mailValFlag = false;
+      this.confPassFlag = false;
+      this.passwordCheckFlag = false;
+
+      //入力判定
+      if (this.mail.length) {
+        if (validator.isEmail(this.mail)) {
+        } else {
+          this.mailValFlag = true;
+          error = true;
+        }
+      } else {
+        this.mailFlag = true;
+        error = true;
+      }
+      //パスワード入力判定
+      if (this.password.length == 0) {
+        this.passFlag = true;
+        error = true;
+      } else {
+        //確認パスワード入力判定
+        if (this.confPassword.length == 0) {
+          this.confPassFlag = true;
+          error = true;
+        } else {
+          if (this.password == this.confPassword) {
+            //API処理
+          } else {
+            this.passwordCheckFlag = true;
+            error = true;
+          }
+        }
+      }
+      if (error) {
+        return;
+      } else {
+        //API処理
+        this.$router.push("/varification");
+        return;
+      }
+    },
+  },
+};
 </script>
 <style>
 h1 {
