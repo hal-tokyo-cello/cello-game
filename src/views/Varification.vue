@@ -1,26 +1,17 @@
 <template>
   <main>
-    <h1>新規登録</h1>
+    <h1>二段階認証</h1>
     <div class="input">
       <span class="p-float-label spacer">
         <InputText id="email" type="text" v-model="value" />
-        <label for="username">メールアドレス</label>
-      </span>
-      <span class="p-float-label spacer">
-        <Password id="password" v-model="value11" />
-        <label for="password">パスワード</label>
-      </span>
-      <span class="p-float-label spacer">
-        <Password id="checkPass" v-model="value11" />
-        <label for="password">確認用パスワード</label>
+        <label for="email">メールアドレス</label>
       </span>
     </div>
-
     <div class="buttonArea">
       <div class="button">
         <Button label="キャンセル" class="p-button-outlined" />
       </div>
-      <Button label="サインアップ" />
+      <Button label="送信" />
     </div>
   </main>
 </template>
@@ -43,9 +34,7 @@ main {
   justify-content: center;
 }
 
-#email,
-#password,
-#checkPass {
+#email {
   width: 600px;
 }
 .input {
