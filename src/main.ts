@@ -9,7 +9,7 @@ import Reset from "./views/Reset.vue"
 import App from "./App.vue";
 
 const routes: RouteRecordRaw[] = [
-
+  { path: '/reset', name: 'reset', component: Reset },
 ];
 
 const router = createRouter({
