@@ -21,7 +21,7 @@ describe("test access helper api", () => {
     accessApi(endPoint, method, body);
 
     expect(global.fetch).toBeCalledTimes(1);
-    expect(global.fetch).toBeCalledWith(`${ServerHost}/${endPoint}`, {
+    expect(global.fetch).toBeCalledWith(`${ServerHost}/api/${endPoint}`, {
       method: method,
       body: JSON.stringify(body),
     });

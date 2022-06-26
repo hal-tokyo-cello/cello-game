@@ -28,7 +28,7 @@ export const accessApi = <T, U>(
   body: T,
   respondValidator?: (res: Response) => boolean | string
 ): Promise<U> => {
-  return fetch(`${ServerHost}/${endPoint}`, {
+  return fetch(`${ServerHost}/api/${endPoint}`, {
     body: JSON.stringify(body),
     method: method,
   }).then((res) => {
