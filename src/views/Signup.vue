@@ -131,12 +131,6 @@ main {
   display: flex;
   justify-content: center;
 }
-
-#email,
-#password,
-#checkPass {
-  width: 600px;
-}
 .input {
   width: 600px;
   margin: 0 auto;

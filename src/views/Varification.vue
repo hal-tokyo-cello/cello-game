@@ -38,10 +38,6 @@ main {
   display: flex;
   justify-content: center;
 }
-
-#email {
-  width: 600px;
-}
 .input {
   width: 600px;
   margin: 0 auto;

@@ -104,11 +104,6 @@ main {
   display: flex;
   justify-content: center;
 }
-
-#email,
-#password {
-  width: 600px;
-}
 .input {
   width: 600px;
   margin: 0 auto;
