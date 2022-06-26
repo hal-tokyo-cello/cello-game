@@ -116,7 +116,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 h1 {
   text-align: center;
 }
@@ -150,5 +150,10 @@ main {
 .link {
   margin-top: 20px;
   text-align: center;
+}
+.error {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: #f00;
 }
 </style>
