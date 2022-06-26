@@ -24,8 +24,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - uses: webfactory/ssh-agent@v0.2.0
-      with:
-        ssh-private-key: ${{ secrets.KC_SSH_PK }} 
+        with:
+          ssh-private-key: ${{ secrets.KC_SSH_PK }}
 
       - name: Install & Test
         run: |
