@@ -2,7 +2,11 @@ import {
   QuestSummaryListRequest,
   QuestSummaryListResponse,
   QuestSummaryRequest,
-  QuestSummaryResponse
+  QuestSummaryResponse,
+  SignInRequest,
+  SignInResponse,
+  SignUpRequest,
+  SignUpResponse,
 } from "cello-core/application";
 
 /**
@@ -63,4 +67,12 @@ export const fetchQuestSummary = (
 export const fetchQuestSummaryList = (
   req: QuestSummaryListRequest
 ): Promise<QuestSummaryListResponse> => accessApi("quests", "GET", req);
+// #endregion
+
+// #region 認証関連
+export const signIn = (req: SignInRequest): Promise<SignInResponse> =>
+  accessApi("signin", "POST", req);
+
+export const signUp = (req: SignUpRequest): Promise<SignUpResponse> =>
+  accessApi("signup", "POST", req);
 // #endregion
