@@ -5,8 +5,10 @@ import "primevue/resources/themes/fluent-light/theme.css"
 import "primevue/resources/primevue.min.css"
 import "primeicons/primeicons.css"
 import Reset from "./views/Reset.vue"
-
 import App from "./App.vue";
+import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
+import Button from 'primevue/button';
 
 const routes: RouteRecordRaw[] = [
   { path: '/reset', name: 'reset', component: Reset },
@@ -19,3 +21,7 @@ const router = createRouter({
 
 const app = createApp(App)
 app.use(router).use(PrimeVue).mount("#app");
+app.component("InputText", InputText);
+app.component("Password", Password);
+app.component("Button", Button);
+
