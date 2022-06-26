@@ -7,4 +7,8 @@ export default {};
 </template>
 
 <style>
+#password,
+#checkPass {
+  width: 600px;
+}
 </style>

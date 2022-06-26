@@ -82,9 +82,6 @@ export default {
           }
         }
       }
-      if (error) {
-        return;
-      }
       return;
     },
   },
@@ -105,11 +102,6 @@ main {
   display: flex;
   justify-content: center;
 }
-
-#password,
-#checkPass {
-  width: 600px;
-}
 .input {
   width: 600px;
   margin: 0 auto;
@@ -125,6 +117,8 @@ main {
   text-align: center;
 }
 .error {
+  margin: 4px 0 0 0;
+  font-size: 12px;
   color: #f00;
 }
 </style>
