@@ -17,17 +17,15 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.KC_PAT }}
 
       - name: Prepare Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
-      # - name: Setup PAT
-      #   run: |
-      #     git config --global url."https://${{ secrets.KC_PAT }}@github.com/".insteadOf ssh://git@github.com/
+      - uses: webfactory/ssh-agent@v0.2.0
+      with:
+        ssh-private-key: ${{ secrets.KC_SSH_PK }} 
 
       - name: Install & Test
         run: |
