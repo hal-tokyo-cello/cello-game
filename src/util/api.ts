@@ -1,3 +1,10 @@
+import {
+  QuestSummaryListRequest,
+  QuestSummaryListResponse,
+  QuestSummaryRequest,
+  QuestSummaryResponse
+} from "cello-core/application";
+
 /**
  * APIサーバーのホストのベースURL。
  */
@@ -22,11 +29,11 @@ export const accessApi = <T, U>(
     method: method,
   }).then((res) => {
     if (respondValidator === undefined) {
-    if (res.status != 200) {
+      if (res.status != 200) {
         return Promise.reject(res.statusText);
-    }
+      }
     } else {
-    const valid = respondValidator(res);
+      const valid = respondValidator(res);
       if (typeof valid === "string") {
         return Promise.reject(valid);
       } else if (!valid) {
@@ -37,3 +44,23 @@ export const accessApi = <T, U>(
     return res.json();
   });
 };
+
+// #region クエスト関連
+/**
+ * クエスト一覧画にクエストの概要を取得する。
+ * @param req クエスト概要を取得するためのリクエストbody
+ * @returns クエスト概要APIからのレスポンス
+ */
+export const fetchQuestSummary = (
+  req: QuestSummaryRequest
+): Promise<QuestSummaryResponse> => accessApi("quests", "GET", req);
+
+/**
+ * クエスト一覧画面にクエストの概要リストを取得する。
+ * @param req クエスト概要リストを取得するためのリクエストbody
+ * @returns クエスト概要リストAPIからのレスポンス
+ */
+export const fetchQuestSummaryList = (
+  req: QuestSummaryListRequest
+): Promise<QuestSummaryListResponse> => accessApi("quests", "GET", req);
+// #endregion
