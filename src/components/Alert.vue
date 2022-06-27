@@ -1,0 +1,107 @@
+<template>
+  <div id="modal">
+    <div id="modal-content" class="modal">
+      <p id="modal-message" class="modal__message">{{ message }}</p>
+      <button class="modal__cancel" @click="returnFalse()">キャンセル</button>
+      <button class="modal__btn" @click="returnTrue()">退会する</button>
+    </div>
+    <div id="modal-overlay"></div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Modal",
+  props: ["message"],
+  methods: {
+    returnFalse() {
+      this.$emit("execute-method", false);
+    },
+    returnTrue() {
+      this.$emit("execute-method", true);
+    },
+  },
+};
+</script>
+
+<style scoped>
+.modal {
+  padding: 10px 20px;
+  border: 2px solid #ff8c00;
+  background: #ffffff;
+  z-index: 2;
+  display: block;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  height: 333px;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+}
+
+.modal__message {
+  color: #d83801;
+  margin-top: 100px;
+  font-size: 24px;
+}
+
+.modal__cancel {
+  display: inline-block;
+  margin: 0 auto;
+  margin-right: 20px;
+  text-decoration: none;
+  width: 150px;
+  height: 50px;
+  text-decoration: none;
+  color: #ff8c00;
+  border: solid 2px #ff8c00;
+  border-radius: 3px;
+  transition: 0.4s;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 15px;
+  background-color: #faebd7;
+}
+
+.modal__cancel:hover {
+  background: #ff8c00;
+  color: white;
+  cursor: pointer;
+}
+
+.modal__btn {
+  display: inline-block;
+  margin: 0 auto;
+  text-decoration: none;
+  width: 150px;
+  height: 50px;
+  text-decoration: none;
+  color: #ff8c00;
+  border: solid 2px #ff8c00;
+  border-radius: 3px;
+  transition: 0.4s;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 15px;
+  background-color: #faebd7;
+}
+
+.modal__btn:hover {
+  background: #ff8c00;
+  color: white;
+  cursor: pointer;
+}
+
+#modal-overlay {
+  z-index: 1;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+</style>
