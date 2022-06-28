@@ -29,6 +29,9 @@
         </div>
       </div>
     </div>
+    <div align="right" class="Withdrawal">
+      <Button label="▶退会する" class="p-button-outlined withdrawal_btn" />
+    </div>
   </div>
 </template>
 
@@ -37,7 +40,7 @@ import Avatar from "primevue/avatar";
 export default {
   data() {
     return {
-      username: "西田果韻",
+      username: "セパ拓郎",
       mail: "sepatakuro@gmail.com",
     };
   },
@@ -87,5 +90,9 @@ export default {
 
 .btn {
   margin: 5px;
+}
+
+.withdrawal_btn {
+  margin: 40px 5px 0px 5px;
 }
 </style>
