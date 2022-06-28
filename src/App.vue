@@ -25,12 +25,11 @@ export default {
 };
 </script>
 <style>
-<<<<<<< HEAD
 #email,
 #password,
 #checkPass {
   width: 600px;
-=======
+}
 .wrap {
   background: #f8f8f8;
   display: flex;
@@ -56,6 +55,5 @@ footer {
   margin-top: auto;
   text-align: center;
   padding: 10px 0;
->>>>>>> origin/dev
 }
 </style>
