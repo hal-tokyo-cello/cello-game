@@ -12,8 +12,7 @@ import {
 /**
  * APIサーバーのホストのベースURL。
  */
-export const ServerHost =
-  "https://3421802a-d0a1-4d8d-84e3-9f215c177961.mock.pstmn.io";
+export const ServerHost = import.meta.env.VITE_API_SERVER;
 
 /**
  * API問い合わせ用のfetchヘルパー関数。
