@@ -7,12 +7,12 @@ on:
       - main
 
 env:
-  STORAGE_ACCOUNT_NAME: "infrag01storage01" # ストレージアカウントの名前。書き換えてください
-  CDN_PROFILE_NAME: "HAL-TH22-IH4C-IW4C-G01-CDN01" # CDNの名前。書き換えてください
-  CDN_ENDPOINT: "cello-infra01" # エンドポイントの名前。書き換えてください
-  RESOURCE_GROUP: "HAL-TH22-RG-IH4C-IW4C-G01" # リソースグループを指定
-  BLOB_STORAGE_PACKAGE_PATH: "." # アップロードするディレクトリ。書き換えてください（現在はルートディレクトリすべてをデプロイしている）
-  NODE_VERSION: "16.x" # nodeのバージョンを指定。書き換えてください
+  STORAGE_ACCOUNT_NAME: "th22ih4ciw4cg01celloblob"
+  CDN_PROFILE_NAME: "th22ih4ciw4cg01celloCdn"
+  CDN_ENDPOINT: "th22ih4ciw4cg01celloEndpoint"
+  RESOURCE_GROUP: "HAL-TH22-RG-IH4C-IW4C-G01"
+  BLOB_STORAGE_PACKAGE_PATH: "." # アップロードするディレクトリ。（現在はルートディレクトリをデプロイ）
+  NODE_VERSION: "16.x"
 
 jobs:
   build:
@@ -41,7 +41,7 @@ jobs:
       - name: Login Azure
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }} # 認証情報。書き換えてください
+          creds: ${{ secrets.AZURE_STORAGE_CREDENTIALS }} # プロファイラ
 
       - name: Upload to blob storage
         uses: azure/CLI@v1
