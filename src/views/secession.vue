@@ -65,7 +65,7 @@ export default {
 main {
   width: 960px;
   margin: 0 auto;
-  padding-top: 70px;
+  padding-top: 10px;
   background: #f8f8f8;
 }
 
@@ -80,12 +80,18 @@ main {
 }
 
 .user_m {
-  margin-left: 40px;
+  margin-left: 125px;
+  font-size: 24px;
 }
 
 .mail {
   font-size: 24px;
   color: #707070;
+}
+
+.mail_m {
+  margin-left: 80px;
+  font-size: 24px;
 }
 
 .cancel_btn {
@@ -127,15 +133,18 @@ main {
 
 .two_d {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-left: 280px;
 }
 
 .three_d {
   text-align: center;
-  margin-bottom: 60px;
-  white-space: nowrap;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 280px;
 }
 
 .four_d {
