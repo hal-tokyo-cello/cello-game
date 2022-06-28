@@ -53,12 +53,14 @@ export const accessApi = <T, U>(
 // #region クエスト関連
 /**
  * クエスト一覧画にクエストの概要を取得する。
+ * @param id クエストのID
  * @param req クエスト概要を取得するためのリクエストbody
  * @returns クエスト概要APIからのレスポンス
  */
 export const fetchQuestSummary = (
+  id: string | number,
   req: QuestSummaryRequest
-): Promise<QuestSummaryResponse> => accessApi("quests", "GET", req);
+): Promise<QuestSummaryResponse> => accessApi(`quests/${id}`, "GET", req);
 
 /**
  * クエスト一覧画面にクエストの概要リストを取得する。
