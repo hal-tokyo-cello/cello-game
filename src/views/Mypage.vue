@@ -53,13 +53,21 @@ export default {
   top: 0px;
   left: 0px;
   opacity: 1;
-  margin: auto;
-  width: 60%;
+  margin: 0 auto;
+  width: 960px;
 }
 
 .box {
   display: flex;
   justify-content: space-between;
+}
+
+.image {
+  width: 240px;
+}
+
+.change {
+  width: 720px;
 }
 
 .username {
