@@ -27,7 +27,7 @@ export default {
 <style scoped>
 .modal {
   padding: 10px 20px;
-  border: 2px solid #ff8c00;
+  border: 1px solid #ff8c00;
   background: #ffffff;
   z-index: 2;
   display: block;
@@ -38,13 +38,12 @@ export default {
   width: 700px;
   height: 333px;
   transform: translate(-50%, -50%);
-  border-radius: 10px;
 }
 
 .modal__message {
   color: #d83801;
   margin-top: 100px;
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .modal__cancel {
@@ -55,20 +54,12 @@ export default {
   width: 150px;
   height: 50px;
   text-decoration: none;
-  color: #ff8c00;
-  border: solid 2px #ff8c00;
-  border-radius: 3px;
+  border: solid 1px #ff8c00;
   transition: 0.4s;
   text-align: center;
   vertical-align: middle;
   font-size: 15px;
-  background-color: #faebd7;
-}
-
-.modal__cancel:hover {
-  background: #ff8c00;
-  color: white;
-  cursor: pointer;
+  background-color: #ffffff;
 }
 
 .modal__btn {
@@ -78,20 +69,13 @@ export default {
   width: 150px;
   height: 50px;
   text-decoration: none;
-  color: #ff8c00;
-  border: solid 2px #ff8c00;
-  border-radius: 3px;
+  color: #ffffff;
+  border: solid 1px #ff8c00;
   transition: 0.4s;
   text-align: center;
   vertical-align: middle;
   font-size: 15px;
-  background-color: #faebd7;
-}
-
-.modal__btn:hover {
-  background: #ff8c00;
-  color: white;
-  cursor: pointer;
+  background-color: #ff8c00;
 }
 
 #modal-overlay {
