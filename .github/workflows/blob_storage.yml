@@ -1,6 +1,5 @@
 name: blob_storage
 
-# main ブランチに何らかの commit が追加されたら走らせる
 on:
   push:
     branches:
