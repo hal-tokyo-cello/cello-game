@@ -9,14 +9,9 @@ import Forget from "./views/Forget.vue"
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 
-<<<<<<< HEAD
 const routes: RouteRecordRaw[] = [
   { path: "/forget", name: "forget", component: Forget }
 ];
-=======
-
-const routes: RouteRecordRaw[] = [];
->>>>>>> origin/dev
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -24,10 +19,6 @@ const router = createRouter({
 });
 
 const app = createApp(App)
-<<<<<<< HEAD
 app.use(router).use(PrimeVue).mount("#app");
 app.component("InputText", InputText);
 app.component("Button", Button);
-=======
-app.use(router).use(PrimeVue).mount("#app");
->>>>>>> origin/dev
