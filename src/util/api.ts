@@ -12,7 +12,8 @@ import {
 /**
  * APIサーバーのホストのベースURL。
  */
-export const ServerHost = "";
+export const ServerHost =
+  "https://3421802a-d0a1-4d8d-84e3-9f215c177961.mock.pstmn.io";
 
 /**
  * API問い合わせ用のfetchヘルパー関数。
@@ -52,12 +53,14 @@ export const accessApi = <T, U>(
 // #region クエスト関連
 /**
  * クエスト一覧画にクエストの概要を取得する。
+ * @param id クエストのID
  * @param req クエスト概要を取得するためのリクエストbody
  * @returns クエスト概要APIからのレスポンス
  */
 export const fetchQuestSummary = (
+  id: string | number,
   req: QuestSummaryRequest
-): Promise<QuestSummaryResponse> => accessApi("quests", "GET", req);
+): Promise<QuestSummaryResponse> => accessApi(`quests/${id}`, "GET", req);
 
 /**
  * クエスト一覧画面にクエストの概要リストを取得する。
