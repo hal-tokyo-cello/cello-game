@@ -94,4 +94,7 @@ main {
   font-size: 12px;
   color: #f00;
 }
+#email {
+  width: 600px;
+}
 </style>
