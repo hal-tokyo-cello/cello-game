@@ -15,16 +15,75 @@
             {{ list.point }}
           </p>
         </div>
-
-        <Dialog header="Header" v-model:visible="display"> Content </Dialog>
       </div>
     </div>
+  </div>
+
+  <!-- test -->
+  <div id="app">
+    <h5>Basic</h5>
+    <p-button
+      label="Show"
+      icon="pi pi-external-link"
+      @click="openBasic"
+    ></p-button>
+    <p-dialog
+      header="Header"
+      v-model:visible="displayBasic"
+      :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
+      :style="{ width: '50vw' }"
+    >
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      <template #footer>
+        <p-button
+          label="No"
+          icon="pi pi-times"
+          @click="closeBasic"
+          class="p-button-text"
+        ></p-button>
+        <p-button
+          label="Yes"
+          icon="pi pi-check"
+          @click="closeBasic"
+          autofocus
+        ></p-button>
+      </template>
+    </p-dialog>
   </div>
 </template>
 
 <script>
+// test
+const App = {
+  setup() {
+    const displayBasic = ref(false);
+
+    const openBasic = () => {
+      displayBasic.value = true;
+    };
+
+    return {
+      displayBasic,
+      openBasic,
+    };
+  },
+  components: {
+    "p-dialog": primevue.dialog,
+    "p-button": primevue.button,
+  },
+};
+
 export default {
   name: "Quest",
+  display: false,
   data() {
     return {
       data: [
@@ -146,5 +205,14 @@ export default {
   font: normal normal bold 16px/27px Tsukushi A Round Gothic;
   letter-spacing: 0px;
   color: #ffffff;
+}
+
+/* test */
+.p-button {
+  margin: 0.3rem 0.5rem;
+  min-width: 10rem;
+}
+.p-dialog .p-button {
+  min-width: 6rem;
 }
 </style>
