@@ -29,7 +29,7 @@ export const accessApi = <T, U>(
   method: "GET" | "POST",
   body: T,
   respondValidator?: (res: AxiosResponse<U>) => boolean | string
-): Promise<U | string> => {
+): Promise<U> => {
   return axios({
     method: method,
     url: `${ServerHost}/api/${endPoint}`,
@@ -44,7 +44,7 @@ export const accessApi = <T, U>(
       if (typeof valid === "string") {
         return Promise.reject(valid);
       } else if (!valid) {
-        return Promise.resolve(res.statusText);
+        return Promise.reject(res.statusText);
       }
     }
 
@@ -62,8 +62,7 @@ export const accessApi = <T, U>(
 export const fetchQuestSummary = (
   id: string | number,
   req: QuestSummaryRequest
-): Promise<QuestSummaryResponse | string> =>
-  accessApi(`quests/${id}`, "GET", req);
+): Promise<QuestSummaryResponse> => accessApi(`quests/${id}`, "GET", req);
 
 /**
  * クエスト一覧画面にクエストの概要リストを取得する。
@@ -72,14 +71,13 @@ export const fetchQuestSummary = (
  */
 export const fetchQuestSummaryList = (
   req: QuestSummaryListRequest
-): Promise<QuestSummaryListResponse | string> =>
-  accessApi("quests", "GET", req);
+): Promise<QuestSummaryListResponse> => accessApi("quests", "GET", req);
 // #endregion
 
 // #region 認証関連
-export const signIn = (req: SignInRequest): Promise<SignInResponse | string> =>
+export const signIn = (req: SignInRequest): Promise<SignInResponse> =>
   accessApi("signin", "POST", req);
 
-export const signUp = (req: SignUpRequest): Promise<SignUpResponse | string> =>
+export const signUp = (req: SignUpRequest): Promise<SignUpResponse> =>
   accessApi("signup", "POST", req);
 // #endregion
