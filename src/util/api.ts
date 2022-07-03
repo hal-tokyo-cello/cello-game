@@ -13,7 +13,7 @@ import {
  * APIサーバーのホストのベースURL。
  */
 export const ServerHost =
-  "https://3421802a-d0a1-4d8d-84e3-9f215c177961.mock.pstmn.io";
+  "https://5355e573-a35a-4859-af9d-475ba909dbb6.mock.pstmn.io";
 
 /**
  * API問い合わせ用のfetchヘルパー関数。
@@ -29,7 +29,7 @@ export const accessApi = <T, U>(
   body: T,
   respondValidator?: (res: Response) => boolean | string
 ): Promise<U> => {
-  return fetch(`${ServerHost}/api/${endPoint}`, {
+  return fetch(`${ServerHost}/${endPoint}`, {
     body: JSON.stringify(body),
     method: method,
   }).then((res) => {
