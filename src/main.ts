@@ -21,5 +21,5 @@ const router = createRouter({
   routes: routes,
 });
 
-export default router;
-const app = createApp(App).use(router).use(PrimeVue).mount("#app");
+const app = createApp(App);
+app.use(router).use(PrimeVue).mount("#app");
