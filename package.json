@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "cello-core": "github:hal-tokyo-cello/cello-core",
     "primeicons": "^5.0.0",
     "primevue": "^3.13.1",
