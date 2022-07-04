@@ -35,7 +35,7 @@ export const accessApi = <T, U>(
   return axios({
 
     method: method,
-    url: `${ServerHost}/api/${endPoint}`,
+    url: `${ServerHost}/${endPoint}`,
     data: body,
   }).then((res: AxiosResponse<U>) => {
     if (respondValidator === undefined) {
