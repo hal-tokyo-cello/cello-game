@@ -13,8 +13,9 @@ import {
 /**
  * APIサーバーのホストのベースURL。
  */
-export const ServerHost =
-  "https://5355e573-a35a-4859-af9d-475ba909dbb6.mock.pstmn.io";
+
+export const ServerHost = import.meta.env.VITE_API_SERVER;
+
 
 /**
  * API問い合わせ用のfetchヘルパー関数。
@@ -34,7 +35,7 @@ export const accessApi = <T, U>(
   return axios({
 
     method: method,
-    url: `${ServerHost}/api/${endPoint}`,
+    url: `${ServerHost}/${endPoint}`,
     data: body,
   }).then((res: AxiosResponse<U>) => {
     if (respondValidator === undefined) {
