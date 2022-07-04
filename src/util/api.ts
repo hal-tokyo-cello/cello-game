@@ -14,7 +14,7 @@ import {
  * APIサーバーのホストのベースURL。
  */
 export const ServerHost =
-  "https://3421802a-d0a1-4d8d-84e3-9f215c177961.mock.pstmn.io";
+  "https://5355e573-a35a-4859-af9d-475ba909dbb6.mock.pstmn.io";
 
 /**
  * API問い合わせ用のfetchヘルパー関数。
@@ -30,7 +30,9 @@ export const accessApi = <T, U>(
   body: T,
   respondValidator?: (res: AxiosResponse<U>) => boolean | string
 ): Promise<U> => {
+
   return axios({
+
     method: method,
     url: `${ServerHost}/api/${endPoint}`,
     data: body,
