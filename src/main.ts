@@ -6,8 +6,6 @@ import "primevue/resources/themes/fluent-light/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 
-import Dialog from "primevue/dialog";
-import Button from "primevue/button";
 import Quest from "./views/Quest.vue";
 
 const routes: RouteRecordRaw[] = [
@@ -23,5 +21,5 @@ const router = createRouter({
   routes: routes,
 });
 
-export default router;
-const app = createApp(App).use(router).use(PrimeVue).mount("#app");
+const app = createApp(App);
+app.use(router).use(PrimeVue).mount("#app");

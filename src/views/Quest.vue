@@ -16,76 +16,31 @@
           </p>
         </div>
       </div>
+
+      <div id="app">
+        <button>click</button>
+
+        <div id="overlay">
+          <div id="content">
+            <p>modal window test</p>
+            <p><button>close</button></p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- test -->
-  <div id="app">
-    <h5>Basic</h5>
-    <p-button
-      label="Show"
-      icon="pi pi-external-link"
-      @click="openBasic"
-    ></p-button>
-    <p-dialog
-      header="Header"
-      v-model:visible="displayBasic"
-      :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
-      :style="{ width: '50vw' }"
-    >
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
-      <template #footer>
-        <p-button
-          label="No"
-          icon="pi pi-times"
-          @click="closeBasic"
-          class="p-button-text"
-        ></p-button>
-        <p-button
-          label="Yes"
-          icon="pi pi-check"
-          @click="closeBasic"
-          autofocus
-        ></p-button>
-      </template>
-    </p-dialog>
-  </div>
 </template>
 
 <script>
 // test
-const App = {
-  setup() {
-    const displayBasic = ref(false);
-
-    const openBasic = () => {
-      displayBasic.value = true;
-    };
-
-    return {
-      displayBasic,
-      openBasic,
-    };
-  },
-  components: {
-    "p-dialog": primevue.dialog,
-    "p-button": primevue.button,
-  },
-};
 
 export default {
   name: "Quest",
-  display: false,
   data() {
     return {
+      // test
       data: [
         {
           title: "問題タイトル",
@@ -208,11 +163,27 @@ export default {
 }
 
 /* test */
-.p-button {
-  margin: 0.3rem 0.5rem;
-  min-width: 10rem;
+#overlay {
+  /*　要素を重ねた時の順番　*/
+  z-index: 1;
+
+  /*　画面全体を覆う設定　*/
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  /*　画面の中央に要素を表示させる設定　*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.p-dialog .p-button {
-  min-width: 6rem;
+#content {
+  z-index: 2;
+  width: 50%;
+  padding: 1em;
+  background: #fff;
 }
 </style>
