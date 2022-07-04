@@ -17,15 +17,16 @@
         </div>
       </div>
 
-      <div id="app">
-        <button>click</button>
+      <!-- modal -->
+      <div class="hello">
+        <h1>{{ msg }}</h1>
 
-        <div id="overlay">
-          <div id="content">
-            <p>modal window test</p>
-            <p><button>close</button></p>
-          </div>
-        </div>
+        <button @click="showModal()">モーダルを表示</button>
+        <modal
+          :message="message"
+          v-show="modal"
+          @execute-method="executeMethod"
+        ></modal>
       </div>
     </div>
   </div>
@@ -35,57 +36,69 @@
 
 <script>
 // test
+import Modal from "./modal.vue";
 
 export default {
-  name: "Quest",
+  name: "HelloWorld",
+  components: {
+    Modal,
+  },
   data() {
     return {
-      // test
-      data: [
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "100",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "200",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "300",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "400",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "500",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "600",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "700",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "800",
-        },
-      ],
+      message: "よろしいですか？",
+      modal: false,
     };
   },
+  props: {
+    msg: String,
+  },
+  methods: {
+    showModal() {
+      // モーダル表示する際の処理が必要ならここに書く
+      this.modal = true;
+    },
+    executeMethod(yes) {
+      // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
+      this.modal = false;
+      if (yes) {
+        alert("はい が押されました。");
+      } else {
+        alert("いいえ が押されました。");
+      }
+    },
+  },
 };
+
+// export default {
+//   name: "Quest",
+//   data() {
+//     return {
+//       // test
+//       data: [
+//         {
+//           title: "問題タイトル",
+//           main: "ジャンル：穴埋め",
+//           point: "100",
+//         },
+//         {
+//           title: "問題タイトル",
+//           main: "ジャンル：穴埋め",
+//           point: "200",
+//         },
+//         {
+//           title: "問題タイトル",
+//           main: "ジャンル：穴埋め",
+//           point: "300",
+//         },
+//         {
+//           title: "問題タイトル",
+//           main: "ジャンル：穴埋め",
+//           point: "400",
+//         },
+//       ],
+//     };
+//   },
+// };
 </script>
 
 <style>
