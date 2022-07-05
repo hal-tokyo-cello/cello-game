@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      message: "よろしいですか？",
+      message: "問題タイトル",
       modal: false,
     };
   },
@@ -60,11 +60,11 @@ export default {
     executeMethod(yes) {
       // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
       this.modal = false;
-      if (yes) {
-        alert("はい が押されました。");
-      } else {
-        alert("いいえ が押されました。");
-      }
+      // if (yes) {
+      //   alert("はい が押されました。");
+      // } else {
+      //   alert("いいえ が押されました。");
+      // }
     },
   },
 };

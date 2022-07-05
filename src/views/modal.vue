@@ -3,11 +3,11 @@
     <div id="modal-content" class="modal">
       <p id="modal-message" class="modal__message">{{ message }}</p>
       <span id="modal-cansel" class="modal__cancel" @click="returnFalse()">
-        いいえ
+        キャンセル
       </span>
-      <button class="modal__btn" @click="returnTrue()">はい</button>
+      <button class="modal__btn" @click="returnTrue()">解答へ</button>
     </div>
-    <div id="modal-overlay"></div>
+    <div id="modal-overlay" @click="returnFalse()"></div>
   </div>
 </template>
 
@@ -29,7 +29,6 @@ export default {
 <style scoped>
 .modal {
   padding: 10px 20px;
-  border: 2px solid #a5272a;
   background: #faebd7;
   z-index: 2;
   display: block;
@@ -64,7 +63,6 @@ export default {
   height: 30px;
   text-decoration: none;
   color: #000000;
-  border: solid 2px #a5272a;
   border-radius: 3px;
   transition: 0.4s;
   text-align: center;
@@ -74,7 +72,6 @@ export default {
 }
 
 .modal__btn:hover {
-  background: #a5272a;
   color: white;
   cursor: pointer;
 }
