@@ -25,6 +25,11 @@
 </template>
 
 <script>
+// axios
+// get or post(url, requestBody)
+// then 成功時
+// catch　失敗時
+// requestBody 認証に必要な情報
 export default {
   name: "Quest",
   data() {
