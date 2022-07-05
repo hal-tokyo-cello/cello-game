@@ -3,30 +3,54 @@
     <h1>ユーザー情報の変更</h1>
     <div class="input">
       <span class="p-float-label spacer">
-        <p class="new">新しいユーザー名</p>
         <InputText id="username" type="text" v-model="value" />
-        <label for="username">Username</label>
+        <label for="username">新しいユーザー名</label>
       </span>
     </div>
     <div class="buttonArea">
       <div class="button">
         <Button label="キャンセル" class="p-button-outlined" />
       </div>
-      <Button label="登録" />
+      <Button label="登録" @click="showModal()" />
     </div>
+    <modal
+      :message="message"
+      v-show="modal"
+      @execute-method="executeMethod"
+    ></modal>
   </main>
 </template>
+
 <script>
-import validator from "validator";
+import Modal from "../components/Alert.vue";
+
 export default {
+  components: {
+    Modal,
+  },
   data() {
     return {
-      mail: "",
-      password: "",
-      mailFlag: false,
-      passFlag: false,
-      mailValFlag: false,
+      message: "ユーザー名を変更しました",
+      modal: false,
     };
+  },
+  props: {
+    msg: String,
+  },
+  methods: {
+    showModal() {
+      // モーダル表示する際の処理が必要ならここに書く
+      this.modal = true;
+    },
+    executeMethod(yes) {
+      // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
+      this.modal = false;
+      // if (yes) {
+      //   alert("退会する が押されました。");
+      // } else {
+      //   alert("キャンセル が押されました。");
+      // }
+    },
   },
 };
 </script>
@@ -39,10 +63,6 @@ main {
   margin: 0 auto;
   padding-top: 70px;
   background: #f8f8f8;
-}
-.new {
-  font-size: 15px;
-  color: #707070;
 }
 #username {
   width: 620px;
