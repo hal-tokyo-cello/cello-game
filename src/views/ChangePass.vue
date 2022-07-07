@@ -3,8 +3,16 @@
     <h1>ユーザー情報の変更</h1>
     <div class="input">
       <span class="p-float-label spacer">
-        <InputText id="username" type="text" v-model="value" />
-        <label for="username">新しいユーザー名</label>
+        <Password v-model="value1" :feedback="false"></Password>
+        <label for="password">現在のパスワード</label>
+      </span>
+      <span class="p-float-label spacer">
+        <Password v-model="value2" toggle-mask></Password>
+        <label for="password">新しいパスワード</label>
+      </span>
+      <span class="p-float-label spacer">
+        <Password v-model="value3" toggle-mask></Password>
+        <label for="password">新しいパスワード</label>
       </span>
     </div>
     <div class="buttonArea">
@@ -22,7 +30,7 @@
 </template>
 
 <script>
-import Modal from "../components/Alert.vue";
+import Modal from "../components/AlertPass.vue";
 
 export default {
   components: {
@@ -64,7 +72,7 @@ main {
   padding-top: 70px;
   background: #f8f8f8;
 }
-#username {
+#Password {
   width: 620px;
   height: 70px;
 }
