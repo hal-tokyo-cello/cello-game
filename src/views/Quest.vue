@@ -2,6 +2,7 @@
   <div class="main">
     <h1>クエスト一覧画面</h1>
     <div class="wrapper">
+      <!-- クエスト発火ボタン -->
       <div class="box" v-for="(list, key) in data" :key="key">
         <div class="title-block">
           <h4 class="title">{{ list.title }}</h4>
@@ -18,9 +19,7 @@
       </div>
 
       <!-- modal -->
-      <div class="hello">
-        <h1>{{ msg }}</h1>
-
+      <div class="modal">
         <button @click="showModal()">モーダルを表示</button>
         <modal
           :message="message"
@@ -54,16 +53,14 @@ export default {
   },
   methods: {
     showModal() {
-      // モーダル表示する際の処理が必要ならここに書く
+      // モーダル表示処理
       this.modal = true;
     },
     executeMethod(yes) {
       // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
       this.modal = false;
       // if (yes) {
-      //   alert("はい が押されました。");
       // } else {
-      //   alert("いいえ が押されました。");
       // }
     },
   },
@@ -176,6 +173,8 @@ export default {
 }
 
 /* test */
+.modal-enter {
+}
 #overlay {
   /*　要素を重ねた時の順番　*/
   z-index: 1;
