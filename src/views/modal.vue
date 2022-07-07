@@ -1,11 +1,17 @@
 <template>
   <div id="modal">
     <div id="modal-content" class="modal">
+      <!-- v-for使って問題の情報を取ってくる？？？ -->
       <p id="modal-message" class="modal__message">{{ message }}</p>
-      <span id="modal-cansel" class="modal__cancel" @click="returnFalse()">
-        キャンセル
-      </span>
-      <button class="modal__btn" @click="returnTrue()">解答へ</button>
+      <p>ジャンル：穴埋め</p>
+      <p>🅿︎300　</p>
+
+      <div id="modal-chose">
+        <div id="modal-cansel" class="modal__cancel" @click="returnFalse()">
+          キャンセル
+        </div>
+        <div class="modal__btn" @click="returnTrue()">解答へ</div>
+      </div>
     </div>
     <div id="modal-overlay" @click="returnFalse()"></div>
   </div>
@@ -28,8 +34,9 @@ export default {
 
 <style scoped>
 .modal {
-  padding: 10px 20px;
-  background: #faebd7;
+  width: 620px;
+  height: 253px;
+  background: white;
   z-index: 2;
   display: block;
   text-align: center;
@@ -37,45 +44,54 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 10px;
+  box-shadow: 0px 0px 6px #00000029;
+  border: 1px solid #ff8c00;
 }
 
 .modal__message {
-  margin-top: 10px;
+  margin-top: 53px;
+  margin-bottom: 0px;
+  text-align: center;
+  font: normal normal bold 21px/25px Segoe UI;
+  letter-spacing: 0px;
+  color: #ff8c00;
 }
 
+#modal-chose {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 340px;
+  margin: 2rem auto;
+}
 .modal__cancel {
-  margin-right: 30px;
-  font-size: 15px;
+  width: 150px;
+  height: 52px;
+  font: normal normal 600 15px/18px Segoe UI;
+  letter-spacing: 0px;
+  color: #fc8c0d;
+  border: 1px solid #fc8c0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .modal__cancel:hover {
   cursor: pointer;
   color: rgb(14, 48, 240);
   font-weight: bold;
 }
-
 .modal__btn {
-  display: inline-block;
-  margin: 30px auto;
-  text-decoration: none;
-  width: 80px;
-  height: 30px;
-  text-decoration: none;
-  color: #000000;
-  border-radius: 3px;
-  transition: 0.4s;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 15px;
-  background-color: #faebd7;
-}
-
-.modal__btn:hover {
-  color: white;
+  width: 150px;
+  height: 52px;
+  background: #fc8c0d 0% 0% no-repeat padding-box;
   cursor: pointer;
+  font: normal normal 600 15px/18px Segoe UI;
+  letter-spacing: 0px;
+  color: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 #modal-overlay {
   z-index: 1;
   display: block;
@@ -84,6 +100,6 @@ export default {
   left: 0;
   width: 100%;
   height: 120%;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 </style>
