@@ -51,4 +51,18 @@ footer {
   text-align: center;
   padding: 10px 0;
 }
+#email,
+#password1,
+#checkPass {
+  width: 620px;
+  height: 70px;
+}
+#password2 {
+  width: 620px;
+  height: 70px;
+}
+#password3 {
+  width: 620px;
+  height: 70px;
+}
 </style>
