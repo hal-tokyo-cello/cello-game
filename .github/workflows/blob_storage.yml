@@ -13,9 +13,9 @@ env:
   NODE_VERSION: "16.x"
 
 jobs:
-  build:
-    name: Build
-    runs-on: self-hosted
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout GitHub Action
         uses: actions/checkout@v3
@@ -32,11 +32,6 @@ jobs:
       - name: Bundle with Webpack
         run: npm run build
 
-  deploy:
-    name: Deploy
-    runs-on: self-hosted
-    needs: build
-    steps:
       - name: Login Azure
         uses: azure/login@v1
         with:
