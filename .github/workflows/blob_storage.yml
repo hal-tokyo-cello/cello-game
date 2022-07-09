@@ -42,7 +42,7 @@ jobs:
         with:
           # --patternオプションでアップロードするファイルを指定できる
           inlineScript: |
-            az storage blob upload-batch --account-name ${{ env.STORAGE_ACCOUNT_NAME }} --auth-mode key -d '$web' -s ${{ env.BLOB_STORAGE_PACKAGE_PATH }}
+            az storage blob upload-batch --account-name ${{ env.STORAGE_ACCOUNT_NAME }} --auth-mode key -d '$web' -s ${{ env.BLOB_STORAGE_PACKAGE_PATH }} --overwrite
 
       - name: Purge CDN endpoint
         uses: azure/CLI@v1
