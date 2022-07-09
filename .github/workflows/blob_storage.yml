@@ -10,7 +10,7 @@ env:
   CDN_PROFILE_NAME: "th22ih4ciw4cg01celloCdn"
   CDN_ENDPOINT: "th22ih4ciw4cg01celloEndpoint"
   RESOURCE_GROUP: "HAL-TH22-RG-IH4C-IW4C-G01"
-  BLOB_STORAGE_PACKAGE_PATH: "." # アップロードするディレクトリ。（現在はルートディレクトリをデプロイ）
+  BLOB_STORAGE_PACKAGE_PATH: "./dist"
   NODE_VERSION: "16.x"
 
 jobs:
