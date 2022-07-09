@@ -33,7 +33,6 @@ module.exports = (env, argv) => ({
     rules: [
       {
         test: /\.vue$/,
-        exclude: [/prime(vue|icons)/],
         use: [
           {
             loader: "vue-loader",
@@ -58,13 +57,6 @@ module.exports = (env, argv) => ({
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
-      {
-        test: /prime(vue|icons).+\.css$/,
-        use: [
-          { loader: MiniCssExtractPlugin.loader, options: { emit: false } },
-          "css-loader",
-        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
