@@ -1,5 +1,7 @@
 const path = require("path");
 
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 const { VueLoaderPlugin } = require("vue-loader");
 
 module.exports = (env, argv) => ({
@@ -10,7 +12,18 @@ module.exports = (env, argv) => ({
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
   },
-  plugins: [new VueLoaderPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "CELLO",
+      filename: "[name].html",
+      template: "index.html",
+      // publicPath: "./dist",
+      scriptLoading: "defer",
+      // favicon:"",
+      // meta: [],
+    }),
+    new VueLoaderPlugin(),
+  ],
   module: {
     rules: [
       {
