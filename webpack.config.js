@@ -1,7 +1,6 @@
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
 const { VueLoaderPlugin } = require("vue-loader");
 
 module.exports = (env, argv) => ({
@@ -17,7 +16,6 @@ module.exports = (env, argv) => ({
       title: "CELLO",
       filename: "[name].html",
       template: "index.html",
-      // publicPath: "./dist",
       scriptLoading: "defer",
       // favicon:"",
       // meta: [],
@@ -45,6 +43,28 @@ module.exports = (env, argv) => ({
       {
         test: /\.css$/,
         use: ["vue-style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: "images",
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(eot|woff|ttf)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              emitFile: false,
+            },
+          },
+        ],
       },
     ],
   },
