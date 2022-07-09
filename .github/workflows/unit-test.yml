@@ -1,8 +1,6 @@
 name: Unit Test with Jest
 
 on:
-  push:
-    branches: ["deploy/#30"]
   pull_request:
     branches: ["main", "dev"]
 
