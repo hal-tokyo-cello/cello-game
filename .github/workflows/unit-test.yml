@@ -23,11 +23,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Setup GitHub Authentication
-        uses: webfactory/ssh-agent@v0.2.0
-        with:
-          ssh-private-key: ${{ secrets.KC_SSH_PK }}
-
       - name: Install & Test
         run: |
           npm ci
