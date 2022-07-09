@@ -16,10 +16,15 @@ module.exports = (env, argv) => ({
     new HtmlWebpackPlugin({
       title: "CELLO",
       filename: "[name].html",
-      template: "index.html",
+      template: "template.html",
       scriptLoading: "defer",
-      // favicon:"",
-      // meta: [],
+      favicon: "./favicon.ico",
+      meta: {
+        viewport: "width=device-width, initial-scale=1.0",
+        author: "hal-tokyo-cello",
+        description: "",
+        keywords: [].join(","),
+      },
     }),
     new MiniCssExtractPlugin(),
     new VueLoaderPlugin(),
@@ -52,8 +57,14 @@ module.exports = (env, argv) => ({
       },
       {
         test: /\.css$/,
-        exclude: [/prime(vue|icons)/],
         use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /prime(vue|icons).+\.css$/,
+        use: [
+          { loader: MiniCssExtractPlugin.loader, options: { emit: false } },
+          "css-loader",
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
