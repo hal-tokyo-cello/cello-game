@@ -4,8 +4,8 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import "primevue/resources/themes/fluent-light/theme.css"
 import "primevue/resources/primevue.min.css"
 import "primeicons/primeicons.css"
-
 import App from "./App.vue";
+
 
 const routes: RouteRecordRaw[] = [];
 
