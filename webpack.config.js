@@ -1,7 +1,8 @@
 const path = require("path");
 
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, argv) => ({
   entry: {
@@ -20,13 +21,22 @@ module.exports = (env, argv) => ({
       // favicon:"",
       // meta: [],
     }),
+    new MiniCssExtractPlugin(),
     new VueLoaderPlugin(),
   ],
   module: {
     rules: [
       {
         test: /\.vue$/,
-        use: ["vue-loader"],
+        exclude: [/prime(vue|icons)/],
+        use: [
+          {
+            loader: "vue-loader",
+            options: {
+              extractCSS: true,
+            },
+          },
+        ],
       },
       {
         test: /\.ts$/,
@@ -42,7 +52,8 @@ module.exports = (env, argv) => ({
       },
       {
         test: /\.css$/,
-        use: ["vue-style-loader", "css-loader"],
+        exclude: [/prime(vue|icons)/],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
@@ -73,7 +84,6 @@ module.exports = (env, argv) => ({
   },
   target: "web",
   externals: {
-    primevue: "primevue",
     vue: "Vue",
     "vue-router": "VueRouter",
   },
