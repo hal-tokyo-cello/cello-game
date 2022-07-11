@@ -5,7 +5,7 @@ import "primevue/resources/themes/fluent-light/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 
-import ChangePass from "./views/ChangePass.vue";
+import ChangeAddr from "./views/ChangeAddr.vue";
 
 //PrimeVue Import
 import InputText from "primevue/inputtext";
@@ -15,7 +15,7 @@ import Button from "primevue/button";
 import App from "./App.vue";
 
 const routes: RouteRecordRaw[] = [
-  { path: "/changepass", name: "changepass", component: ChangePass },
+  { path: "/changeaddr", name: "changeaddr", component: ChangeAddr },
 ];
 
 const router = createRouter({
