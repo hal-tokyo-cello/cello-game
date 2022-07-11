@@ -4,8 +4,8 @@
       <h1 class="head">Hello !! Excel !!</h1>
       <h2 class="subHead">Celloを使えばゲーム感覚で楽しくExcelを学べるよ</h2>
       <h2 class="subHead2">さあ！Celloをはじめてみよう！</h2>
-      <router-link style="text-decoration: none" to="/signin">
-        <button class="button">はじめてみる</button>
+      <router-link style="text-decoration: none" to="/Signup">
+        <Button class="button">はじめてみる</Button>
       </router-link>
     </section>
     <section class="section2">
@@ -59,8 +59,8 @@
     <section class="section4">
       <h1 class="section4Head">さっそくはじめてみよう</h1>
       <div class="btnWrap">
-        <router-link style="text-decoration: none" to="/signin">
-          <button class="button2">はじめてみる</button>
+        <router-link style="text-decoration: none" to="/Signup">
+          <Button class="button2">はじめてみる</Button>
         </router-link>
       </div>
     </section>
