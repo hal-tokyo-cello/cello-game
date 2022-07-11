@@ -5,7 +5,7 @@
       <h2 class="subHead">Celloを使えばゲーム感覚で楽しくExcelを学べるよ</h2>
       <h2 class="subHead2">さあ！Celloをはじめてみよう！</h2>
       <router-link style="text-decoration: none" to="/Signup">
-        <Button class="button">はじめてみる</Button>
+        <Button label="はじめてみる" class="button" />
       </router-link>
     </section>
     <section class="section2">
@@ -60,7 +60,7 @@
       <h1 class="section4Head">さっそくはじめてみよう</h1>
       <div class="btnWrap">
         <router-link style="text-decoration: none" to="/Signup">
-          <Button class="button2">はじめてみる</Button>
+          <Button label="はじめてみる" class="button2" />
         </router-link>
       </div>
     </section>
@@ -68,7 +68,13 @@
 </template>
 
 <script>
-export default {};
+import Button from "primevue/button";
+
+export default {
+  components: {
+    Button,
+  },
+};
 </script>
 
 <style scoped>
