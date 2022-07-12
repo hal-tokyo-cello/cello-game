@@ -9,7 +9,11 @@
     </div>
     <div class="buttonArea">
       <div class="button">
-        <Button label="キャンセル" class="p-button-outlined" />
+        <Button
+          label="キャンセル"
+          @click="cancel()"
+          class="p-button-outlined"
+        />
       </div>
       <Button label="登録" @click="showModal()" />
     </div>
@@ -38,6 +42,9 @@ export default {
     msg: String,
   },
   methods: {
+    cancel() {
+      this.$router.push("./Mypage.vue");
+    },
     showModal() {
       // モーダル表示する際の処理が必要ならここに書く
       this.modal = true;
@@ -45,11 +52,6 @@ export default {
     executeMethod(yes) {
       // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
       this.modal = false;
-      // if (yes) {
-      //   alert("退会する が押されました。");
-      // } else {
-      //   alert("キャンセル が押されました。");
-      // }
     },
   },
 };
