@@ -3,20 +3,20 @@
     <h1>クエスト一覧画面</h1>
     <div class="wrapper">
       <!-- 各クエストを表示するボックス -->
-      <div class="box" v-for="(list, key) in data" :key="key">
+      <div class="box" v-for="(items, key) in quests" :key="key">
         <!-- クエストのタイトル部分 -->
         <div class="title-block">
-          <h4 class="title">{{ list.title }}</h4>
+          <h4 class="title">{{ items.title }}</h4>
         </div>
         <div class="title-tri"></div>
 
         <!-- クエストのジャンル表示部分 -->
-        <p class="genre">{{ list.main }}</p>
+        <p class="genre">{{ items.genre }}</p>
 
         <!-- クエストの経験値バッジ部分 -->
         <div class="point-badge">
           <p class="points">
-            {{ list.point }}
+            {{ items.experience }}
           </p>
         </div>
       </div>
@@ -25,58 +25,34 @@
 </template>
 
 <script>
-// axios
-// get or post(url, requestBody)
-// then 成功時
-// catch　失敗時
-// requestBody 認証に必要な情報
+import axios from "axios";
+
 export default {
   name: "Quest",
   data() {
     return {
-      data: [
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "100",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "200",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "300",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "400",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "500",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "600",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "700",
-        },
-        {
-          title: "問題タイトル",
-          main: "ジャンル：穴埋め",
-          point: "800",
-        },
-      ],
+      quests: [],
     };
+  },
+  methods: {
+    // api関連
+    getData() {
+      axios
+        // クエスト情報の取得
+        .get(
+          "https://5355e573-a35a-4859-af9d-475ba909dbb6.mock.pstmn.io/quests"
+        )
+        //取得成功時
+        .then(
+          (response) =>
+            // console.log(response.data["quests"]),
+            (this.quests = response.data["quests"])
+        )
+        .catch((error) => console.log(error));
+    },
+  },
+  mounted: function () {
+    this.getData();
   },
 };
 </script>
