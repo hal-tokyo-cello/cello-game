@@ -3,8 +3,8 @@
     <div id="modal-content" class="modal">
       <!-- v-for使って問題の情報を取ってくる？？？ -->
       <p id="modal-message" class="modal__message">{{ message }}</p>
-      <p>ジャンル：穴埋め</p>
-      <p>🅿︎300　</p>
+      <p id="modal-genre">ジャンル：穴埋め</p>
+      <p id="modal-experience">🅿︎300　</p>
 
       <div id="modal-chose">
         <div id="modal-cansel" class="modal__cancel" @click="returnFalse()">
@@ -56,6 +56,19 @@ export default {
   letter-spacing: 0px;
   color: #ff8c00;
 }
+#modal-genre {
+  margin-top: 20px;
+  margin-bottom: 6px;
+  font: normal normal bold 12px/14px Segoe UI;
+  letter-spacing: 0px;
+  color: #666666;
+}
+#modal-experience {
+  margin: 0;
+  font: normal normal bold 15px/18px Segoe UI;
+  letter-spacing: 0px;
+  color: #666666;
+}
 
 #modal-chose {
   display: flex;
@@ -74,11 +87,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.modal__cancel:hover {
   cursor: pointer;
-  color: rgb(14, 48, 240);
-  font-weight: bold;
 }
 .modal__btn {
   width: 150px;
@@ -100,6 +109,6 @@ export default {
   left: 0;
   width: 100%;
   height: 120%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.6);
 }
 </style>

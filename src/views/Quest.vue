@@ -3,7 +3,18 @@
     <h1>クエスト一覧画面</h1>
     <div class="wrapper">
       <!-- クエスト発火ボタン -->
-      <div class="box" v-for="(list, key) in data" :key="key">
+      <div
+        class="box"
+        @click="showModal()"
+        v-for="(list, key) in data"
+        :key="key"
+      >
+        <modal
+          :message="message"
+          v-show="modal"
+          @execute-method="executeMethod"
+        ></modal>
+
         <div class="title-block">
           <h4 class="title">{{ list.title }}</h4>
         </div>
@@ -18,15 +29,21 @@
         </div>
       </div>
 
+      <modal
+        :message="message"
+        v-show="modal"
+        @execute-method="executeMethod"
+      ></modal>
+
       <!-- modal -->
-      <div class="modal">
+      <!-- <div class="modal">
         <button @click="showModal()">モーダルを表示</button>
         <modal
           :message="message"
           v-show="modal"
           @execute-method="executeMethod"
         ></modal>
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -44,6 +61,13 @@ export default {
   },
   data() {
     return {
+      data: [
+        {
+          title: "問題タイトル",
+          main: "ジャンル：穴埋め",
+          point: "100",
+        },
+      ],
       message: "問題タイトル",
       modal: false,
     };
@@ -59,43 +83,12 @@ export default {
     executeMethod(yes) {
       // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
       this.modal = false;
-      // if (yes) {
-      // } else {
-      // }
+      if (yes) {
+      } else {
+      }
     },
   },
 };
-
-// export default {
-//   name: "Quest",
-//   data() {
-//     return {
-//       // test
-//       data: [
-//         {
-//           title: "問題タイトル",
-//           main: "ジャンル：穴埋め",
-//           point: "100",
-//         },
-//         {
-//           title: "問題タイトル",
-//           main: "ジャンル：穴埋め",
-//           point: "200",
-//         },
-//         {
-//           title: "問題タイトル",
-//           main: "ジャンル：穴埋め",
-//           point: "300",
-//         },
-//         {
-//           title: "問題タイトル",
-//           main: "ジャンル：穴埋め",
-//           point: "400",
-//         },
-//       ],
-//     };
-//   },
-// };
 </script>
 
 <style>
@@ -173,8 +166,6 @@ export default {
 }
 
 /* test */
-.modal-enter {
-}
 #overlay {
   /*　要素を重ねた時の順番　*/
   z-index: 1;
