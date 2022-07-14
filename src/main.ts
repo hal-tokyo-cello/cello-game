@@ -5,6 +5,7 @@ import "primevue/resources/themes/fluent-light/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 import App from "./App.vue";
+import Button from "primevue/button";
 import Secession from "./views/secession.vue";
 
 const routes: RouteRecordRaw[] = [
@@ -17,4 +18,5 @@ const router = createRouter({
 });
 
 const app = createApp(App);
+app.component("TheButton", Button);
 app.use(router).use(PrimeVue).mount("#app");

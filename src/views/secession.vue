@@ -14,7 +14,6 @@
           <p class="mail_m">example@gmail.co.jp</p>
         </div>
         <div class="four_d">
-          <button class="cancel_btn">キャンセル</button>
           <button class="next_btn" @click="showModal()">次へ</button>
         </div>
         <modal
