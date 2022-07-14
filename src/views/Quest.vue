@@ -8,12 +8,6 @@
         v-for="(items, key) in quests"
         :key="key"
       >
-        <modal
-          :message="message"
-          v-show="modal"
-          @execute-method="executeMethod"
-        ></modal>
-
         <!-- クエストのタイトル部分 -->
         <div class="title-block">
           <h4 class="title">{{ items.title }}</h4>
@@ -30,6 +24,12 @@
           </p>
         </div>
       </div>
+
+      <modal
+        :message="message"
+        v-show="modal"
+        @execute-method="executeMethod"
+      ></modal>
     </div>
   </div>
 </template>
