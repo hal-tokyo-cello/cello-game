@@ -2,7 +2,7 @@
   <div id="modal">
     <div id="modal-content" class="modal">
       <!-- v-for使って問題の情報を取ってくる？？？ -->
-      <p id="modal-message" class="modal__message">{{ message }}</p>
+      <p id="modal-message" class="modal__message">{{ title }}</p>
       <p id="modal-genre">ジャンル：穴埋め</p>
       <p id="modal-experience">🅿︎300　</p>
 
@@ -20,7 +20,7 @@
 <script>
 export default {
   name: "Modal",
-  props: ["message"],
+  props: ["title", "genre", "experience"],
   methods: {
     returnFalse() {
       this.$emit("execute-method", false);

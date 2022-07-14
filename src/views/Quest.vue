@@ -26,7 +26,7 @@
       </div>
 
       <modal
-        :message="message"
+        :quest="{ quests: 'title' }"
         v-show="modal"
         @execute-method="executeMethod"
       ></modal>
@@ -46,13 +46,12 @@ export default {
   data() {
     return {
       quests: [],
-      message: "問題タイトル",
       modal: false,
     };
   },
-  props: {
-    msg: String,
-  },
+  // props: {
+  //   msg: String,
+  // },
   methods: {
     // api関連
     getData() {
