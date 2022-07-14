@@ -39,7 +39,7 @@ import axios from "axios";
 import Modal from "./modal.vue";
 
 export default {
-  name: "HelloWorld",
+  name: "Quest",
   components: {
     Modal,
   },
