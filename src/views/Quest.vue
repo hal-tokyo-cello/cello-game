@@ -2,7 +2,18 @@
   <div class="main">
     <div class="wrapper">
       <!-- 各クエストを表示するボックス -->
-      <div class="box" v-for="(items, key) in quests" :key="key">
+      <div
+        class="box"
+        @click="showModal()"
+        v-for="(items, key) in quests"
+        :key="key"
+      >
+        <modal
+          :message="message"
+          v-show="modal"
+          @execute-method="executeMethod"
+        ></modal>
+
         <!-- クエストのタイトル部分 -->
         <div class="title-block">
           <h4 class="title">{{ items.title }}</h4>
@@ -25,13 +36,20 @@
 
 <script>
 import axios from "axios";
+import Modal from "./modal.vue";
 
 export default {
-  name: "Quest",
+  name: "HelloWorld",
+  components: {
+    Modal,
+  },
   data() {
     return {
       quests: [],
     };
+  },
+  props: {
+    msg: String,
   },
   methods: {
     // api関連
@@ -48,6 +66,18 @@ export default {
             (this.quests = response.data["quests"])
         )
         .catch((error) => console.log(error));
+    },
+
+    // モーダル表示処理
+    showModal() {
+      this.modal = true;
+    },
+    executeMethod(yes) {
+      // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
+      this.modal = false;
+      if (yes) {
+      } else {
+      }
     },
   },
   mounted: function () {
@@ -75,6 +105,7 @@ export default {
   margin-top: 40px;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
 }
 
 /*   box upper   */
@@ -127,5 +158,30 @@ export default {
   font: normal normal bold 16px/27px Tsukushi A Round Gothic;
   letter-spacing: 0px;
   color: #ffffff;
+}
+
+/* test */
+#overlay {
+  /*　要素を重ねた時の順番　*/
+  z-index: 1;
+
+  /*　画面全体を覆う設定　*/
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  /*　画面の中央に要素を表示させる設定　*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#content {
+  z-index: 2;
+  width: 50%;
+  padding: 1em;
+  background: #fff;
 }
 </style>
