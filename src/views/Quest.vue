@@ -46,6 +46,8 @@ export default {
   data() {
     return {
       quests: [],
+      message: "問題タイトル",
+      modal: false,
     };
   },
   props: {
