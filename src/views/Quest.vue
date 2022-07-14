@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <h1>クエスト一覧画面</h1>
     <div class="wrapper">
       <!-- 各クエストを表示するボックス -->
       <div class="box" v-for="(items, key) in quests" :key="key">
@@ -73,7 +72,7 @@ export default {
   width: 377px;
   height: 115px;
   border: 1px solid #fc8c0d;
-  margin-bottom: 40px;
+  margin-top: 40px;
   overflow: hidden;
   position: relative;
 }
