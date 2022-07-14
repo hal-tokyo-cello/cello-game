@@ -48,6 +48,7 @@
 </template>
 <script>
 import validator from "validator";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -65,6 +66,7 @@ export default {
       this.passFlag = false;
       this.mailValFlag = false;
       //入力判定
+      //メールアドレス
       if (this.mail.length) {
         if (validator.isEmail(this.mail)) {
         } else {
@@ -75,6 +77,7 @@ export default {
         this.mailFlag = true;
         error = true;
       }
+      //パスワード
       if (this.password.length == 0) {
         this.passFlag = true;
         error = true;
@@ -83,6 +86,22 @@ export default {
         return;
       } else {
         //API処理
+        const requestBody = {
+          email: this.mail,
+          password: this.password,
+        }
+        axios.post(import.meta.env.VITE_API_SERVER + "/users/signin", requestBody)
+        .then((response) => {
+            console.log("way");
+            // 成功したときの処理はここに記述する
+            this.$router.go({path: '/varification', force: true});
+        })
+        .catch((e) => {
+            // レスポンスがエラーで返ってきたときの処理はここに記述する
+            console.log("hoge");
+            //エラー回避用
+            this.$router.push("/varification")
+        });
         return;
       }
     },
