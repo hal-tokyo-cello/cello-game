@@ -27,7 +27,7 @@
 
 <script>
 import Modal from "../components/Alert.vue";
-
+import axios from "axios";
 export default {
   components: {
     Modal,
@@ -46,8 +46,31 @@ export default {
       this.$router.push("./Mypage.vue");
     },
     showModal() {
-      // モーダル表示する際の処理が必要ならここに書く
-      this.modal = true;
+      if (error) {
+        return;
+      } else {
+        //API処理
+        const requestBody = {
+          name: this.value,
+        };
+        axios
+          .put(
+            import.meta.env.VITE_API_SERVER + "/users/{accountID}",
+            requestBody
+          )
+          .then((response) => {
+            console.log("way");
+            // 成功したときの処理はここに記述する
+            this.modal = true;
+          })
+          .catch((e) => {
+            // レスポンスがエラーで返ってきたときの処理はここに記述する
+            console.log("hoge");
+            //エラー回避用
+            this.$router.push("/ChangeName.vue");
+          });
+        return;
+      }
     },
     executeMethod(yes) {
       // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
