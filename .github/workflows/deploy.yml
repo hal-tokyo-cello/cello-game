@@ -1,0 +1,56 @@
+name: Deploy to Azure Blob Storage
+
+on:
+  push:
+    branches: ["main"]
+
+env:
+  STORAGE_ACCOUNT_NAME: "th22ih4ciw4cg01celloblob"
+  CDN_PROFILE_NAME: "th22ih4ciw4cg01celloCdn"
+  CDN_ENDPOINT: "th22ih4ciw4cg01celloEndpoint"
+  RESOURCE_GROUP: "HAL-TH22-RG-IH4C-IW4C-G01"
+  BLOB_STORAGE_PACKAGE_PATH: "./dist"
+  NODE_VERSION: "16.x"
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout GitHub Action
+        uses: actions/checkout@v3
+
+      - name: Setup node ${{ env.NODE_VERSION }} environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci --omit dev
+
+      - name: Bundle with Webpack
+        run: npm run build
+
+      - name: Login Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_STORAGE_CREDENTIALS }} # プロファイラ
+
+      - name: Upload to blob storage
+        uses: azure/CLI@v1
+        with:
+          # --patternオプションでアップロードするファイルを指定できる
+          inlineScript: |
+            az storage blob upload-batch --account-name ${{ env.STORAGE_ACCOUNT_NAME }} --auth-mode key -d '$web' -s ${{ env.BLOB_STORAGE_PACKAGE_PATH }} --overwrite
+
+      - name: Purge CDN endpoint
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az cdn endpoint purge --content-paths "/*" --profile-name ${{ env.CDN_PROFILE_NAME }} --name ${{ env.CDN_ENDPOINT }} --resource-group ${{ env.RESOURCE_GROUP }}
+
+      - name: Azure logout
+        run: |
+          az logout
+        if: always()
