@@ -1,14 +1,9 @@
 <template>
   <div class="wrap">
     <header>
-      <img src="/src/assets/img/cello_logo.png" alt="logo" />
+      <img :src="icon" alt="logo" />
       <div class="avatar">
-        <Avatar
-          image="/src/assets/img/small.jpeg"
-          class="mr-2"
-          size="xlarge"
-          shape="circle"
-        />
+        <Avatar :image="avatar" class="mr-2" size="xlarge" shape="circle" />
       </div>
     </header>
     <router-view></router-view>
@@ -17,10 +12,18 @@
 </template>
 <script>
 import Avatar from "primevue/avatar";
+import icon from "./assets/img/cello_logo.png";
+import avatar from "./assets/img/small.jpeg";
 
 export default {
   components: {
     Avatar,
+  },
+  data() {
+    return {
+      icon,
+      avatar,
+    };
   },
 };
 </script>
