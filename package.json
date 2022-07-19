@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "webpack --config webpack.config.js --mode production",
+    "test": "jest --passWithNoTests",
     "preview": "vite preview"
   },
   "dependencies": {
