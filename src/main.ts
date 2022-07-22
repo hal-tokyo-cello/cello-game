@@ -18,6 +18,7 @@ import Index from "./views/Index.vue";
 import Mypage from "./views/Mypage.vue";
 import Quest from "./views/Quest.vue";
 import Reset from "./views/Reset.vue";
+import Secession from "./views/secession.vue";
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
 import Varification from "./views/Varification.vue";
@@ -33,6 +34,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/changename", name: "changename", component: ChangeName },
   { path: "/changepass", name: "changepass", component: ChangePass },
   { path: "/changeaddr", name: "changeaddr", component: ChangeAddr },
+  { path: "/secession", name: "secession", component: Secession },
 ];
 
 const router = createRouter({
@@ -45,3 +47,4 @@ app.use(router).use(PrimeVue).mount("#app");
 app.component("InputText", InputText);
 app.component("Password", Password);
 app.component("Button", Button);
+app.component("TheButton", Button);
