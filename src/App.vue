@@ -54,4 +54,8 @@ footer {
   text-align: center;
   padding: 10px 0;
 }
+#password,
+#checkPass {
+  width: 600px;
+}
 </style>
