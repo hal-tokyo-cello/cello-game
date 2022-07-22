@@ -28,6 +28,11 @@ export default {
 };
 </script>
 <style>
+#email,
+#password,
+#checkPass {
+  width: 600px;
+}
 .wrap {
   background: #f8f8f8;
   display: flex;
@@ -53,5 +58,19 @@ footer {
   margin-top: auto;
   text-align: center;
   padding: 10px 0;
+}
+#email,
+#password1,
+#checkPass {
+  width: 620px;
+  height: 70px;
+}
+#password2 {
+  width: 620px;
+  height: 70px;
+}
+#password3 {
+  width: 620px;
+  height: 70px;
 }
 </style>
