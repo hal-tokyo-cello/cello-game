@@ -14,15 +14,16 @@ import App from "./App.vue";
 import ChangeAddr from "./views/ChangeAddr.vue";
 import ChangeName from "./views/ChangeName.vue";
 import ChangePass from "./views/ChangePass.vue";
+import Forget from "./views/Forget.vue";
 import Index from "./views/Index.vue";
 import Mypage from "./views/Mypage.vue";
+import Pairing from "./views/Pairing.vue";
 import Quest from "./views/Quest.vue";
 import Reset from "./views/Reset.vue";
 import Secession from "./views/secession.vue";
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
 import Varification from "./views/Varification.vue";
-import Forget from "./views/Forget.vue";
 
 const routes: RouteRecordRaw[] = [
   { path: "/index", name: "index", component: Index },
@@ -37,6 +38,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/changeaddr", name: "changeaddr", component: ChangeAddr },
   { path: "/secession", name: "secession", component: Secession },
   { path: "/forget", name: "forget", component: Forget },
+  { path: "/pairing", name: "pairing", component: Pairing },
 ];
 
 const router = createRouter({
