@@ -22,6 +22,7 @@ import Secession from "./views/secession.vue";
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
 import Varification from "./views/Varification.vue";
+import Forget from "./views/Forget.vue";
 
 const routes: RouteRecordRaw[] = [
   { path: "/index", name: "index", component: Index },
@@ -35,6 +36,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/changepass", name: "changepass", component: ChangePass },
   { path: "/changeaddr", name: "changeaddr", component: ChangeAddr },
   { path: "/secession", name: "secession", component: Secession },
+  { path: "/forget", name: "forget", component: Forget },
 ];
 
 const router = createRouter({
