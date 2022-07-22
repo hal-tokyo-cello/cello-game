@@ -18,6 +18,7 @@ import Reset from "./views/Reset.vue";
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
 import Varification from "./views/Varification.vue";
+import ChangeName from "./views/ChangeName.vue";
 
 const routes: RouteRecordRaw[] = [
   { path: "/index", name: "index", component: Index },
@@ -27,7 +28,9 @@ const routes: RouteRecordRaw[] = [
   { path: "/signup", name: "signup", component: Signup },
   { path: "/varification", name: "varification", component: Varification },
   { path: "/mypage", name: "mypage", component: Mypage },
+  { path: "/changename", name: "changename", component: ChangeName },
 ];
+
 const router = createRouter({
   history: createWebHashHistory(),
   routes: routes,
