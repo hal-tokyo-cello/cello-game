@@ -12,6 +12,7 @@ import "primevue/resources/themes/fluent-light/theme.css";
 
 import App from "./App.vue";
 import Index from "./views/Index.vue";
+import Mypage from "./views/Mypage.vue";
 import Quest from "./views/Quest.vue";
 import Reset from "./views/Reset.vue";
 import Signin from "./views/Signin.vue";
@@ -25,6 +26,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/signin", name: "signin", component: Signin },
   { path: "/signup", name: "signup", component: Signup },
   { path: "/varification", name: "varification", component: Varification },
+  { path: "/mypage", name: "mypage", component: Mypage },
 ];
 const router = createRouter({
   history: createWebHashHistory(),
