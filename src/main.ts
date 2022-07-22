@@ -11,6 +11,9 @@ import "primevue/resources/primevue.min.css";
 import "primevue/resources/themes/fluent-light/theme.css";
 
 import App from "./App.vue";
+import ChangeAddr from "./views/ChangeAddr.vue";
+import ChangeName from "./views/ChangeName.vue";
+import ChangePass from "./views/ChangePass.vue";
 import Index from "./views/Index.vue";
 import Mypage from "./views/Mypage.vue";
 import Quest from "./views/Quest.vue";
@@ -18,8 +21,6 @@ import Reset from "./views/Reset.vue";
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
 import Varification from "./views/Varification.vue";
-import ChangeName from "./views/ChangeName.vue";
-import ChangePass from "./views/ChangePass.vue";
 
 const routes: RouteRecordRaw[] = [
   { path: "/index", name: "index", component: Index },
@@ -31,6 +32,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/mypage", name: "mypage", component: Mypage },
   { path: "/changename", name: "changename", component: ChangeName },
   { path: "/changepass", name: "changepass", component: ChangePass },
+  { path: "/changeaddr", name: "changeaddr", component: ChangeAddr },
 ];
 
 const router = createRouter({
