@@ -12,7 +12,6 @@ import "primevue/resources/themes/fluent-light/theme.css";
 
 import App from "./App.vue";
 import ChangeAddr from "./views/ChangeAddr.vue";
-import ChangeName from "./views/ChangeName.vue";
 import ChangePass from "./views/ChangePass.vue";
 import Forget from "./views/Forget.vue";
 import fourchoice from "./views/fourchoice.vue";
@@ -34,7 +33,6 @@ const routes: RouteRecordRaw[] = [
   { path: "/signup", name: "signup", component: Signup },
   { path: "/varification", name: "varification", component: Varification },
   { path: "/mypage", name: "mypage", component: Mypage },
-  { path: "/changename", name: "changename", component: ChangeName },
   { path: "/changepass", name: "changepass", component: ChangePass },
   { path: "/changeaddr", name: "changeaddr", component: ChangeAddr },
   { path: "/secession", name: "secession", component: Secession },
