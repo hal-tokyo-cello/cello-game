@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { thisExpression } from "@babel/types";
 import axios from "axios";
 
 export default {
@@ -24,10 +23,10 @@ export default {
       this.$emit("execute-method", true);
       //api処理
       const requestBody = {
-        email: thisExpression.mail,
+        email: this.mail,
         password: this.password,
       };
-      axios.get(import.meta.env.VITE_API_SERVER + );
+      // axios.get(import.meta.env.VITE_API_SERVER + );
     },
   },
 };
