@@ -12,11 +12,13 @@ import "primevue/resources/themes/fluent-light/theme.css";
 
 import App from "./App.vue";
 import Index from "./views/Index.vue";
+import Quest from "./views/Quest.vue";
 import Reset from "./views/Reset.vue";
 
 const routes: RouteRecordRaw[] = [
   { path: "/index", name: "index", component: Index },
   { path: "/reset", name: "reset", component: Reset },
+  { path: "/", name: "quest", component: Quest },
 ];
 
 const router = createRouter({
