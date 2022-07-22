@@ -14,13 +14,18 @@ import App from "./App.vue";
 import Index from "./views/Index.vue";
 import Quest from "./views/Quest.vue";
 import Reset from "./views/Reset.vue";
+import Signin from "./views/Signin.vue";
+import Signup from "./views/Signup.vue";
+import Varification from "./views/Varification.vue";
 
 const routes: RouteRecordRaw[] = [
   { path: "/index", name: "index", component: Index },
   { path: "/reset", name: "reset", component: Reset },
   { path: "/", name: "quest", component: Quest },
+  { path: "/signin", name: "signin", component: Signin },
+  { path: "/signup", name: "signup", component: Signup },
+  { path: "/varification", name: "varification", component: Varification },
 ];
-
 const router = createRouter({
   history: createWebHashHistory(),
   routes: routes,

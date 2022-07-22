@@ -28,6 +28,11 @@ export default {
 };
 </script>
 <style>
+#email,
+#password,
+#checkPass {
+  width: 600px;
+}
 .wrap {
   background: #f8f8f8;
   display: flex;
