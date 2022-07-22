@@ -15,6 +15,7 @@ import ChangeAddr from "./views/ChangeAddr.vue";
 import ChangeName from "./views/ChangeName.vue";
 import ChangePass from "./views/ChangePass.vue";
 import Forget from "./views/Forget.vue";
+import fourchoice from "./views/fourchoice.vue";
 import Index from "./views/Index.vue";
 import Mypage from "./views/Mypage.vue";
 import Pairing from "./views/Pairing.vue";
@@ -39,6 +40,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/secession", name: "secession", component: Secession },
   { path: "/forget", name: "forget", component: Forget },
   { path: "/pairing", name: "pairing", component: Pairing },
+  { path: "/fourchoice", name: "fourchoice", component: fourchoice },
 ];
 
 const router = createRouter({
