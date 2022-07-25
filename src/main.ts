@@ -13,7 +13,7 @@ import "primevue/resources/themes/fluent-light/theme.css";
 import App from "./App.vue";
 import DeleteAccount from "./views/DeleteAccount.vue";
 import Forget from "./views/Forget.vue";
-import fourchoice from "./views/fourchoice.vue";
+import MultipleChoiceQuest from "./views/MultipleChoiceQuest.vue";
 import Index from "./views/Index.vue";
 import Mypage from "./views/Mypage.vue";
 import Pairing from "./views/Pairing.vue";
@@ -28,8 +28,8 @@ import Verification from "./views/Verification.vue";
 const routes: RouteRecordRaw[] = [
   { path: "/deleteaccount", name: "secession", component: DeleteAccount },
   { path: "/forget", name: "forget", component: Forget },
-  { path: "/fourchoice", name: "fourchoice", component: fourchoice },
   { path: "/index", name: "index", component: Index },
+  { path: "/multiplechoice", component: MultipleChoiceQuest },
   { path: "/mypage", name: "mypage", component: Mypage },
   { path: "/mypage/password", component: UpdateUserPassword },
   { path: "/mypage/update", name: "changeaddr", component: UpdateUserInfo },
