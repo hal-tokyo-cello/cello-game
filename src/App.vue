@@ -1,16 +1,12 @@
 <template>
   <header>
     <img :src="logo" class="logo" />
-    <Avatar
-      :image="avatar"
-      class="mr-2 avatar"
-      size="xlarge"
-      shape="circle"
-      style="margin: 8px 20px 0 0"
-    />
+    <Avatar :image="avatar" class="mr-2 avatar" size="xlarge" shape="circle" />
   </header>
 
-  <main><router-view></router-view></main>
+  <main>
+    <router-view></router-view>
+  </main>
 
   <footer>&copy; CELLO 2022</footer>
 </template>
@@ -50,8 +46,12 @@ header {
   justify-content: space-between;
 }
 
+main {
+  width: 960px;
+  margin: 0 auto;
+}
+
 footer {
-  margin-top: auto;
   text-align: center;
   padding: 10px 0;
 }
@@ -62,7 +62,6 @@ footer {
 }
 
 .avatar {
-  margin-top: 8px;
-  margin-right: 20px;
+  margin: 8px 20px 0 0;
 }
 </style>
