@@ -34,16 +34,16 @@
     </div>
 
     <div class="button-bar">
-        <Button label="キャンセル" class="p-button-outlined" />
+      <Button label="キャンセル" class="p-button-outlined" />
       <Button label="サインアップ" type="submit" />
-      </div>
+    </div>
   </form>
 
   <div class="links">
-      <router-link style="text-decoration: none" to="/signin">
-        <Button label="サインインはこちら" class="p-button-link p-button-sm" />
-      </router-link>
-    </div>
+    <router-link style="text-decoration: none" to="/signin">
+      <Button label="サインインはこちら" class="p-button-link p-button-sm" />
+    </router-link>
+  </div>
 </template>
 
 <script>

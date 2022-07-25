@@ -18,19 +18,22 @@
     </div>
 
     <div class="button-bar">
-        <Button label="キャンセル" class="p-button-outlined" />
+      <Button label="キャンセル" class="p-button-outlined" />
       <Button label="サインイン" type="submit" />
-      </div>
+    </div>
   </form>
 
   <div class="links">
     <router-link to="/">
       <Button label="パスワードを忘れた" class="p-button-link p-button-sm" />
-        </router-link>
+    </router-link>
     <router-link to="/signup">
-      <Button label="初めてご利用の方はこちら" class="p-button-link p-button-sm" />
-        </router-link>
-      </div>
+      <Button
+        label="初めてご利用の方はこちら"
+        class="p-button-link p-button-sm"
+      />
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -76,19 +79,20 @@ export default {
         const requestBody = {
           email: this.mail,
           password: this.password,
-        }
-        axios.post(import.meta.env.VITE_API_SERVER + "/users/signin", requestBody)
-        .then((response) => {
+        };
+        axios
+          .post(import.meta.env.VITE_API_SERVER + "/users/signin", requestBody)
+          .then((response) => {
             console.log("way");
             // 成功したときの処理はここに記述する
-            this.$router.go({path: '/varification', force: true});
-        })
-        .catch((e) => {
+            this.$router.go({ path: "/varification", force: true });
+          })
+          .catch((e) => {
             // レスポンスがエラーで返ってきたときの処理はここに記述する
             console.log("hoge");
             //エラー回避用
-            this.$router.push("/varification")
-        });
+            this.$router.push("/varification");
+          });
         return;
       }
     },
