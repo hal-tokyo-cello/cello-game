@@ -1,14 +1,3 @@
-import {
-  QuestSummaryListRequest,
-  QuestSummaryListResponse,
-  QuestSummaryRequest,
-  QuestSummaryResponse,
-  SignInRequest,
-  SignInResponse,
-  SignUpRequest,
-  SignUpResponse,
-} from "cello-core/application";
-
 /**
  * APIサーバーのホストのベースURL。
  */
@@ -49,31 +38,3 @@ export const accessApi = <T, U>(
     return res.json();
   });
 };
-
-// #region クエスト関連
-/**
- * クエスト一覧画にクエストの概要を取得する。
- * @param req クエスト概要を取得するためのリクエストbody
- * @returns クエスト概要APIからのレスポンス
- */
-export const fetchQuestSummary = (
-  req: QuestSummaryRequest
-): Promise<QuestSummaryResponse> => accessApi("quests", "GET", req);
-
-/**
- * クエスト一覧画面にクエストの概要リストを取得する。
- * @param req クエスト概要リストを取得するためのリクエストbody
- * @returns クエスト概要リストAPIからのレスポンス
- */
-export const fetchQuestSummaryList = (
-  req: QuestSummaryListRequest
-): Promise<QuestSummaryListResponse> => accessApi("quests", "GET", req);
-// #endregion
-
-// #region 認証関連
-export const signIn = (req: SignInRequest): Promise<SignInResponse> =>
-  accessApi("signin", "POST", req);
-
-export const signUp = (req: SignUpRequest): Promise<SignUpResponse> =>
-  accessApi("signup", "POST", req);
-// #endregion
