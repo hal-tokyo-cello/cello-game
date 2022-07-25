@@ -13,8 +13,7 @@
   <div class="fields four_d">
     <button class="next_btn" @click="showModal()">次へ</button>
   </div>
-  <modal :message="message" v-show="modal" @execute-method="executeMethod">
-  </modal>
+  <modal :message="message" v-show="modal" @execute-method="executeMethod" />
 </template>
 
 <script>
