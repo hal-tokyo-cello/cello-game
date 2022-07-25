@@ -1,51 +1,38 @@
 <template>
-  <main>
-    <h1>サインイン</h1>
-    <div class="input">
+  <h1 style="text-align: center">サインイン</h1>
+
+  <form @submit="Signin">
+    <div class="fields">
       <span class="p-float-label spacer">
-        <InputText id="email" type="text" v-model="mail" />
+        <InputText id="email" type="email" v-model="mail" />
         <label for="email">メールアドレス</label>
       </span>
-      <template v-if="mailFlag == true">
-        <p class="error">※メールアドレスが入力されていません</p>
-      </template>
-      <template v-if="mailValFlag == true">
-        <p class="error">※メールアドレスではありません</p>
-      </template>
+      <p v-if="mailFlag" class="p-error">メールアドレスが入力されていません</p>
+      <p v-if="mailValFlag" class="p-error">メールアドレスではありません</p>
+
       <span class="p-float-label spacer">
-        <Password id="password" v-model="password" />
+        <Password v-model="password" id="password" />
         <label for="password">パスワード</label>
       </span>
-      <template v-if="passFlag == true">
-        <p class="error">※パスワードが入力されていません</p>
-      </template>
+      <p v-if="passFlag" class="p-error">パスワードが入力されていません</p>
     </div>
-    <div class="buttonArea">
-      <div class="button">
+
+    <div class="button-bar">
         <Button label="キャンセル" class="p-button-outlined" />
+      <Button label="サインイン" type="submit" />
       </div>
-      <Button label="サインイン" @click="Signin()" />
-    </div>
-    <div class="link">
-      <div>
-        <router-link style="text-decoration: none" to="/">
-          <Button
-            label="パスワードを忘れた"
-            class="p-button-link p-button-sm"
-          />
+  </form>
+
+  <div class="links">
+    <router-link to="/">
+      <Button label="パスワードを忘れた" class="p-button-link p-button-sm" />
+        </router-link>
+    <router-link to="/signup">
+      <Button label="初めてご利用の方はこちら" class="p-button-link p-button-sm" />
         </router-link>
       </div>
-      <div>
-        <router-link style="text-decoration: none" to="/signup">
-          <Button
-            label="初めてご利用の方はこちら"
-            class="p-button-link p-button-sm"
-          />
-        </router-link>
-      </div>
-    </div>
-  </main>
 </template>
+
 <script>
 import validator from "validator";
 import axios from "axios";
@@ -108,38 +95,46 @@ export default {
   },
 };
 </script>
+
 <style scoped>
-h1 {
-  text-align: center;
+.fields {
+  width: 620px;
+  margin: auto;
 }
-main {
-  width: 960px;
-  margin: 0 auto;
-  padding-top: 70px;
-  background: #f8f8f8;
+
+.fields p.p-error::before {
+  content: "※";
 }
-.buttonArea {
+
+.fields :deep(*) {
+  width: 620px;
+}
+
+.fields :deep(input) {
+  height: 70px;
+}
+
+.button-bar {
   margin-top: 50px;
   display: flex;
   justify-content: center;
 }
-.input {
-  width: 600px;
-  margin: 0 auto;
+
+.button-bar button {
+  margin: 0 16px;
 }
-.button {
-  margin-right: 16px;
-}
-.spacer {
-  margin-top: 50px;
-}
-.link {
+
+.links {
   text-align: center;
 }
 
-.error {
-  margin: 4px 0 0 0;
-  font-size: 12px;
-  color: #f00;
+.links a {
+  display: block;
+  min-width: 200px;
+  text-decoration: none;
+}
+
+.spacer {
+  margin-top: 50px;
 }
 </style>
