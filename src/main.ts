@@ -11,8 +11,8 @@ import "primevue/resources/primevue.min.css";
 import "primevue/resources/themes/fluent-light/theme.css";
 
 import App from "./App.vue";
-import UpdateUserInfo from "./views/UpdateUserInfo.vue";
 import ChangePass from "./views/ChangePass.vue";
+import DeleteAccount from "./views/DeleteAccount.vue";
 import Forget from "./views/Forget.vue";
 import fourchoice from "./views/fourchoice.vue";
 import Index from "./views/Index.vue";
@@ -20,25 +20,25 @@ import Mypage from "./views/Mypage.vue";
 import Pairing from "./views/Pairing.vue";
 import Quest from "./views/Quest.vue";
 import Reset from "./views/Reset.vue";
-import DeleteAccount from "./views/DeleteAccount.vue";
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
+import UpdateUserInfo from "./views/UpdateUserInfo.vue";
 import Verification from "./views/Verification.vue";
 
 const routes: RouteRecordRaw[] = [
-  { path: "/index", name: "index", component: Index },
-  { path: "/reset", name: "reset", component: Reset },
   { path: "/", name: "quest", component: Quest },
+  { path: "/changepass", name: "changepass", component: ChangePass },
+  { path: "/deleteaccount", name: "secession", component: DeleteAccount },
+  { path: "/forget", name: "forget", component: Forget },
+  { path: "/fourchoice", name: "fourchoice", component: fourchoice },
+  { path: "/index", name: "index", component: Index },
+  { path: "/mypage", name: "mypage", component: Mypage },
+  { path: "/mypage/update", name: "changeaddr", component: UpdateUserInfo },
+  { path: "/pairing", name: "pairing", component: Pairing },
+  { path: "/reset", name: "reset", component: Reset },
   { path: "/signin", name: "signin", component: Signin },
   { path: "/signup", name: "signup", component: Signup },
   { path: "/verification", name: "varification", component: Verification },
-  { path: "/mypage", name: "mypage", component: Mypage },
-  { path: "/changepass", name: "changepass", component: ChangePass },
-  { path: "/mypage/update", name: "changeaddr", component: UpdateUserInfo },
-  { path: "/deleteaccount", name: "secession", component: DeleteAccount },
-  { path: "/forget", name: "forget", component: Forget },
-  { path: "/pairing", name: "pairing", component: Pairing },
-  { path: "/fourchoice", name: "fourchoice", component: fourchoice },
 ];
 
 const router = createRouter({
