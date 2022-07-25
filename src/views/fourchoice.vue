@@ -28,13 +28,6 @@
 </script>
 
 <style>
-main {
-  width: 960px;
-  margin: 0 auto;
-  padding-top: 70px;
-  background: #f8f8f8;
-}
-
 h1 {
   font-size: 40px;
 }

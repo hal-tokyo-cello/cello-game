@@ -61,13 +61,6 @@ export default {
 </script>
 
 <style scoped>
-main {
-  width: 960px;
-  margin: 0 auto;
-  padding-top: 10px;
-  background: #f8f8f8;
-}
-
 .procedure {
   font-size: 30px;
   color: #707070;

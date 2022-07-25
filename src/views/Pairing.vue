@@ -79,9 +79,6 @@ button {
   justify-content: center;
   align-items: center;
 }
-main {
-  background-color: #f8f8f8;
-}
 .Wrapper {
   width: 960px;
   margin: 0 auto;

@@ -108,12 +108,6 @@ export default {
 h1 {
   text-align: center;
 }
-main {
-  width: 960px;
-  margin: 0 auto;
-  padding-top: 70px;
-  background: #f8f8f8;
-}
 .email {
   width: 620px;
   height: 70px;

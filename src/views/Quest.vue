@@ -88,9 +88,6 @@ export default {
 </script>
 
 <style>
-.main {
-  background-color: #f8f8f8;
-}
 .wrapper {
   width: 799px;
   margin: 0px auto;

@@ -99,12 +99,6 @@ export default {
 h1 {
   text-align: center;
 }
-main {
-  width: 960px;
-  margin: 0 auto;
-  padding-top: 70px;
-  background: #f8f8f8;
-}
 #Password {
   width: 620px;
   height: 70px;
