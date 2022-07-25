@@ -17,7 +17,7 @@ import fourchoice from "./views/fourchoice.vue";
 import Index from "./views/Index.vue";
 import Mypage from "./views/Mypage.vue";
 import Pairing from "./views/Pairing.vue";
-import Quest from "./views/Quest.vue";
+import QuestOverview from "./views/QuestOverview.vue";
 import Reset from "./views/Reset.vue";
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
@@ -26,7 +26,6 @@ import UpdateUserPassword from "./views/UpdateUserPassword.vue";
 import Verification from "./views/Verification.vue";
 
 const routes: RouteRecordRaw[] = [
-  { path: "/", name: "quest", component: Quest },
   { path: "/deleteaccount", name: "secession", component: DeleteAccount },
   { path: "/forget", name: "forget", component: Forget },
   { path: "/fourchoice", name: "fourchoice", component: fourchoice },
@@ -35,6 +34,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/mypage/password", component: UpdateUserPassword },
   { path: "/mypage/update", name: "changeaddr", component: UpdateUserInfo },
   { path: "/pairing", name: "pairing", component: Pairing },
+  { path: "/quests", name: "quest", component: QuestOverview },
   { path: "/reset", name: "reset", component: Reset },
   { path: "/signin", name: "signin", component: Signin },
   { path: "/signup", name: "signup", component: Signup },
