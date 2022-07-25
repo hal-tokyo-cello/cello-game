@@ -20,7 +20,7 @@ import Mypage from "./views/Mypage.vue";
 import Pairing from "./views/Pairing.vue";
 import Quest from "./views/Quest.vue";
 import Reset from "./views/Reset.vue";
-import Secession from "./views/secession.vue";
+import DeleteAccount from "./views/DeleteAccount.vue";
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
 import Verification from "./views/Verification.vue";
@@ -35,7 +35,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/mypage", name: "mypage", component: Mypage },
   { path: "/changepass", name: "changepass", component: ChangePass },
   { path: "/changeaddr", name: "changeaddr", component: ChangeAddr },
-  { path: "/secession", name: "secession", component: Secession },
+  { path: "/deleteaccount", name: "secession", component: DeleteAccount },
   { path: "/forget", name: "forget", component: Forget },
   { path: "/pairing", name: "pairing", component: Pairing },
   { path: "/fourchoice", name: "fourchoice", component: fourchoice },
