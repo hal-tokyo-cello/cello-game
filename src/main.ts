@@ -23,7 +23,7 @@ import Reset from "./views/Reset.vue";
 import Secession from "./views/secession.vue";
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
-import Varification from "./views/Varification.vue";
+import Verification from "./views/Verification.vue";
 
 const routes: RouteRecordRaw[] = [
   { path: "/index", name: "index", component: Index },
@@ -31,7 +31,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/", name: "quest", component: Quest },
   { path: "/signin", name: "signin", component: Signin },
   { path: "/signup", name: "signup", component: Signup },
-  { path: "/varification", name: "varification", component: Varification },
+  { path: "/verification", name: "varification", component: Verification },
   { path: "/mypage", name: "mypage", component: Mypage },
   { path: "/changepass", name: "changepass", component: ChangePass },
   { path: "/changeaddr", name: "changeaddr", component: ChangeAddr },
