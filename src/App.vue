@@ -1,18 +1,24 @@
 <template>
-  <div class="wrap">
-    <header>
-      <img :src="icon" alt="logo" />
-      <div class="avatar">
-        <Avatar :image="avatar" class="mr-2" size="xlarge" shape="circle" />
-      </div>
-    </header>
-    <router-view></router-view>
-    <footer>©cello2022</footer>
-  </div>
+  <header>
+    <img :src="logo" class="logo" />
+    <Avatar
+      :image="avatar"
+      class="mr-2 avatar"
+      size="xlarge"
+      shape="circle"
+      style="margin: 8px 20px 0 0"
+    />
+  </header>
+
+  <main><router-view></router-view></main>
+
+  <footer>&copy; CELLO 2022</footer>
 </template>
+
 <script>
 import Avatar from "primevue/avatar";
-import icon from "./assets/img/cello_logo.png";
+
+import logo from "./assets/img/cello_logo.png";
 import avatar from "./assets/img/small.jpeg";
 
 export default {
@@ -21,56 +27,42 @@ export default {
   },
   data() {
     return {
-      icon,
+      logo,
       avatar,
     };
   },
 };
 </script>
-<style>
-#email,
-#password,
-#checkPass {
-  width: 600px;
+
+<style scoped>
+:deep(#email),
+:deep(#checkPass),
+:deep(.password) {
+  width: 620px;
+  height: 70px;
 }
-.wrap {
-  background: #f8f8f8;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+
 header {
   width: 100%;
   height: 80px;
-  background: #fff;
+  background: white;
   display: flex;
   justify-content: space-between;
 }
-header img {
-  width: 80px;
-  height: 80px;
-}
-header .avatar {
-  margin-top: 8px;
-  margin-right: 20px;
-}
+
 footer {
   margin-top: auto;
   text-align: center;
   padding: 10px 0;
 }
-#email,
-#password1,
-#checkPass {
-  width: 620px;
-  height: 70px;
+
+.logo {
+  width: 80px;
+  height: 80px;
 }
-#password2 {
-  width: 620px;
-  height: 70px;
-}
-#password3 {
-  width: 620px;
-  height: 70px;
+
+.avatar {
+  margin-top: 8px;
+  margin-right: 20px;
 }
 </style>

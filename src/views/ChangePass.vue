@@ -3,15 +3,19 @@
     <h1>ユーザー情報の変更</h1>
     <div class="input">
       <span class="p-float-label spacer">
-        <Password v-model="value1" :feedback="false" id="password1"></Password>
+        <Password
+          v-model="value1"
+          :feedback="false"
+          class="password"
+        ></Password>
         <label for="password">現在のパスワード</label>
       </span>
       <span class="p-float-label spacer">
-        <Password v-model="value2" toggle-mask id="password2"></Password>
+        <Password v-model="value2" toggle-mask class="password"></Password>
         <label for="password">新しいパスワード</label>
       </span>
       <span class="p-float-label spacer">
-        <Password v-model="value3" toggle-mask id="password3"></Password>
+        <Password v-model="value3" toggle-mask class="password"></Password>
         <label for="password">新しいパスワード</label>
       </span>
     </div>
