@@ -31,13 +31,6 @@ export default {
 </script>
 
 <style scoped>
-:deep(#email),
-:deep(#checkPass),
-:deep(.password) {
-  width: 620px;
-  height: 70px;
-}
-
 header {
   width: 100%;
   height: 80px;
