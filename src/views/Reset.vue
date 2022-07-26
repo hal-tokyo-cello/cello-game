@@ -1,46 +1,44 @@
 <template>
-  <main>
-    <h1>パスワード再設定</h1>
-    <div class="input">
+  <h1 style="text-align: center">パスワード再設定</h1>
+
+  <form @submit="Signup">
+    <div class="fields">
       <span class="p-float-label spacer">
-        <Password id="password" v-model="password" />
-        <label for="password"
-          >新規パスワード
+        <Password v-model="password" id="password" />
+        <label for="password">
+          新規パスワード
           <span style="font-size: 12px">
             ※半角英数字記号を含む8文字以上32文字以下
           </span>
         </label>
       </span>
-      <!-- パスワードエラー -->
-      <template v-if="passFlag == true">
-        <p class="error">※パスワードが入力されていません</p>
-      </template>
-      <template v-if="passwordCheckFlag == true">
-        <p class="error">※確認用パスワードと一致しません</p>
-      </template>
+      <p v-if="passFlag" class="p-error">パスワードが入力されていません</p>
+      <p v-if="passwordCheckFlag" class="p-error">
+        確認用パスワードと一致しません
+      </p>
+
       <span class="p-float-label spacer">
-        <Password id="checkPass" v-model="confPassword" :feedback="false" />
-        <label for="password">確認用パスワード</label>
+        <Password v-model="confPassword" id="checkPass" :feedback="false" />
+        <label for="checkPass">確認用パスワード</label>
       </span>
-      <!-- 確認パスワードエラー -->
-      <template v-if="confPassFlag == true">
-        <p class="error">※確認用パスワードが入力されていません</p>
-      </template>
+      <p v-if="confPassFlag" class="p-error">
+        確認用パスワードが入力されていません
+      </p>
     </div>
 
-    <div class="buttonArea">
-      <div class="button">
-        <Button label="キャンセル" class="p-button-outlined" />
-      </div>
-      <Button label="サインアップ" @click="Signup()" />
+    <div class="button-bar">
+      <Button label="キャンセル" class="p-button-outlined" />
+      <Button label="サインアップ" type="submit" />
     </div>
-    <div class="link">
-      <router-link style="text-decoration: none" to="/signin">
-        <Button label="サインインはこちら" class="p-button-link p-button-sm" />
-      </router-link>
-    </div>
-  </main>
+  </form>
+
+  <div class="links">
+    <router-link style="text-decoration: none" to="/signin">
+      <Button label="サインインはこちら" class="p-button-link p-button-sm" />
+    </router-link>
+  </div>
 </template>
+
 <script>
 import validator from "validator";
 export default {
@@ -87,38 +85,46 @@ export default {
   },
 };
 </script>
+
 <style scoped>
-h1 {
-  text-align: center;
+.fields {
+  width: 620px;
+  margin: auto;
 }
-main {
-  width: 960px;
-  margin: 0 auto;
-  padding-top: 70px;
-  background: #f8f8f8;
+
+.fields p.p-error::before {
+  content: "※";
 }
-.buttonArea {
+
+.fields :deep(*) {
+  width: 620px;
+}
+
+.fields :deep(input) {
+  height: 70px;
+}
+
+.button-bar {
   margin-top: 50px;
   display: flex;
   justify-content: center;
 }
-.input {
-  width: 600px;
-  margin: 0 auto;
+
+.button-bar button {
+  margin: 0 16px;
 }
-.button {
-  margin-right: 16px;
-}
-.spacer {
-  margin-top: 50px;
-}
-.link {
-  margin-top: 20px;
+
+.links {
   text-align: center;
 }
-.error {
-  margin: 4px 0 0 0;
-  font-size: 12px;
-  color: #f00;
+
+.links a {
+  display: block;
+  min-width: 200px;
+  text-decoration: none;
+}
+
+.spacer {
+  margin-top: 50px;
 }
 </style>

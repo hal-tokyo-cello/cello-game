@@ -1,37 +1,33 @@
 <template>
-  <div class="content">
-    <div class="top">
-      <h1>マイページ</h1>
+  <h1>マイページ</h1>
+
+  <div style="display: flex; justify-content: space-between">
+    <div style="flex: 1 1">
+      <Avatar
+        image="/src/assets/img/kimawari.png"
+        size="xlarge"
+        shape="circle"
+      />
     </div>
 
-    <div class="box">
-      <div class="image">
-        <Avatar
-          image="/src/assets/img/kimawari.png"
-          class="mr-2"
-          size="xlarge"
-          shape="circle"
-        />
-      </div>
-
+    <div style="flex: 3 3">
       <div class="change">
-        <div class="username">
-          <p>{{ username }}</p>
-          <Button label="変更する" class="btn" />
-        </div>
-        <div class="mail">
-          <p>E-mail：{{ mail }}</p>
-          <Button label="変更する" class="btn" />
-        </div>
-        <div class="password">
-          <p>password</p>
-          <Button label="変更する" class="btn" />
-        </div>
+        <p>{{ username }}</p>
+        <Button label="変更する" />
+      </div>
+      <div class="change">
+        <p>E-mail: {{ mail }}</p>
+        <Button label="変更する" />
+      </div>
+      <div class="change">
+        <p>password</p>
+        <Button label="変更する" />
       </div>
     </div>
-    <div align="right" class="Withdrawal">
-      <Button label="▶退会する" class="p-button-outlined withdrawal_btn" />
-    </div>
+  </div>
+
+  <div style="float: right; margin-top: 40px; padding-right: 5px">
+    <Button label="▶退会する" class="p-button-outlined" />
   </div>
 </template>
 
@@ -52,47 +48,12 @@ export default {
 </script>
 
 <style>
-.content {
-  top: 0px;
-  left: 0px;
-  opacity: 1;
-  margin: 0 auto;
-  width: 960px;
-}
-
-.box {
-  display: flex;
-  justify-content: space-between;
-}
-
-.image {
-  width: 240px;
-}
-
 .change {
-  width: 720px;
-}
-
-.username {
   display: flex;
   justify-content: space-between;
 }
 
-.mail {
-  display: flex;
-  justify-content: space-between;
-}
-
-.password {
-  display: flex;
-  justify-content: space-between;
-}
-
-.btn {
+.change button {
   margin: 5px;
-}
-
-.withdrawal_btn {
-  margin: 40px 5px 0px 5px;
 }
 </style>

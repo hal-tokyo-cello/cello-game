@@ -11,34 +11,34 @@ import "primevue/resources/primevue.min.css";
 import "primevue/resources/themes/fluent-light/theme.css";
 
 import App from "./App.vue";
-import ChangeAddr from "./views/ChangeAddr.vue";
-import ChangePass from "./views/ChangePass.vue";
+import DeleteAccount from "./views/DeleteAccount.vue";
 import Forget from "./views/Forget.vue";
-import fourchoice from "./views/fourchoice.vue";
+import MultipleChoiceQuest from "./views/MultipleChoiceQuest.vue";
 import Index from "./views/Index.vue";
 import Mypage from "./views/Mypage.vue";
-import Pairing from "./views/Pairing.vue";
-import Quest from "./views/Quest.vue";
+import CombinationQuest from "./views/CombinationQuest.vue";
+import QuestOverview from "./views/QuestOverview.vue";
 import Reset from "./views/Reset.vue";
-import Secession from "./views/secession.vue";
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
-import Varification from "./views/Varification.vue";
+import UpdateUserInfo from "./views/UpdateUserInfo.vue";
+import UpdateUserPassword from "./views/UpdateUserPassword.vue";
+import Verification from "./views/Verification.vue";
 
 const routes: RouteRecordRaw[] = [
+  { path: "/deleteaccount", name: "secession", component: DeleteAccount },
+  { path: "/forget", name: "forget", component: Forget },
   { path: "/index", name: "index", component: Index },
+  { path: "/multiplechoice", component: MultipleChoiceQuest },
+  { path: "/mypage", name: "mypage", component: Mypage },
+  { path: "/mypage/password", component: UpdateUserPassword },
+  { path: "/mypage/update", name: "changeaddr", component: UpdateUserInfo },
+  { path: "/combination", name: "pairing", component: CombinationQuest },
+  { path: "/quests", name: "quest", component: QuestOverview },
   { path: "/reset", name: "reset", component: Reset },
-  { path: "/", name: "quest", component: Quest },
   { path: "/signin", name: "signin", component: Signin },
   { path: "/signup", name: "signup", component: Signup },
-  { path: "/varification", name: "varification", component: Varification },
-  { path: "/mypage", name: "mypage", component: Mypage },
-  { path: "/changepass", name: "changepass", component: ChangePass },
-  { path: "/changeaddr", name: "changeaddr", component: ChangeAddr },
-  { path: "/secession", name: "secession", component: Secession },
-  { path: "/forget", name: "forget", component: Forget },
-  { path: "/pairing", name: "pairing", component: Pairing },
-  { path: "/fourchoice", name: "fourchoice", component: fourchoice },
+  { path: "/verification", name: "varification", component: Verification },
 ];
 
 const router = createRouter({

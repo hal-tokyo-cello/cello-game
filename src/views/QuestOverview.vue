@@ -1,42 +1,34 @@
 <template>
-  <div class="main">
-    <div class="wrapper">
-      <!-- 各クエストを表示するボックス -->
-      <div
-        class="box"
-        @click="showModal()"
-        v-for="(items, key) in quests"
-        :key="key"
-      >
-        <!-- クエストのタイトル部分 -->
-        <div class="title-block">
-          <h4 class="title">{{ items.title }}</h4>
-        </div>
-        <div class="title-tri"></div>
-
-        <!-- クエストのジャンル表示部分 -->
-        <p class="genre">{{ items.genre }}</p>
-
-        <!-- クエストの経験値バッジ部分 -->
-        <div class="point-badge">
-          <p class="points">
-            {{ items.experience }}
-          </p>
-        </div>
+  <div class="wrapper">
+    <div
+      v-for="(quest, idx) in quests"
+      :key="idx"
+      @click="showModal"
+      class="quest-card"
+    >
+      <div class="title-box">
+        <h4 class="title">{{ quest.title }}</h4>
       </div>
+      <div class="title-decoration" />
 
-      <modal
-        :quest="{ quests: 'title' }"
-        v-show="modal"
-        @execute-method="executeMethod"
-      ></modal>
+      <p class="genre">{{ quest.genre }}</p>
+
+      <span class="point-badge">
+        {{ quest.experience }}
+      </span>
     </div>
   </div>
+
+  <modal
+    v-if="modal"
+    :quest="{ quests: 'title' }"
+    @execute-method="executeMethod"
+  />
 </template>
 
 <script>
 import axios from "axios";
-import Modal from "./modal.vue";
+import Modal from "../components/QuestConfirmDialog.vue";
 
 export default {
   name: "Quest",
@@ -87,19 +79,17 @@ export default {
 };
 </script>
 
-<style>
-.main {
-  background-color: #f8f8f8;
-}
+<style scoped>
 .wrapper {
-  width: 799px;
-  margin: 0px auto;
+  width: 800px;
+  margin: auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-content: space-between;
-  flex-wrap: wrap;
 }
-.box {
+
+.quest-card {
   width: 377px;
   height: 115px;
   border: 1px solid #fc8c0d;
@@ -109,8 +99,7 @@ export default {
   cursor: pointer;
 }
 
-/*   box upper   */
-.title-block {
+.quest-card .title-box {
   margin: 0;
   width: 377px;
   height: 47px;
@@ -119,30 +108,29 @@ export default {
   display: flex;
   justify-content: center;
 }
-.title-tri {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 21px 188.5px 0 188.5px;
-  border-color: #fc8c0d transparent transparent transparent;
-}
-.title {
+.quest-card .title {
   margin-top: 20px;
   text-align: center;
   font: normal normal bold 14px/17px Segoe UI;
   color: #ffffff;
 }
 
-/*   box bottom   */
-.genre {
-  /* width: 100%; */
+.quest-card .title-decoration {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 21px 188.5px 0 188.5px;
+  border-color: #fc8c0d transparent transparent transparent;
+}
+
+.quest-card .genre {
   margin-top: 1rem;
   text-align: center;
   font: normal normal bold 8px/10px Segoe UI;
-  letter-spacing: 0px;
-  color: #707070;
+  color: hsl(0, 0%, 44%);
 }
-.point-badge {
+
+.quest-card .point-badge {
   position: absolute;
   right: 20px;
   bottom: 10px;
@@ -154,35 +142,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.points {
-  font: normal normal bold 16px/27px Tsukushi A Round Gothic;
+  font: normal normal bold 16px/27px "Tsukushi A Round Gothic";
   letter-spacing: 0px;
-  color: #ffffff;
-}
-
-/* test */
-#overlay {
-  /*　要素を重ねた時の順番　*/
-  z-index: 1;
-
-  /*　画面全体を覆う設定　*/
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-
-  /*　画面の中央に要素を表示させる設定　*/
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-#content {
-  z-index: 2;
-  width: 50%;
-  padding: 1em;
-  background: #fff;
+  color: white;
 }
 </style>

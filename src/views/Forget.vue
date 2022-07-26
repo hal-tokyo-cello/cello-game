@@ -1,26 +1,23 @@
 <template>
-  <main>
-    <h1>パスワード再設定</h1>
-    <div class="input">
+  <h1 style="text-align: center">パスワード再設定</h1>
+
+  <form @submit="Signin">
+    <div class="fields">
       <span class="p-float-label spacer">
         <InputText id="email" type="text" v-model="mail" />
         <label for="email">メールアドレス</label>
       </span>
-      <template v-if="mailFlag == true">
-        <p class="error">※メールアドレスが入力されていません</p>
-      </template>
-      <template v-if="mailValFlag == true">
-        <p class="error">※メールアドレスではありません</p>
-      </template>
+      <p v-if="mailFlag" class="p-error">メールアドレスが入力されていません</p>
+      <p v-if="mailValFlag" class="p-error">メールアドレスではありません</p>
     </div>
-    <div class="buttonArea">
-      <div class="button">
-        <Button label="キャンセル" class="p-button-outlined" />
-      </div>
-      <Button label="次へ" @click="Signin()" />
+
+    <div class="button-bar">
+      <Button label="キャンセル" class="p-button-outlined" />
+      <Button label="次へ" type="submit" />
     </div>
-  </main>
+  </form>
 </template>
+
 <script>
 import validator from "validator";
 export default {
@@ -64,37 +61,46 @@ export default {
   },
 };
 </script>
+
 <style scoped>
-h1 {
-  text-align: center;
+.fields {
+  width: 620px;
+  margin: auto;
 }
-main {
-  width: 960px;
-  margin: 0 auto;
-  padding-top: 70px;
-  background: #f8f8f8;
+
+.fields p.p-error::before {
+  content: "※";
 }
-.buttonArea {
+
+.fields :deep(*) {
+  width: 620px;
+}
+
+.fields :deep(input) {
+  height: 70px;
+}
+
+.button-bar {
   margin-top: 50px;
   display: flex;
   justify-content: center;
 }
-.input {
-  width: 600px;
-  margin: 0 auto;
+
+.button-bar button {
+  margin: 0 16px;
 }
-.button {
-  margin-right: 16px;
+
+.links {
+  text-align: center;
 }
+
+.links a {
+  display: block;
+  min-width: 200px;
+  text-decoration: none;
+}
+
 .spacer {
   margin-top: 50px;
-}
-.error {
-  margin: 4px 0 0 0;
-  font-size: 12px;
-  color: #f00;
-}
-#email {
-  width: 600px;
 }
 </style>

@@ -1,20 +1,16 @@
-<template>
-  <div id="modal">
-    <div id="modal-content" class="modal">
-      <!-- v-for使って問題の情報を取ってくる？？？ -->
-      <p id="modal-message" class="modal__message">{{ title }}</p>
-      <p id="modal-genre">ジャンル：穴埋め</p>
-      <p id="modal-experience">🅿︎300　</p>
+<template >
+  <div class="modal">
+    <p class="title">{{ title }}</p>
+    <p class="genre">穴埋め</p>
+    <p class="experience">300</p>
 
-      <div id="modal-chose">
-        <div id="modal-cansel" class="modal__cancel" @click="returnFalse()">
-          キャンセル
-        </div>
-        <div class="modal__btn" @click="returnTrue()">解答へ</div>
-      </div>
+    <div class="actions">
+      <div class="cancel" @click="returnFalse">キャンセル</div>
+      <div class="primary" @click="returnTrue">解答へ</div>
     </div>
-    <div id="modal-overlay" @click="returnFalse()"></div>
   </div>
+
+  <div class="overlay" @click="returnFalse"></div>
 </template>
 
 <script>
@@ -48,7 +44,7 @@ export default {
   border: 1px solid #ff8c00;
 }
 
-.modal__message {
+.title {
   margin-top: 53px;
   margin-bottom: 0px;
   text-align: center;
@@ -56,28 +52,39 @@ export default {
   letter-spacing: 0px;
   color: #ff8c00;
 }
-#modal-genre {
+
+.genre {
   margin-top: 20px;
   margin-bottom: 6px;
   font: normal normal bold 12px/14px Segoe UI;
   letter-spacing: 0px;
   color: #666666;
 }
-#modal-experience {
+
+.genre::before {
+  content: "ジャンル：";
+}
+
+.experience {
   margin: 0;
   font: normal normal bold 15px/18px Segoe UI;
   letter-spacing: 0px;
   color: #666666;
 }
 
-#modal-chose {
+.experience::before {
+  content: "🅿︎";
+}
+
+.actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 340px;
   margin: 2rem auto;
 }
-.modal__cancel {
+
+.actions .cancel {
   width: 150px;
   height: 52px;
   font: normal normal 600 15px/18px Segoe UI;
@@ -89,7 +96,8 @@ export default {
   justify-content: center;
   cursor: pointer;
 }
-.modal__btn {
+
+.actions .primary {
   width: 150px;
   height: 52px;
   background: #fc8c0d 0% 0% no-repeat padding-box;
@@ -101,7 +109,8 @@ export default {
   align-items: center;
   justify-content: center;
 }
-#modal-overlay {
+
+.overlay {
   z-index: 1;
   display: block;
   position: fixed;
