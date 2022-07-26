@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Modal from "../components/Alert.vue";
+import Modal from "../../components/Alert.vue";
 
 export default {
   components: {

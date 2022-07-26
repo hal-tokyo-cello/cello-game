@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import Modal from "../components/AlertAddr.vue";
+import Modal from "../../components/AlertAddr.vue";
 import validator from "validator";
 
 export default {

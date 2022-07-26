@@ -28,7 +28,7 @@
 
 <script>
 import axios from "axios";
-import Modal from "../components/AlertAddr.vue";
+import Modal from "../../components/AlertAddr.vue";
 
 export default {
   components: {
