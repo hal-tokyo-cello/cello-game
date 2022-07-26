@@ -1,10 +1,8 @@
 <template>
-  <h1 style="text-align: center">ユーザー情報の変更</h1>
-
-  <form>
-    <div class="fields">
+  <c-form-layout title="ユーザー情報の変更">
+    <template #fields>
       <template v-for="i in 3" :key="i">
-        <span class="p-float-label spacer">
+        <span class="p-float-label">
           <p-input-text class="email" id="email" type="text" v-model="mail1" />
           <label for="email">メールアドレス</label>
         </span>
@@ -13,13 +11,14 @@
         </p>
         <p v-if="mailValFlag" class="p-error">メールアドレスではありません</p>
       </template>
-    </div>
+    </template>
 
-    <div class="button-bar">
+    <template #action>
       <p-button label="キャンセル" @click="cancel" class="p-button-outlined" />
       <p-button label="登録" type="submit" class="p-button" />
-    </div>
-  </form>
+    </template>
+  </c-form-layout>
+
   <c-modal :message="message" v-show="modal" @execute-method="executeMethod" />
 </template>
 
@@ -30,9 +29,11 @@ import PButton from "primevue/button";
 import PInputText from "primevue/inputtext";
 
 import CModal from "../../components/AlertAddr.vue";
+import CFormLayout from "../../layout/Form.vue";
 
 export default {
   components: {
+    CFormLayout,
     CModal,
     PButton,
     PInputText,
@@ -84,49 +85,4 @@ export default {
 </script>
 
 <style scoped>
-.button-bar {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-}
-.fields {
-  width: 620px;
-  margin: auto;
-}
-
-.fields p.p-error::before {
-  content: "※";
-}
-
-.fields :deep(*) {
-  width: 620px;
-}
-
-.fields :deep(input) {
-  height: 70px;
-}
-
-.button-bar {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-}
-
-.button-bar button {
-  margin: 0 16px;
-}
-
-.links {
-  text-align: center;
-}
-
-.links a {
-  display: block;
-  min-width: 200px;
-  text-decoration: none;
-}
-
-.spacer {
-  margin-top: 50px;
-}
 </style>

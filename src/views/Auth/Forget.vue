@@ -1,21 +1,19 @@
 <template>
-  <h1 style="text-align: center">パスワード再設定</h1>
-
-  <form @submit="Signin">
-    <div class="fields">
-      <span class="p-float-label spacer">
+  <c-form-layout title="パスワード再設定" @submit.prevent="Signin">
+    <template #fields>
+      <span class="p-float-label">
         <p-input-text id="email" type="text" v-model="mail" />
         <label for="email">メールアドレス</label>
       </span>
       <p v-if="mailFlag" class="p-error">メールアドレスが入力されていません</p>
       <p v-if="mailValFlag" class="p-error">メールアドレスではありません</p>
-    </div>
+    </template>
 
-    <div class="button-bar">
+    <template #action>
       <p-button label="キャンセル" class="p-button-outlined" />
       <p-button label="次へ" type="submit" />
-    </div>
-  </form>
+    </template>
+  </c-form-layout>
 </template>
 
 <script>
@@ -25,11 +23,14 @@ import PButton from "primevue/button";
 import PInputText from "primevue/inputtext";
 import PPassword from "primevue/password";
 
+import CFormLayout from "../../layout/Form.vue";
+
 export default {
   components: {
-    PPassword,
-    PInputText,
+    CFormLayout,
     PButton,
+    PInputText,
+    PPassword,
   },
   data() {
     return {
@@ -73,44 +74,4 @@ export default {
 </script>
 
 <style scoped>
-.fields {
-  width: 620px;
-  margin: auto;
-}
-
-.fields p.p-error::before {
-  content: "※";
-}
-
-.fields :deep(*) {
-  width: 620px;
-}
-
-.fields :deep(input) {
-  height: 70px;
-}
-
-.button-bar {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-}
-
-.button-bar button {
-  margin: 0 16px;
-}
-
-.links {
-  text-align: center;
-}
-
-.links a {
-  display: block;
-  min-width: 200px;
-  text-decoration: none;
-}
-
-.spacer {
-  margin-top: 50px;
-}
 </style>
