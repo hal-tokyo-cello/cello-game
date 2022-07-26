@@ -1,6 +1,6 @@
 import PrimeVue from "primevue/config";
 import { createApp } from "vue";
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
@@ -26,7 +26,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: routes,
 });
 
