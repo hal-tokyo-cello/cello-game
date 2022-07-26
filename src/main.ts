@@ -16,7 +16,7 @@ import Forget from "./views/Forget.vue";
 import MultipleChoiceQuest from "./views/MultipleChoiceQuest.vue";
 import Index from "./views/Index.vue";
 import Mypage from "./views/Mypage.vue";
-import Pairing from "./views/Pairing.vue";
+import CombinationQuest from "./views/CombinationQuest.vue";
 import QuestOverview from "./views/QuestOverview.vue";
 import Reset from "./views/Reset.vue";
 import Signin from "./views/Signin.vue";
@@ -33,7 +33,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/mypage", name: "mypage", component: Mypage },
   { path: "/mypage/password", component: UpdateUserPassword },
   { path: "/mypage/update", name: "changeaddr", component: UpdateUserInfo },
-  { path: "/pairing", name: "pairing", component: Pairing },
+  { path: "/combination", name: "pairing", component: CombinationQuest },
   { path: "/quests", name: "quest", component: QuestOverview },
   { path: "/reset", name: "reset", component: Reset },
   { path: "/signin", name: "signin", component: Signin },
