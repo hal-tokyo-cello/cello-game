@@ -28,7 +28,7 @@
 
 <script>
 import axios from "axios";
-import Modal from "../components/QuestConfirmDialog.vue";
+import Modal from "../../components/QuestConfirmDialog.vue";
 
 export default {
   name: "Quest",

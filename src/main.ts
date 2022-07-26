@@ -13,11 +13,9 @@ import "./theme.css";
 import App from "./App.vue";
 import DeleteAccount from "./views/DeleteAccount.vue";
 import Forget from "./views/Forget.vue";
-import MultipleChoiceQuest from "./views/MultipleChoiceQuest.vue";
 import Index from "./views/Index.vue";
 import Mypage from "./views/Mypage.vue";
-import CombinationQuest from "./views/CombinationQuest.vue";
-import QuestOverview from "./views/QuestOverview.vue";
+import QuestOverview from "./views/Quest/QuestOverview.vue";
 import Reset from "./views/Reset.vue";
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
@@ -29,11 +27,9 @@ const routes: RouteRecordRaw[] = [
   { path: "/deleteaccount", name: "secession", component: DeleteAccount },
   { path: "/forget", name: "forget", component: Forget },
   { path: "/index", name: "index", component: Index },
-  { path: "/multiplechoice", component: MultipleChoiceQuest },
   { path: "/mypage", name: "mypage", component: Mypage },
   { path: "/mypage/password", component: UpdateUserPassword },
   { path: "/mypage/update", name: "changeaddr", component: UpdateUserInfo },
-  { path: "/combination", name: "pairing", component: CombinationQuest },
   { path: "/quests", name: "quest", component: QuestOverview },
   { path: "/reset", name: "reset", component: Reset },
   { path: "/signin", name: "signin", component: Signin },
