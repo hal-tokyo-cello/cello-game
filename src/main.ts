@@ -24,17 +24,17 @@ import UpdateUserPassword from "./views/UpdateUserPassword.vue";
 import Verification from "./views/Verification.vue";
 
 const routes: RouteRecordRaw[] = [
-  { path: "/deleteaccount", name: "secession", component: DeleteAccount },
-  { path: "/forget", name: "forget", component: Forget },
-  { path: "/index", name: "index", component: Index },
-  { path: "/mypage", name: "mypage", component: Mypage },
+  { path: "/auth/forgetpassword", component: Forget },
+  { path: "/auth/signin", component: Signin },
+  { path: "/auth/signup", component: Signup },
+  { path: "/auth/signup/verification", component: Verification },
+  { path: "/home", component: Index },
+  { path: "/mypage", component: Mypage },
+  { path: "/mypage/deleteaccount", component: DeleteAccount },
   { path: "/mypage/password", component: UpdateUserPassword },
-  { path: "/mypage/update", name: "changeaddr", component: UpdateUserInfo },
-  { path: "/quests", name: "quest", component: QuestOverview },
-  { path: "/reset", name: "reset", component: Reset },
-  { path: "/signin", name: "signin", component: Signin },
-  { path: "/signup", name: "signup", component: Signup },
-  { path: "/verification", name: "varification", component: Verification },
+  { path: "/mypage/update", component: UpdateUserInfo },
+  { path: "/quests", component: QuestOverview },
+  { path: "/resetpassword", component: Reset },
 ];
 
 const router = createRouter({
