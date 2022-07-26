@@ -8,7 +8,7 @@ import Password from "primevue/password";
 
 import "primeicons/primeicons.css";
 import "primevue/resources/primevue.min.css";
-import "primevue/resources/themes/fluent-light/theme.css";
+import "./theme.css";
 
 import App from "./App.vue";
 import DeleteAccount from "./views/DeleteAccount.vue";
