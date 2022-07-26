@@ -4,7 +4,7 @@
   <form @submit="Signin">
     <div class="fields">
       <span class="p-float-label spacer">
-        <InputText id="email" type="text" v-model="mail" />
+        <p-input-text id="email" type="text" v-model="mail" />
         <label for="email">メールアドレス</label>
       </span>
       <p v-if="mailFlag" class="p-error">メールアドレスが入力されていません</p>
@@ -12,15 +12,25 @@
     </div>
 
     <div class="button-bar">
-      <Button label="キャンセル" class="p-button-outlined" />
-      <Button label="次へ" type="submit" />
+      <p-button label="キャンセル" class="p-button-outlined" />
+      <p-button label="次へ" type="submit" />
     </div>
   </form>
 </template>
 
 <script>
 import validator from "validator";
+
+import PButton from "primevue/button";
+import PInputText from "primevue/inputtext";
+import PPassword from "primevue/password";
+
 export default {
+  components: {
+    PPassword,
+    PInputText,
+    PButton,
+  },
   data() {
     return {
       mail: "",

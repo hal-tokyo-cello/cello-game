@@ -2,10 +2,6 @@ import PrimeVue from "primevue/config";
 import { createApp } from "vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-import Button from "primevue/button";
-import InputText from "primevue/inputtext";
-import Password from "primevue/password";
-
 import "primeicons/primeicons.css";
 import "primevue/resources/primevue.min.css";
 import "./theme.css";
@@ -30,9 +26,4 @@ const router = createRouter({
   routes: routes,
 });
 
-const app = createApp(App);
-app.use(router).use(PrimeVue).mount("#app");
-app.component("InputText", InputText);
-app.component("Password", Password);
-app.component("Button", Button);
-app.component("TheButton", Button);
+createApp(App).use(router).use(PrimeVue).mount("#app");

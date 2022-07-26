@@ -8,20 +8,30 @@
   <form>
     <div class="fields">
       <span class="p-float-label spacer">
-        <InputText id="email" type="email" v-model="value" />
+        <p-input-text id="email" type="email" v-model="value" />
         <label for="email">メール記載の認証コードを入力してください。</label>
       </span>
     </div>
 
     <div class="button-bar">
-      <Button label="キャンセル" class="p-button-outlined" />
-      <Button label="送信" type="submit" />
+      <p-button label="キャンセル" class="p-button-outlined" />
+      <p-button label="送信" type="submit" />
     </div>
   </form>
 </template>
 
 <script>
-export default {};
+import PButton from "primevue/button";
+import PInputText from "primevue/inputtext";
+import PPassword from "primevue/password";
+
+export default {
+  components: {
+    PPassword,
+    PInputText,
+    PButton,
+  },
+};
 </script>
 
 

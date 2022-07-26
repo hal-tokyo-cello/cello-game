@@ -5,20 +5,23 @@
       <h2 class="subHead">Celloを使えばゲーム感覚で楽しくExcelを学べるよ</h2>
       <h2 class="subHead2">さあ！Celloをはじめてみよう！</h2>
       <router-link style="text-decoration: none" to="/Signup">
-        <Button label="はじめてみる" class="button" />
+        <p-button label="はじめてみる" class="button" />
       </router-link>
     </section>
+
     <section class="section2">
       <div class="sectionFriend">
         <h1 class="sectionHead">CELLO</h1>
         <h2 class="sectionHead2">へようこそ</h2>
       </div>
+
       <img src="/src/assets/img/pan1.png" alt="quiz" class="pan1" />
       <img src="/src/assets/img/pan2.png" alt="quiz" class="pan2" />
       <div class="imageWrap">
         <img src="/src/assets/img/quiz.png" alt="quiz" class="quizImg" />
       </div>
     </section>
+
     <section class="section3">
       <h2 class="section3Head">問題を解いてアバターを進化させよう！</h2>
       <div class="section3Img">
@@ -34,20 +37,24 @@
           class="doragon2"
         />
       </div>
+
       <div class="section3Mon">
         <h2 class="section3Head2">レベルに合わせた問題でレベルを上げよう！</h2>
+
         <div class="section3Mon1">
           <img src="/src/assets/img/mon1.png" alt="mon" class="mon1" />
           <div class="monCenter">
             <p class="monText">組み合わせ問題</p>
           </div>
         </div>
+
         <div class="section3Mon2">
           <div class="monCenter2">
             <p class="monText">４択問題</p>
           </div>
           <img src="/src/assets/img/mon3.png" alt="mon" class="mon2" />
         </div>
+
         <div class="section3Mon3">
           <img src="/src/assets/img/mon2.png" alt="mon" class="mon1" />
           <div class="monCenter">
@@ -56,11 +63,13 @@
         </div>
       </div>
     </section>
+
     <section class="section4">
       <h1 class="section4Head">さっそくはじめてみよう</h1>
+
       <div class="btnWrap">
         <router-link style="text-decoration: none" to="/Signup">
-          <Button label="はじめてみる" class="button2" />
+          <p-button label="はじめてみる" class="button2" />
         </router-link>
       </div>
     </section>
@@ -68,11 +77,11 @@
 </template>
 
 <script>
-import Button from "primevue/button";
+import PButton from "primevue/button";
 
 export default {
   components: {
-    Button,
+    PButton,
   },
 };
 </script>

@@ -5,7 +5,7 @@
     <div class="fields">
       <template v-for="i in 3" :key="i">
         <span class="p-float-label spacer">
-          <InputText class="email" id="email" type="text" v-model="mail1" />
+          <p-input-text class="email" id="email" type="text" v-model="mail1" />
           <label for="email">メールアドレス</label>
         </span>
         <p v-if="mailFlag" class="p-error">
@@ -16,21 +16,26 @@
     </div>
 
     <div class="button-bar">
-      <Button label="キャンセル" @click="cancel" class="p-button-outlined" />
-      <Button label="登録" type="submit" class="p-button" />
+      <p-button label="キャンセル" @click="cancel" class="p-button-outlined" />
+      <p-button label="登録" type="submit" class="p-button" />
     </div>
   </form>
-  <modal :message="message" v-show="modal" @execute-method="executeMethod">
-  </modal>
+  <c-modal :message="message" v-show="modal" @execute-method="executeMethod" />
 </template>
 
 <script>
-import Modal from "../../components/AlertAddr.vue";
 import validator from "validator";
+
+import PButton from "primevue/button";
+import PInputText from "primevue/inputtext";
+
+import CModal from "../../components/AlertAddr.vue";
 
 export default {
   components: {
-    Modal,
+    CModal,
+    PButton,
+    PInputText,
   },
   data() {
     return {

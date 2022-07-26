@@ -4,7 +4,7 @@
   <form @submit="Signup">
     <div class="fields">
       <span class="p-float-label spacer">
-        <Password v-model="password" id="password" />
+        <p-password v-model="password" id="password" />
         <label for="password">
           新規パスワード
           <span style="font-size: 12px">
@@ -18,7 +18,7 @@
       </p>
 
       <span class="p-float-label spacer">
-        <Password v-model="confPassword" id="checkPass" :feedback="false" />
+        <p-password v-model="confPassword" id="checkPass" :feedback="false" />
         <label for="checkPass">確認用パスワード</label>
       </span>
       <p v-if="confPassFlag" class="p-error">
@@ -27,21 +27,27 @@
     </div>
 
     <div class="button-bar">
-      <Button label="キャンセル" class="p-button-outlined" />
-      <Button label="サインアップ" type="submit" />
+      <p-button label="キャンセル" class="p-button-outlined" />
+      <p-button label="サインアップ" type="submit" />
     </div>
   </form>
 
   <div class="links">
     <router-link style="text-decoration: none" to="/signin">
-      <Button label="サインインはこちら" class="p-button-link p-button-sm" />
+      <p-button label="サインインはこちら" class="p-button-link p-button-sm" />
     </router-link>
   </div>
 </template>
 
 <script>
-import validator from "validator";
+import PButton from "primevue/button";
+import PPassword from "primevue/password";
+
 export default {
+  components: {
+    PButton,
+    PPassword,
+  },
   data() {
     return {
       password: "",

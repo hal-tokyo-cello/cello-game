@@ -3,7 +3,7 @@
 
   <div style="display: flex; justify-content: space-between">
     <div style="flex: 1 1">
-      <Avatar
+      <p-avatar
         image="/src/assets/img/kimawari.png"
         size="xlarge"
         shape="circle"
@@ -13,15 +13,15 @@
     <div style="flex: 3 3">
       <div class="change">
         <p>{{ username }}</p>
-        <Button label="変更する" />
+        <p-button label="変更する" />
       </div>
       <div class="change">
         <p>E-mail: {{ mail }}</p>
-        <Button label="変更する" />
+        <p-button label="変更する" />
       </div>
       <div class="change">
         <p>password</p>
-        <Button label="変更する" />
+        <p-button label="変更する" />
       </div>
     </div>
   </div>
@@ -32,7 +32,9 @@
 </template>
 
 <script>
-import Avatar from "primevue/avatar";
+import PAvatar from "primevue/avatar";
+import PButton from "primevue/button";
+
 export default {
   data() {
     return {
@@ -42,7 +44,8 @@ export default {
   },
   methods: {},
   components: {
-    Avatar,
+    PAvatar,
+    PButton,
   },
 };
 </script>

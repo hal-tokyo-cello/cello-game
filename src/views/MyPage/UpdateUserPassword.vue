@@ -4,35 +4,41 @@
   <form @submit="showModal">
     <div class="fields">
       <span class="p-float-label spacer">
-        <Password v-model="value1" :feedback="false" class="password" />
+        <p-password v-model="value1" :feedback="false" class="password" />
         <label for="password">現在のパスワード</label>
       </span>
 
       <span class="p-float-label spacer">
-        <Password v-model="value2" toggle-mask class="password" />
+        <p-password v-model="value2" toggle-mask class="password" />
         <label for="password">新しいパスワード</label>
       </span>
 
       <span class="p-float-label spacer">
-        <Password v-model="value3" toggle-mask class="password" />
+        <p-password v-model="value3" toggle-mask class="password" />
         <label for="password">新しいパスワード</label>
       </span>
     </div>
     <div class="button-bar">
-      <Button label="キャンセル" @click="cancel" class="p-button-outlined" />
-      <Button label="登録" @click="showModal" />
+      <p-button label="キャンセル" @click="cancel" class="p-button-outlined" />
+      <p-button label="登録" @click="showModal" />
     </div>
   </form>
-  <modal :message="message" v-show="modal" @execute-method="executeMethod" />
+  <c-modal :message="message" v-show="modal" @execute-method="executeMethod" />
 </template>
 
 <script>
 import axios from "axios";
-import Modal from "../../components/AlertAddr.vue";
+
+import PButton from "primevue/button";
+import PPassword from "primevue/password";
+
+import CModal from "../../components/AlertAddr.vue";
 
 export default {
   components: {
-    Modal,
+    PPassword,
+    PButton,
+    CModal,
   },
   data() {
     return {

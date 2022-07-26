@@ -4,31 +4,31 @@
   <form @submit="Signin">
     <div class="fields">
       <span class="p-float-label spacer">
-        <InputText id="email" type="email" v-model="mail" />
+        <p-input-text id="email" type="email" v-model="mail" />
         <label for="email">メールアドレス</label>
       </span>
       <p v-if="mailFlag" class="p-error">メールアドレスが入力されていません</p>
       <p v-if="mailValFlag" class="p-error">メールアドレスではありません</p>
 
       <span class="p-float-label spacer">
-        <Password v-model="password" id="password" />
+        <p-password v-model="password" id="password" />
         <label for="password">パスワード</label>
       </span>
       <p v-if="passFlag" class="p-error">パスワードが入力されていません</p>
     </div>
 
     <div class="button-bar">
-      <Button label="キャンセル" class="p-button-outlined" />
-      <Button label="サインイン" type="submit" />
+      <p-button label="キャンセル" class="p-button-outlined" />
+      <p-button label="サインイン" type="submit" />
     </div>
   </form>
 
   <div class="links">
     <router-link to="/">
-      <Button label="パスワードを忘れた" class="p-button-link p-button-sm" />
+      <p-button label="パスワードを忘れた" class="p-button-link p-button-sm" />
     </router-link>
     <router-link to="/signup">
-      <Button
+      <p-button
         label="初めてご利用の方はこちら"
         class="p-button-link p-button-sm"
       />
@@ -37,9 +37,19 @@
 </template>
 
 <script>
-import validator from "validator";
 import axios from "axios";
+import validator from "validator";
+
+import PButton from "primevue/button";
+import PInputText from "primevue/inputtext";
+import PPassword from "primevue/password";
+
 export default {
+  components: {
+    PPassword,
+    PInputText,
+    PButton,
+  },
   data() {
     return {
       mail: "",
