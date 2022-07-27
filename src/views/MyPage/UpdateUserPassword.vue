@@ -26,7 +26,8 @@
   <c-modal :message="message" v-show="modal" @execute-method="executeMethod" />
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "@vue/runtime-core";
 import axios from "axios";
 
 import PButton from "primevue/button";
@@ -35,7 +36,7 @@ import PPassword from "primevue/password";
 import CModal from "../../components/AlertAddr.vue";
 import CFormLayout from "../../layout/Form.vue";
 
-export default {
+export default defineComponent({
   components: {
     CFormLayout,
     CModal,
@@ -46,6 +47,7 @@ export default {
     return {
       message: "ユーザー名を変更しました",
       modal: false,
+      value: null,
       value1: null,
       value2: null,
       value3: null,
@@ -59,6 +61,8 @@ export default {
       this.$router.push("./Mypage.vue");
     },
     showModal() {
+      const error = false; // FIX: error means something else
+
       if (error) {
         return;
       } else {
@@ -85,12 +89,12 @@ export default {
         return;
       }
     },
-    executeMethod(yes) {
+    executeMethod(yes: boolean) {
       // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
       this.modal = false;
     },
   },
-};
+});
 </script>
 
 <style scoped>

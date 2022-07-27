@@ -16,12 +16,14 @@
   <c-modal :message="message" v-show="modal" @execute-method="executeMethod" />
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "@vue/runtime-core";
+
 import PButton from "primevue/button";
 
 import CModal from "../../components/Alert.vue";
 
-export default {
+export default defineComponent({
   components: {
     CModal,
     PButton,
@@ -40,7 +42,7 @@ export default {
       // モーダル表示する際の処理が必要ならここに書く
       this.modal = true;
     },
-    executeMethod(yes) {
+    executeMethod(yes: boolean) {
       // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
       this.modal = false;
       if (yes) {
@@ -50,17 +52,13 @@ export default {
       }
     },
   },
-};
+});
 </script>
 
 <style scoped>
 /* TODO: Rework on styles */
 .label {
   color: hsl(0, 0%, 44%);
-}
-
-.fields {
-  /* text-align: center; */
 }
 
 .fields .user {
