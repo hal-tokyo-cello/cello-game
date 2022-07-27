@@ -31,7 +31,8 @@
   </c-form-layout>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "@vue/runtime-core";
 import axios from "axios";
 import validator from "validator";
 
@@ -41,7 +42,7 @@ import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
 
-export default {
+export default defineComponent({
   components: {
     CFormLayout,
     PButton,
@@ -105,7 +106,7 @@ export default {
       }
     },
   },
-};
+});
 </script>
 
 <style scoped>
