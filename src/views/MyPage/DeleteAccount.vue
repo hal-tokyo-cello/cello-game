@@ -11,17 +11,20 @@
     <p class="mail">example@gmail.co.jp</p>
   </div>
   <div class="fields four_d">
-    <button class="next_btn" @click="showModal()">次へ</button>
+    <p-button label="次へ" @click="showModal" class="next_btn" />
   </div>
-  <modal :message="message" v-show="modal" @execute-method="executeMethod" />
+  <c-modal :message="message" v-show="modal" @execute-method="executeMethod" />
 </template>
 
 <script>
-import Modal from "../components/Alert.vue";
+import PButton from "primevue/button";
+
+import CModal from "../../components/Alert.vue";
 
 export default {
   components: {
-    Modal,
+    CModal,
+    PButton,
   },
   data() {
     return {

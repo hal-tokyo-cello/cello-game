@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <modal
+  <c-modal
     v-if="modal"
     :quest="{ quests: 'title' }"
     @execute-method="executeMethod"
@@ -28,12 +28,12 @@
 
 <script>
 import axios from "axios";
-import Modal from "../components/QuestConfirmDialog.vue";
+import CModal from "../../components/QuestConfirmDialog.vue";
 
 export default {
   name: "Quest",
   components: {
-    Modal,
+    CModal,
   },
   data() {
     return {
