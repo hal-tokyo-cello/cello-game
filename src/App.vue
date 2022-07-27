@@ -1,7 +1,7 @@
 <template>
   <header>
-    <img src="./assets/img/cello_logo.png" class="logo" />
-    <p-avatar image="/src/assets/img/small.jpeg" class="mr-2 avatar" size="xlarge" shape="circle" />
+    <img src="./assets/images/cello_logo.png" class="logo" />
+    <p-avatar :image="userIcon" class="mr-2 avatar" size="xlarge" shape="circle" />
   </header>
 
   <main>
@@ -16,10 +16,17 @@ import { defineComponent } from "@vue/runtime-core";
 
 import PAvatar from "primevue/avatar";
 
+import userIcon from "./assets/images/small.jpeg"
+
 export default defineComponent({
   components: {
     PAvatar,
   },
+  data() {
+    return {
+      userIcon
+    }
+  }
 });
 </script>
 

@@ -119,7 +119,7 @@ h1 {
   width: 42px;
   height: 42px;
   padding-bottom: 4px;
-  background-image: url("/src/assets/img/question.png");
+  background-image: url(../../assets/images/question.png);
   color: white;
 }
 

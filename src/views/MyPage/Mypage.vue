@@ -3,7 +3,7 @@
 
   <div style="display: flex; justify-content: space-between">
     <div style="flex: 1 1">
-      <p-avatar image="/src/assets/img/kimawari.png" size="xlarge" shape="circle" />
+      <p-avatar :image="userIcon" size="xlarge" shape="circle" />
     </div>
 
     <div style="flex: 3 3">
@@ -33,9 +33,12 @@ import { defineComponent } from "@vue/runtime-core";
 import PAvatar from "primevue/avatar";
 import PButton from "primevue/button";
 
+import userIcon from "../../assets/images/kimawari.png"
+
 export default defineComponent({
   data() {
     return {
+      userIcon,
       username: "セパ拓郎",
       mail: "sepatakuro@gmail.com",
     };
