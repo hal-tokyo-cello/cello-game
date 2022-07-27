@@ -11,6 +11,7 @@ module.exports = (env, argv) => ({
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "https://cdn.cellolearn.net/",
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -33,14 +34,7 @@ module.exports = (env, argv) => ({
     rules: [
       {
         test: /\.vue$/,
-        use: [
-          {
-            loader: "vue-loader",
-            options: {
-              extractCSS: true,
-            },
-          },
-        ],
+        use: ["vue-loader"],
       },
       {
         test: /\.ts$/,
@@ -61,13 +55,7 @@ module.exports = (env, argv) => ({
       },
       {
         test: /prime(vue|icons).+\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { emit: false, esModule: false },
-          },
-          "css-loader",
-        ],
+        use: ["ignore-loader"],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
@@ -79,17 +67,12 @@ module.exports = (env, argv) => ({
             },
           },
         ],
+        dependency: { not: ["url"] },
+        type: "javascript/auto",
       },
       {
         test: /\.(eot|woff|ttf)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              emitFile: false,
-            },
-          },
-        ],
+        use: ["ignore-loader"],
       },
     ],
   },
