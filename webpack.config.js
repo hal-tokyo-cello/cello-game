@@ -66,6 +66,8 @@ module.exports = (env, argv) => ({
             },
           },
         ],
+        dependency: { not: ["url"] },
+        type: "javascript/auto",
       },
       {
         test: /\.(eot|woff|ttf)$/,
