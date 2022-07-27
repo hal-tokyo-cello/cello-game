@@ -1,11 +1,6 @@
 <template>
   <div class="wrapper">
-    <div
-      v-for="(quest, idx) in quests"
-      :key="idx"
-      @click="showModal"
-      class="quest-card"
-    >
+    <div v-for="(quest, idx) in quests" :key="idx" @click="showModal" class="quest-card">
       <div class="title-box">
         <h4 class="title">{{ quest.title }}</h4>
       </div>
@@ -19,25 +14,29 @@
     </div>
   </div>
 
-  <c-modal
-    v-if="modal"
-    :quest="{ quests: 'title' }"
-    @execute-method="executeMethod"
-  />
+  <c-modal v-if="modal" :quest="{ quests: 'title' }" @execute-method="executeMethod" />
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "@vue/runtime-core";
 import axios from "axios";
+
 import CModal from "../../components/QuestConfirmDialog.vue";
 
-export default {
+interface Quest {
+  title: String,
+  genre: String,
+  experience: Number
+}
+
+export default defineComponent({
   name: "Quest",
   components: {
     CModal,
   },
   data() {
     return {
-      quests: [],
+      quests: [] as Quest[],
       modal: false,
     };
   },
@@ -65,7 +64,7 @@ export default {
     showModal() {
       this.modal = true;
     },
-    executeMethod(yes) {
+    executeMethod(yes: boolean) {
       // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
       this.modal = false;
       if (yes) {
@@ -76,7 +75,7 @@ export default {
   mounted: function () {
     this.getData();
   },
-};
+});
 </script>
 
 <style scoped>
@@ -108,6 +107,7 @@ export default {
   display: flex;
   justify-content: center;
 }
+
 .quest-card .title {
   margin-top: 20px;
   text-align: center;

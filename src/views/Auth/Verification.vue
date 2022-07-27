@@ -18,21 +18,28 @@
   </c-form-layout>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "@vue/runtime-core";
+
 import PButton from "primevue/button";
 import PInputText from "primevue/inputtext";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
 
-export default {
+export default defineComponent({
   components: {
     CFormLayout,
     PButton,
     PInputText,
     PPassword,
   },
-};
+  data() {
+    return {
+      value: ""
+    }
+  }
+});
 </script>
 
 

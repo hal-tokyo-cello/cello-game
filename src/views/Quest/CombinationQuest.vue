@@ -51,8 +51,10 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { defineComponent } from "@vue/runtime-core";
+
+export default defineComponent({});
 </script>
 
 <style scoped>
@@ -117,7 +119,7 @@ h1 {
   width: 42px;
   height: 42px;
   padding-bottom: 4px;
-  background-image: url("/src/assets/img/question.png");
+  background-image: url(../../assets/images/question.png);
   color: white;
 }
 

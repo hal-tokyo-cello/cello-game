@@ -37,13 +37,15 @@
   </c-form-layout>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "@vue/runtime-core";
+
 import PButton from "primevue/button";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../layout/Form.vue";
 
-export default {
+export default defineComponent({
   components: {
     CFormLayout,
     PButton,
@@ -53,6 +55,8 @@ export default {
     return {
       password: "",
       confPassword: "",
+      mailFlag: false,
+      mailValFlag: false,
       passFlag: false,
       confPassFlag: false,
       passwordCheckFlag: false,
@@ -90,7 +94,7 @@ export default {
       return;
     },
   },
-};
+});
 </script>
 
 <style scoped>

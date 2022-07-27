@@ -22,7 +22,7 @@
   <c-modal :message="message" v-show="modal" @execute-method="executeMethod" />
 </template>
 
-<script>
+<script lang="ts">
 import validator from "validator";
 
 import PButton from "primevue/button";
@@ -30,8 +30,9 @@ import PInputText from "primevue/inputtext";
 
 import CModal from "../../components/AlertAddr.vue";
 import CFormLayout from "../../layout/Form.vue";
+import { defineComponent } from "@vue/runtime-core";
 
-export default {
+export default defineComponent({
   components: {
     CFormLayout,
     CModal,
@@ -40,6 +41,7 @@ export default {
   },
   data() {
     return {
+      mail: "",
       mail1: "",
       mail2: "",
       mail3: "",
@@ -76,12 +78,12 @@ export default {
         error = true;
       }
     },
-    executeMethod(yes) {
+    executeMethod(yes: boolean) {
       // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
       this.modal = false;
     },
   },
-};
+});
 </script>
 
 <style scoped>
