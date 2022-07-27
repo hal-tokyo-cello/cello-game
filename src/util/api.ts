@@ -1,7 +1,7 @@
 /**
  * APIサーバーのホストのベースURL。
  */
-export const ServerHost = process.env.CELLO_API_SERVER;
+const ServerHost = process.env.CELLO_API_SERVER;
 
 const defaultValidator = (res: Response): boolean | string =>
   res.status != 200 ? res.statusText : true;
