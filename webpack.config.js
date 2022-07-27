@@ -33,14 +33,7 @@ module.exports = (env, argv) => ({
     rules: [
       {
         test: /\.vue$/,
-        use: [
-          {
-            loader: "vue-loader",
-            options: {
-              extractCSS: true,
-            },
-          },
-        ],
+        use: ["vue-loader"],
       },
       {
         test: /\.ts$/,
