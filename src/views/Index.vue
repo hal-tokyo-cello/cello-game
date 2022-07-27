@@ -25,17 +25,9 @@
     <section class="section3">
       <h2 class="section3Head">問題を解いてアバターを進化させよう！</h2>
       <div class="section3Img">
-        <img
-          src="/src/assets/img/doragon1.png"
-          alt="doragon"
-          class="doragon1"
-        />
+        <img src="/src/assets/img/doragon1.png" alt="doragon" class="doragon1" />
         <img src="/src/assets/img/sankaku.png" alt="sankaku" class="sankaku" />
-        <img
-          src="/src/assets/img/doragon2.png"
-          alt="doragon"
-          class="doragon2"
-        />
+        <img src="/src/assets/img/doragon2.png" alt="doragon" class="doragon2" />
       </div>
 
       <div class="section3Mon">
@@ -77,13 +69,15 @@
 </template>
 
 <script>
+import { defineComponent } from "@vue/runtime-core";
+
 import PButton from "primevue/button";
 
-export default {
+export default defineComponent({
   components: {
     PButton,
   },
-};
+});
 </script>
 
 <style scoped>
@@ -91,6 +85,7 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 button {
   font-size: 24px;
   background-color: #fc8c0d;
@@ -102,79 +97,95 @@ button {
   justify-content: center;
   align-items: center;
 }
+
 button:hover {
   background-color: #ffb900;
   cursor: grab;
 }
+
 .section1 {
   width: 960px;
   margin: 0 auto;
   padding-top: 70px;
   background: #f8f8f8;
 }
+
 .head {
   font-size: 96px;
   color: #ffb900;
   margin-left: 20px;
   margin-top: 60px;
 }
+
 .subHead {
   font-size: 32px;
   margin-top: 100px;
 }
+
 .subHead2 {
   font-size: 32px;
   margin-top: 60px;
 }
+
 .button {
   margin-top: 40px;
   margin-left: 600px;
   margin-bottom: 130px;
 }
+
 .section2 {
   background-color: #ffb900;
   height: 648px;
   position: relative;
 }
+
 .sectionFriend {
   display: flex;
   justify-content: center;
   margin-top: 70px;
 }
+
 .sectionHead {
   font-size: 166px;
   color: #ffffff;
 }
+
 .sectionHead2 {
   font-size: 100px;
   color: #ffffff;
   margin-top: 80px;
   margin-left: 8px;
 }
+
 .imageWrap {
   display: flex;
   justify-content: center;
   margin-top: 8px;
 }
+
 .pan1 {
   position: absolute;
   margin-left: 190px;
   margin-top: 140px;
 }
+
 .pan2 {
   position: absolute;
   right: 0;
   margin-right: 140px;
   margin-top: -70px;
 }
+
 .section3 {
   height: 1700px;
   text-align: center;
 }
+
 .section3Head {
   margin-top: 80px;
   font-size: 32px;
 }
+
 .section3Img {
   display: flex;
   align-items: center;
@@ -182,67 +193,81 @@ button:hover {
   margin-top: 70px;
   gap: 60px;
 }
+
 .section3Head2 {
   margin-top: 160px;
   font-size: 32px;
   margin-bottom: 60px;
 }
+
 .mon1 {
   width: 620px;
   height: 310px;
   left: 0;
   border: solid 1px #dddddd;
 }
+
 .section3Mon {
   width: 960px;
   margin: 0 auto;
 }
+
 .section3Mon1 {
   display: flex;
 }
+
 .monText {
   font-size: 24px;
 }
+
 .monCenter {
   display: flex;
   align-items: center;
   margin-left: 80px;
 }
+
 .section3Mon2 {
   display: flex;
   margin-left: 70px;
   margin-top: 30px;
 }
+
 .mon2 {
   width: 620px;
   height: 310px;
   margin-left: auto;
   border: solid 1px #dddddd;
 }
+
 .monCenter2 {
   display: flex;
   align-items: center;
   margin-left: 50px;
 }
+
 .section3Mon3 {
   display: flex;
   margin-top: 30px;
 }
+
 .section4 {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 160px;
 }
+
 .section4Head {
   font-size: 32px;
 }
+
 .button2 {
   margin-top: 60px;
   margin-bottom: 20px;
   margin-bottom: 130px;
   border: none;
 }
+
 .btnWrap {
   width: 100%;
   display: flex;

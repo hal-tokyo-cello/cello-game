@@ -38,12 +38,14 @@
 </template>
 
 <script>
+import { defineComponent } from "@vue/runtime-core";
+
 import PButton from "primevue/button";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../layout/Form.vue";
 
-export default {
+export default defineComponent({
   components: {
     CFormLayout,
     PButton,
@@ -90,7 +92,7 @@ export default {
       return;
     },
   },
-};
+});
 </script>
 
 <style scoped>
