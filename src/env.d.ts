@@ -15,7 +15,3 @@ declare module "*.png" {
   export default url;
 }
 // #endregion
-
-interface ImportMeta {
-  readonly env: any;
-}
