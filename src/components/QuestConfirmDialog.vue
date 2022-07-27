@@ -13,10 +13,15 @@
   <div class="overlay" @click="returnFalse"></div>
 </template>
 
-<script>
-export default {
-  name: "Modal",
-  props: ["title", "genre", "experience"],
+<script lang="ts">
+import { defineComponent } from "@vue/runtime-core";
+
+export default defineComponent({
+  props: {
+    title: String,
+    genre: String,
+    experience: Number
+  },
   methods: {
     returnFalse() {
       this.$emit("execute-method", false);
@@ -25,7 +30,7 @@ export default {
       this.$emit("execute-method", true);
     },
   },
-};
+});
 </script>
 
 <style scoped>

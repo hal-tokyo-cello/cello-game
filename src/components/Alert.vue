@@ -9,12 +9,15 @@
   </div>
 </template>
 
-<script>
-import axios from "axios";
+<script lang="ts">
+import { defineComponent } from "@vue/runtime-core";
 
-export default {
-  name: "Modal",
-  props: ["message"],
+export default defineComponent({
+  props: {
+    message: String,
+    mail: String,
+    password: String
+  },
   methods: {
     returnFalse() {
       this.$emit("execute-method", false);
@@ -29,7 +32,7 @@ export default {
       // axios.get(import.meta.env.VITE_API_SERVER + );
     },
   },
-};
+});
 </script>
 
 <style scoped>

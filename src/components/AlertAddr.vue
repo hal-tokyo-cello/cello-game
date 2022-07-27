@@ -7,17 +7,20 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "Modal",
-  props: ["message"],
+<script lang="ts">
+import { defineComponent } from "@vue/runtime-core";
+
+export default defineComponent({
+  props: {
+    message: String
+  },
   methods: {
     del_modal() {
       // マイページトップ画面に遷移
       this.$router.push("../views/Mypage.vue");
     },
   },
-};
+});
 </script>
 
 <style scoped>
@@ -34,6 +37,7 @@ export default {
   height: 333px;
   transform: translate(-50%, -50%);
 }
+
 .modal__message {
   text-align: center;
   color: #ff8c00;
