@@ -1,7 +1,7 @@
 <template>
   <header>
-    <img :src="logo" class="logo" />
-    <Avatar :image="avatar" class="mr-2 avatar" size="xlarge" shape="circle" />
+    <img src="./assets/img/cello_logo.png" class="logo" />
+    <Avatar image="./assets/img/small.jpeg" class="mr-2 avatar" size="xlarge" shape="circle" />
   </header>
 
   <main>
@@ -11,23 +11,14 @@
   <footer>&copy; CELLO 2022</footer>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
 
 import Avatar from "primevue/avatar";
 
-import logo from "./assets/img/cello_logo.png";
-import avatar from "./assets/img/small.jpeg";
-
 export default defineComponent({
   components: {
     Avatar,
-  },
-  data() {
-    return {
-      logo,
-      avatar,
-    };
   },
 });
 </script>
