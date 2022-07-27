@@ -61,13 +61,7 @@ module.exports = (env, argv) => ({
       },
       {
         test: /prime(vue|icons).+\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { emit: false, esModule: false },
-          },
-          "css-loader",
-        ],
+        use: ["ignore-loader"],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
@@ -82,14 +76,7 @@ module.exports = (env, argv) => ({
       },
       {
         test: /\.(eot|woff|ttf)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              emitFile: false,
-            },
-          },
-        ],
+        use: ["ignore-loader"],
       },
     ],
   },
