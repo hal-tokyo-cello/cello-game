@@ -12,12 +12,14 @@
 </template>
 
 <script>
+import { defineComponent } from "@vue/runtime-core";
+
 import Avatar from "primevue/avatar";
 
 import logo from "./assets/img/cello_logo.png";
 import avatar from "./assets/img/small.jpeg";
 
-export default {
+export default defineComponent({
   components: {
     Avatar,
   },
@@ -27,7 +29,7 @@ export default {
       avatar,
     };
   },
-};
+});
 </script>
 
 <style scoped>
