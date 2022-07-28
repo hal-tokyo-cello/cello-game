@@ -11,7 +11,7 @@ env:
   RESOURCE_GROUP: "HAL-TH22-RG-IH4C-IW4C-G01"
   BLOB_STORAGE_PACKAGE_PATH: "./dist"
   NODE_VERSION: "16.x"
-  CELLO_API_SERVER: "https://a33b4bb8-3240-48a6-8046-f0d522d06856.mock.pstmn.io"
+  CELLO_API_SERVER: "https://api.cellolearn.net"
 
 jobs:
   deploy:
