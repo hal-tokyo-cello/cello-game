@@ -27,8 +27,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
 import axios from "axios";
+import { defineComponent } from "vue";
+import { RouteRecordRaw } from "vue-router";
 
 import PButton from "primevue/button";
 import PPassword from "primevue/password";
@@ -36,7 +37,7 @@ import PPassword from "primevue/password";
 import CModal from "../../components/AlertAddr.vue";
 import CFormLayout from "../../layout/Form.vue";
 
-export default defineComponent({
+const component = defineComponent({
   components: {
     CFormLayout,
     CModal,
@@ -95,6 +96,9 @@ export default defineComponent({
     },
   },
 });
+
+export const route: RouteRecordRaw = { path: "/mypage/password", component }
+export default component
 </script>
 
 <style scoped>

@@ -18,8 +18,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
 import axios from "axios";
+import { defineComponent } from "vue";
+import { RouteRecordRaw } from "vue-router";
 
 import CModal from "../../components/QuestConfirmDialog.vue";
 
@@ -29,7 +30,7 @@ interface Quest {
   experience: Number
 }
 
-export default defineComponent({
+const component = defineComponent({
   name: "Quest",
   components: {
     CModal,
@@ -76,6 +77,9 @@ export default defineComponent({
     this.getData();
   },
 });
+
+export const route: RouteRecordRaw = { path: "/quests", component }
+export default component
 </script>
 
 <style scoped>

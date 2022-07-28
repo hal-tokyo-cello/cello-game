@@ -18,12 +18,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { RouteRecordRaw } from "vue-router";
 
 import PButton from "primevue/button";
 
 import CModal from "../../components/Alert.vue";
 
-export default defineComponent({
+const component = defineComponent({
   components: {
     CModal,
     PButton,
@@ -53,6 +54,9 @@ export default defineComponent({
     },
   },
 });
+
+export const route: RouteRecordRaw = { path: "/mypage/deleteaccount", component }
+export default component
 </script>
 
 <style scoped>
