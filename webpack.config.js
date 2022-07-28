@@ -3,6 +3,7 @@ const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { EnvironmentPlugin } = require("webpack");
 
 module.exports = (env, argv) => ({
   entry: {
@@ -14,6 +15,7 @@ module.exports = (env, argv) => ({
     publicPath: "https://cdn.cellolearn.net/",
   },
   plugins: [
+    new EnvironmentPlugin(["CELLO_API_SERVER"]),
     new HtmlWebpackPlugin({
       title: "CELLO",
       filename: "[name].html",
