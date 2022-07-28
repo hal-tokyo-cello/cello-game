@@ -1,7 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
 
-import Quests from "./QuestOverview.vue";
+import { route as Overview } from "./QuestOverview.vue";
 
-export const routes: RouteRecordRaw[] = [
-  { path: "/quests", component: Quests },
-];
+export const routes: RouteRecordRaw[] = [Overview];

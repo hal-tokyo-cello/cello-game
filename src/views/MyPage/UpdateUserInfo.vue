@@ -24,15 +24,16 @@
 
 <script lang="ts">
 import validator from "validator";
+import { defineComponent } from "vue";
+import { RouteRecordRaw } from "vue-router";
 
 import PButton from "primevue/button";
 import PInputText from "primevue/inputtext";
 
 import CModal from "../../components/AlertAddr.vue";
 import CFormLayout from "../../layout/Form.vue";
-import { defineComponent } from "vue";
 
-export default defineComponent({
+const component = defineComponent({
   components: {
     CFormLayout,
     CModal,
@@ -84,6 +85,9 @@ export default defineComponent({
     },
   },
 });
+
+export const route: RouteRecordRaw = { path: "/mypage/update", component }
+export default component
 </script>
 
 <style scoped>

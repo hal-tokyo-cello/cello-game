@@ -29,13 +29,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { RouteRecordRaw } from "vue-router";
 
 import PAvatar from "primevue/avatar";
 import PButton from "primevue/button";
 
-import userIcon from "../../assets/images/kimawari.png"
+import userIcon from "../../assets/images/kimawari.png";
 
-export default defineComponent({
+const component = defineComponent({
   data() {
     return {
       userIcon,
@@ -49,6 +50,9 @@ export default defineComponent({
     PButton,
   },
 });
+
+export const route: RouteRecordRaw = { path: "/mypage", component }
+export default component
 </script>
 
 <style>
