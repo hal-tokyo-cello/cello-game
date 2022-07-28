@@ -30,7 +30,7 @@ import PInputText from "primevue/inputtext";
 
 import CModal from "../../components/AlertAddr.vue";
 import CFormLayout from "../../layout/Form.vue";
-import { defineComponent } from "@vue/runtime-core";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   components: {

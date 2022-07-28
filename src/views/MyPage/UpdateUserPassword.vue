@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/runtime-core";
+import { defineComponent } from "vue";
 import axios from "axios";
 
 import PButton from "primevue/button";
