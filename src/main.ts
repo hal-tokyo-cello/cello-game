@@ -21,6 +21,7 @@ const routes: RouteRecordRaw[] = [Auth, MyPage, Quests]
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  strict: true,
 });
 
 createApp(App).use(router).use(PrimeVue).mount("#app");
