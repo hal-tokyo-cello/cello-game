@@ -70,14 +70,18 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { RouteRecordRaw } from "vue-router";
 
 import PButton from "primevue/button";
 
-export default defineComponent({
+const component = defineComponent({
   components: {
     PButton,
   },
 });
+
+export const route: RouteRecordRaw = { path: "/home", component }
+export default component;
 </script>
 
 <style scoped>

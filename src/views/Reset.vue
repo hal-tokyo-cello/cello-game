@@ -39,13 +39,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { RouteRecordRaw } from "vue-router";
 
 import PButton from "primevue/button";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../layout/Form.vue";
 
-export default defineComponent({
+const component = defineComponent({
   components: {
     CFormLayout,
     PButton,
@@ -95,6 +96,9 @@ export default defineComponent({
     },
   },
 });
+
+export const route: RouteRecordRaw = { path: "/resetpassword", component }
+export default component;
 </script>
 
 <style scoped>
