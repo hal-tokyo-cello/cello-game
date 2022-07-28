@@ -72,7 +72,7 @@ export default defineComponent({
         };
         axios
           .put(
-            import.meta.env.VITE_API_SERVER + "/users/{accountID}",
+            process.env.CELLO_API_SERVER + "/users/{accountID}",
             requestBody
           )
           .then((response) => {

@@ -29,7 +29,7 @@ export default defineComponent({
         email: this.mail,
         password: this.password,
       };
-      // axios.get(import.meta.env.VITE_API_SERVER + );
+      // axios.get(process.env.CELLO_API_SERVER + );
     },
   },
 });

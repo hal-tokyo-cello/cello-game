@@ -90,7 +90,7 @@ export default defineComponent({
           password: this.password,
         };
         axios
-          .post(import.meta.env.VITE_API_SERVER + "/users/signin", requestBody)
+          .post(process.env.CELLO_API_SERVER + "/users/signin", requestBody)
           .then((response) => {
             console.log("way");
             // 成功したときの処理はここに記述する
