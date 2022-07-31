@@ -1,4 +1,5 @@
 <template>
+  <p-toast />
   <header>
     <img src="./assets/images/cello_logo.png" class="logo" />
     <p-avatar :image="userIcon" class="mr-2 avatar" size="xlarge" shape="circle" />
@@ -15,12 +16,14 @@
 import { defineComponent } from "vue";
 
 import PAvatar from "primevue/avatar";
+import PToast from 'primevue/toast';
 
 import userIcon from "./assets/images/small.jpeg"
 
 export default defineComponent({
   components: {
     PAvatar,
+    PToast
   },
   data() {
     return {

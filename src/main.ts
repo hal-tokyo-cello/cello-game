@@ -1,4 +1,5 @@
 import PrimeVue from "primevue/config";
+import ToastService from "primevue/toastservice";
 import { createApp } from "vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
@@ -24,4 +25,4 @@ const router = createRouter({
   strict: true,
 });
 
-createApp(App).use(router).use(PrimeVue).mount("#app");
+createApp(App).use(router).use(PrimeVue).use(ToastService).mount("#app");
