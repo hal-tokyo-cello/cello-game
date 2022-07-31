@@ -21,24 +21,29 @@ export const accessApi = <T, U>(
   method: "GET" | "POST" | "PUT" = "GET",
   headers: HeadersInit = {},
   respondValidator = defaultValidator
-): Promise<U> => {
-  return fetch(`${ServerHost}/${endPoint}`, {
+) =>
+  fetch(`${ServerHost}/${endPoint}`, {
     body: body && JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
       ...headers,
     },
     method: method,
-  }).then((res) => {
+  }).then<U>((res) => {
     const valid = respondValidator(res);
 
     if (typeof valid === "string") {
       return Promise.reject(valid);
     }
-    if (!valid) {
-      return Promise.reject(res.statusText);
-    }
 
-    return res.json();
+    return valid ? res.json() : Promise.reject<ApiError>(res.json());
   });
-};
+
+export interface ApiError {
+  code: number;
+  message: string;
+  errors: {
+    message: string;
+    reason: string;
+  }[];
+}
