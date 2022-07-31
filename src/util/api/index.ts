@@ -3,9 +3,6 @@
  */
 const ServerHost = process.env.CELLO_API_SERVER;
 
-const defaultValidator = (res: Response): boolean | string =>
-  res.status != 200 ? res.statusText : true;
-
 /**
  * API問い合わせ用のfetchヘルパー関数。
  * @param endPoint APIエンドのルート
@@ -20,7 +17,7 @@ export const accessApi = <T, U>(
   body?: T,
   method: "GET" | "POST" | "PUT" = "GET",
   headers: HeadersInit = {},
-  respondValidator = defaultValidator
+  respondValidator = (res: Response) => res.status != 200
 ) =>
   fetch(`${ServerHost}/${endPoint}`, {
     body: body && JSON.stringify(body),
@@ -40,16 +37,18 @@ export const accessApi = <T, U>(
   });
 
 export interface ApiError {
-  code: number;
-  message: string;
-  errors: {
+  error: {
+    code: number;
     message: string;
-    reason: string;
-  }[];
+    errors: {
+      message: string;
+      reason: string;
+    }[];
+  };
 }
 
 export const isApiError = (value: any): value is ApiError =>
-  value.errors != undefined;
+  value.error.errors != undefined;
 
 export interface User {
   accountId: string;
