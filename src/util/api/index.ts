@@ -17,7 +17,7 @@ export const accessApi = <T, U>(
   body?: T,
   method: "GET" | "POST" | "PUT" = "GET",
   headers: HeadersInit = {},
-  respondValidator = (res: Response) => res.status != 200
+  respondValidator = (res: Response) => res.status == 200
 ) =>
   fetch(`${ServerHost}/${endPoint}`, {
     body: body && JSON.stringify(body),
