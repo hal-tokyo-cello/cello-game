@@ -5,14 +5,18 @@
         <p-input-text id="email" type="email" v-model="mail" />
         <label for="email">メールアドレス</label>
       </span>
-      <p v-if="mailFlag" class="p-error">メールアドレスが入力されていません</p>
-      <p v-if="mailValFlag" class="p-error">メールアドレスではありません</p>
+      <p v-if="isEmptyMail" class="p-error">
+        メールアドレスが入力されていません
+      </p>
+      <p v-if="isInvalidMail" class="p-error">メールアドレスではありません</p>
 
       <span class="p-float-label">
         <p-password v-model="password" id="password" />
         <label for="password">パスワード</label>
       </span>
-      <p v-if="passFlag" class="p-error">パスワードが入力されていません</p>
+      <p v-if="isEmptyPassword" class="p-error">
+        パスワードが入力されていません
+      </p>
     </template>
 
     <template #action>
@@ -22,28 +26,46 @@
 
     <template #links>
       <router-link :to="Forget.path">
-        <p-button label="パスワードを忘れた" class="p-button-link p-button-sm" />
+        <p-button
+          label="パスワードを忘れた"
+          class="p-button-link p-button-sm"
+        />
       </router-link>
       <router-link :to="SignUp.path">
-        <p-button label="初めてご利用の方はこちら" class="p-button-link p-button-sm" />
+        <p-button
+          label="初めてご利用の方はこちら"
+          class="p-button-link p-button-sm"
+        />
       </router-link>
     </template>
   </c-form-layout>
 </template>
 
 <script lang="ts">
-import axios from "axios";
+import { ToastSeverity } from "primevue/api";
 import validator from "validator";
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
+
+import { ApiError, signIn } from "../../util/api";
 
 import PButton from "primevue/button";
 import PInputText from "primevue/inputtext";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
-import { route as SignUp } from "./Signup.vue"
-import { route as Forget } from "./Forget.vue"
+import { route as Quests } from "../Quest/QuestOverview.vue";
+import { route as Forget } from "./Forget.vue";
+import { route as SignUp } from "./Signup.vue";
+
+const signInErrorDetail = (code: number) => {
+  switch (code) {
+    case 400:
+      return "メールアドレスかパスワードが正しくありません。";
+    case 404:
+      return "使用されているメールアドレスが未登録です。";
+  }
+};
 
 const component = defineComponent({
   components: {
@@ -52,70 +74,49 @@ const component = defineComponent({
     PInputText,
     PPassword,
   },
-  data() {
-    return {
-      SignUp,
-      Forget,
-      mail: "",
-      password: "",
-      mailFlag: false,
-      passFlag: false,
-      mailValFlag: false,
-    };
+  data: () => ({
+    SignUp,
+    Forget,
+    attempted: false,
+    mail: "",
+    password: "",
+  }),
+  computed: {
+    isEmptyMail() {
+      return this.attempted && this.mail.length <= 0;
+    },
+    isInvalidMail() {
+      return this.attempted && !validator.isEmail(this.mail);
+    },
+    isEmptyPassword() {
+      return this.attempted && this.password.length <= 0;
+    },
   },
   methods: {
     Signin() {
-      var error = false;
-      this.mailFlag = false;
-      this.passFlag = false;
-      this.mailValFlag = false;
-      //入力判定
-      //メールアドレス
-      if (this.mail.length) {
-        if (validator.isEmail(this.mail)) {
-        } else {
-          this.mailValFlag = true;
-          error = true;
-        }
-      } else {
-        this.mailFlag = true;
-        error = true;
-      }
-      //パスワード
-      if (this.password.length == 0) {
-        this.passFlag = true;
-        error = true;
-      }
-      if (error) {
+      this.attempted = true;
+
+      if (this.isEmptyMail || this.isInvalidMail || this.isEmptyMail) {
         return;
-      } else {
-        //API処理
-        const requestBody = {
-          email: this.mail,
-          password: this.password,
-        };
-        axios
-          .post(process.env.CELLO_API_SERVER + "/users/signin", requestBody)
-          .then((response) => {
-            console.log("way");
-            // 成功したときの処理はここに記述する
-            this.$router.push({ path: "/varification", force: true });
+      }
+
+      signIn({ email: this.mail, password: this.password }).then(
+        (data) => this.$router.push({ path: Quests.path }),
+        (error: ApiError) =>
+          this.$toast.add({
+            severity: ToastSeverity.ERROR,
+            life: 3000,
+            closable: false,
+            summary: "サインインできません",
+            detail: signInErrorDetail(error.error.code),
           })
-          .catch((e) => {
-            // レスポンスがエラーで返ってきたときの処理はここに記述する
-            console.log("hoge");
-            //エラー回避用
-            this.$router.push("/varification");
-          });
-        return;
-      }
+      );
     },
   },
 });
 
-export const route: RouteRecordRaw = { path: "/auth/signin", component }
-export default component
+export const route: RouteRecordRaw = { path: "/auth/signin", component };
+export default component;
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
