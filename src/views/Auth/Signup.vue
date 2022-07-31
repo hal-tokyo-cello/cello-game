@@ -77,13 +77,13 @@ const component = defineComponent({
       return this.attempted && this.mail.length <= 0;
     },
     isInvalidMail() {
-      return this.attempted && validator.isEmail(this.mail);
+      return this.attempted && !validator.isEmail(this.mail);
     },
     isEmptyPassword() {
       return this.attempted && this.password.length <= 0;
     },
     isMismatchPassword() {
-      return this.attempted && this.password === this.confPassword;
+      return this.attempted && this.password !== this.confPassword;
     },
     isEmptyConfirm() {
       return this.attempted && this.confPassword.length <= 0;
