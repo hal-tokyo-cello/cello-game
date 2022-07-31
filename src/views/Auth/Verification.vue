@@ -37,15 +37,13 @@ const component = defineComponent({
   },
   data() {
     return {
-      value: ""
-    }
-  }
+      value: "",
+    };
+  },
 });
 
-export const route: RouteRecordRaw = { path: "/auth/forgetpassword", component }
-export default component
+export const route: RouteRecordRaw = { path: "/auth/verify", component };
+export default component;
 </script>
 
-
-<style scoped>
-</style>
+<style scoped></style>
