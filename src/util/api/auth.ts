@@ -8,6 +8,6 @@ export interface SignInRequest {
 export type SignInResponse = User | ApiError;
 
 export const signIn = (req: SignInRequest) =>
-  accessApi<SignInRequest, SignInResponse>("users/signin", req, "POST", {
-    "x-mock-response-code": "400",
-  }).then((data) => (isApiError(data) ? Promise.reject(data) : data));
+  accessApi<SignInRequest, SignInResponse>("users/signin", req, "POST").then(
+    (data) => (isApiError(data) ? Promise.reject(data) : data)
+  );
