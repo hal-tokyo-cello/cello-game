@@ -52,15 +52,19 @@
 </template>
 
 <script lang="ts">
+import { ToastSeverity } from "primevue/api";
 import validator from "validator";
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
+
+import { signUp } from "../../util/api";
 
 import PButton from "primevue/button";
 import PInputText from "primevue/inputtext";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
+import { route as Verification } from "./Verification.vue";
 import { route as SignIn } from "./Signin.vue";
 
 const component = defineComponent({
@@ -72,9 +76,9 @@ const component = defineComponent({
   },
   data: () => ({
     SignIn,
-      mail: "",
-      password: "",
-      confPassword: "",
+    mail: "",
+    password: "",
+    confPassword: "",
     attempted: false,
   }),
   computed: {
@@ -96,56 +100,35 @@ const component = defineComponent({
   },
   methods: {
     Signup() {
-      var error = false;
-      this.mailFlag = false;
-      this.passFlag = false;
-      this.mailValFlag = false;
-      this.confPassFlag = false;
-      this.passwordCheckFlag = false;
+      this.attempted = true;
 
-      //入力判定
-      if (this.mail.length) {
-        if (validator.isEmail(this.mail)) {
-        } else {
-          this.mailValFlag = true;
-          error = true;
-        }
-      } else {
-        this.mailFlag = true;
-        error = true;
-      }
-      //パスワード入力判定
-      if (this.password.length == 0) {
-        this.passFlag = true;
-        error = true;
-      } else {
-        //確認パスワード入力判定
-        if (this.confPassword.length == 0) {
-          this.confPassFlag = true;
-          error = true;
-        } else {
-          if (this.password == this.confPassword) {
-            //API処理
-          } else {
-            this.passwordCheckFlag = true;
-            error = true;
-          }
-        }
-      }
-      if (error) {
-        return;
-      } else {
-        //API処理
-        this.$router.push("/varification");
+      if (
+        this.isEmptyMail ||
+        this.isInvalidMail ||
+        this.isEmptyPassword ||
+        this.isEmptyConfirm ||
+        this.isMismatchPassword
+      ) {
         return;
       }
+
+      signUp({ email: this.mail, password: this.password }).then(
+        () => this.$router.push({ path: Verification.path }),
+        () =>
+          this.$toast.add({
+            severity: ToastSeverity.ERROR,
+            life: 3000,
+            closable: false,
+            summary: "サインアップできません",
+            detail: "メールアドレスを確認した上で再度お試しください。",
+          })
+      );
     },
   },
 });
 
-export const route: RouteRecordRaw = { path: "/auth/signup", component }
-export default component
+export const route: RouteRecordRaw = { path: "/auth/signup", component };
+export default component;
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
