@@ -3,9 +3,6 @@
  */
 const ServerHost = process.env.CELLO_API_SERVER;
 
-const defaultValidator = (res: Response): boolean | string =>
-  res.status != 200 ? res.statusText : true;
-
 /**
  * API問い合わせ用のfetchヘルパー関数。
  * @param endPoint APIエンドのルート
@@ -20,25 +17,54 @@ export const accessApi = <T, U>(
   body?: T,
   method: "GET" | "POST" | "PUT" = "GET",
   headers: HeadersInit = {},
-  respondValidator = defaultValidator
-): Promise<U> => {
-  return fetch(`${ServerHost}/${endPoint}`, {
+  respondValidator = (res: Response) => res.status == 200
+) =>
+  fetch(`${ServerHost}/${endPoint}`, {
     body: body && JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
       ...headers,
     },
     method: method,
-  }).then((res) => {
+  }).then<U>((res) => {
     const valid = respondValidator(res);
 
     if (typeof valid === "string") {
       return Promise.reject(valid);
     }
-    if (!valid) {
-      return Promise.reject(res.statusText);
-    }
 
-    return res.json();
+    return valid ? res.json() : Promise.reject<ApiError>(res.json());
   });
-};
+
+export interface ApiError {
+  error: {
+    code: number;
+    message: string;
+    errors: {
+      message: string;
+      reason: string;
+    }[];
+  };
+}
+
+export const isApiError = (value: any): value is ApiError =>
+  value.error.errors != undefined;
+
+export interface User {
+  accountId: string;
+  name: string;
+  avatar: Avatar;
+  createDate?: number;
+  updateDate?: number;
+  leaveDate?: number;
+  lastLogin?: number;
+}
+
+export interface Avatar {
+  race: number;
+  totalExp: number;
+  evolved: boolean;
+  iconUrl?: string;
+}
+
+export * from "./auth";
