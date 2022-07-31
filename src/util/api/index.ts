@@ -47,3 +47,25 @@ export interface ApiError {
     reason: string;
   }[];
 }
+
+export const isApiError = (value: any): value is ApiError =>
+  value.errors != undefined;
+
+export interface User {
+  accountId: string;
+  name: string;
+  avatar: Avatar;
+  createDate?: number;
+  updateDate?: number;
+  leaveDate?: number;
+  lastLogin?: number;
+}
+
+export interface Avatar {
+  race: number;
+  totalExp: number;
+  evolved: boolean;
+  iconUrl?: string;
+}
+
+export * from "./auth";
