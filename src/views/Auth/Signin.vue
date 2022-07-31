@@ -21,10 +21,10 @@
     </template>
 
     <template #links>
-      <router-link to="/">
+      <router-link :to="Forget.path">
         <p-button label="パスワードを忘れた" class="p-button-link p-button-sm" />
       </router-link>
-      <router-link to="/signup">
+      <router-link :to="SignUp.path">
         <p-button label="初めてご利用の方はこちら" class="p-button-link p-button-sm" />
       </router-link>
     </template>
@@ -42,6 +42,8 @@ import PInputText from "primevue/inputtext";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
+import { route as SignUp } from "./Signup.vue"
+import { route as Forget } from "./Forget.vue"
 
 const component = defineComponent({
   components: {
@@ -52,6 +54,8 @@ const component = defineComponent({
   },
   data() {
     return {
+      SignUp,
+      Forget,
       mail: "",
       password: "",
       mailFlag: false,
