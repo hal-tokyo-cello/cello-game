@@ -41,8 +41,11 @@
     </template>
 
     <template #links>
-      <router-link style="text-decoration: none" to="/signin">
-        <p-button label="サインインはこちら" class="p-button-link p-button-sm" />
+      <router-link style="text-decoration: none" :to="SignIn.path">
+        <p-button
+          label="サインインはこちら"
+          class="p-button-link p-button-sm"
+        />
       </router-link>
     </template>
   </c-form-layout>
@@ -58,6 +61,7 @@ import PInputText from "primevue/inputtext";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
+import { route as SignIn } from "./Signin.vue";
 
 const component = defineComponent({
   components: {
@@ -67,6 +71,7 @@ const component = defineComponent({
     PPassword,
   },
   data: () => ({
+    SignIn,
       mail: "",
       password: "",
       confPassword: "",
