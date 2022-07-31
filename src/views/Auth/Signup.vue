@@ -5,8 +5,10 @@
         <p-input-text id="email" type="email" v-model="mail" />
         <label for="email">メールアドレス</label>
       </span>
-      <p v-if="mailFlag" class="p-error">メールアドレスが入力されていません</p>
-      <p v-if="mailValFlag" class="p-error">メールアドレスではありません</p>
+      <p v-if="isEmptyMail" class="p-error">
+        メールアドレスが入力されていません
+      </p>
+      <p v-if="isInvalidMail" class="p-error">メールアドレスではありません</p>
 
       <span class="p-float-label">
         <p-password v-model="password" id="password" />
@@ -17,16 +19,18 @@
           </span>
         </label>
       </span>
-      <p v-if="passFlag" class="p-error">パスワードが入力されていません</p>
-      <p v-if="passwordCheckFlag" class="p-error">
+      <p v-if="isEmptyPassword" class="p-error">
+        パスワードが入力されていません
+      </p>
+      <p v-if="isMismatchPassword" class="p-error">
         確認用パスワードと一致しません
       </p>
 
       <span class="p-float-label">
-        <p-password v-model="confPassword" id="checkPass" />
+        <p-password v-model="confPassword" :feedback="false" id="checkPass" />
         <label for="checkPass">確認用パスワード</label>
       </span>
-      <p v-if="confPassFlag" class="p-error">
+      <p v-if="isEmptyConfirm" class="p-error">
         確認用パスワードが入力されていません
       </p>
     </template>
@@ -62,17 +66,28 @@ const component = defineComponent({
     PInputText,
     PPassword,
   },
-  data() {
-    return {
+  data: () => ({
       mail: "",
       password: "",
       confPassword: "",
-      mailFlag: false,
-      passFlag: false,
-      confPassFlag: false,
-      mailValFlag: false,
-      passwordCheckFlag: false,
-    };
+    attempted: false,
+  }),
+  computed: {
+    isEmptyMail() {
+      return this.attempted && this.mail.length <= 0;
+    },
+    isInvalidMail() {
+      return this.attempted && validator.isEmail(this.mail);
+    },
+    isEmptyPassword() {
+      return this.attempted && this.password.length <= 0;
+    },
+    isMismatchPassword() {
+      return this.attempted && this.password === this.confPassword;
+    },
+    isEmptyConfirm() {
+      return this.attempted && this.confPassword.length <= 0;
+    },
   },
   methods: {
     Signup() {
