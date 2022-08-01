@@ -1,8 +1,8 @@
 <template >
   <div class="modal">
-    <p class="title">{{ title }}</p>
-    <p class="genre">穴埋め</p>
-    <p class="experience">300</p>
+    <p class="title">{{ quest?.title }}</p>
+    <p class="genre">{{ quest?.genre }}</p>
+    <p class="experience">{{ quest?.experience }}</p>
 
     <div class="actions">
       <div class="cancel" @click="returnFalse">キャンセル</div>
@@ -14,13 +14,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+
+import { QuestSummary } from "../util/api/quest";
 
 export default defineComponent({
   props: {
-    title: String,
-    genre: String,
-    experience: Number
+    quest: {
+      type: Object as PropType<QuestSummary>,
+      required: true
+    },
   },
   methods: {
     returnFalse() {
