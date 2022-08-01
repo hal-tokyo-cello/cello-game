@@ -15,7 +15,7 @@ const ServerHost = process.env.CELLO_API_SERVER;
 export const accessApi = <T, U>(
   endPoint: string,
   body?: T,
-  method: "GET" | "POST" | "PUT" = "GET",
+  method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
   headers: HeadersInit = {},
   respondValidator = (res: Response) => res.status == 200
 ) =>
