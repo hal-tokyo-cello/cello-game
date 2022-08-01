@@ -18,9 +18,10 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
+
+import { getQuestSummaryList } from "../../util/api/quest";
 
 import CModal from "../../components/QuestConfirmDialog.vue";
 
@@ -45,23 +46,6 @@ const component = defineComponent({
   //   msg: String,
   // },
   methods: {
-    // api関連
-    getData() {
-      axios
-        // クエスト情報の取得
-        .get(
-          "https://5355e573-a35a-4859-af9d-475ba909dbb6.mock.pstmn.io/quests"
-        )
-        //取得成功時
-        .then(
-          (response) =>
-            // console.log(response.data["quests"]),
-            (this.quests = response.data["quests"])
-        )
-        .catch((error) => console.log(error));
-    },
-
-    // モーダル表示処理
     showModal() {
       this.modal = true;
     },
@@ -73,8 +57,8 @@ const component = defineComponent({
       }
     },
   },
-  mounted: function () {
-    this.getData();
+  mounted() {
+    getQuestSummaryList().then(data => { this.quests = data.quests }).catch(error => console.log(error))
   },
 });
 
