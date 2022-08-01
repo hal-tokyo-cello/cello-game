@@ -1,6 +1,6 @@
 import PrimeVue from "primevue/config";
 import ToastService from "primevue/toastservice";
-import { createApp } from "vue";
+import { AppConfig, Component, createApp } from "vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 import "primeicons/primeicons.css";
@@ -15,6 +15,12 @@ import { routes as MyPage } from "./views/MyPage";
 import { routes as Quests } from "./views/Quest";
 import { route as Reset } from "./views/Reset.vue";
 
+const createAppWithConfig = (root: Component, config: Partial<AppConfig>) => {
+  const app = createApp(root);
+  app.config = { ...app.config, ...config };
+  return app;
+};
+
 const routes: RouteRecordRaw[] = [Auth, MyPage, Quests]
   .flat()
   .concat(Home, Reset);
@@ -25,4 +31,8 @@ const router = createRouter({
   strict: true,
 });
 
-createApp(App).use(router).use(PrimeVue).use(ToastService).mount("#app");
+createAppWithConfig(App, { unwrapInjectedRef: true })
+  .use(router)
+  .use(PrimeVue)
+  .use(ToastService)
+  .mount("#app");
