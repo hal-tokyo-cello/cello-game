@@ -23,7 +23,7 @@
   </div>
 
   <div style="float: right; margin-top: 40px; padding-right: 5px">
-    <Button label="▶退会する" class="p-button-outlined" />
+    <p-button label="▶退会する" class="p-button-outlined" />
   </div>
 </template>
 
