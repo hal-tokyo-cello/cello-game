@@ -1,134 +1,179 @@
 <template>
-  <div class="fields one_d">
-    <p class="label" style="font-size: 1.875em">退会手続き</p>
-  </div>
-  <div class="fields two_d">
-    <p class="label" style="font-size: 1.5em">ユーザー名</p>
-    <p class="user">User01</p>
-  </div>
-  <div class="fields three_d">
-    <p class="label" style="font-size: 1.5em">メールアドレス</p>
-    <p class="mail">example@gmail.co.jp</p>
-  </div>
-  <div class="fields four_d">
-    <p-button label="次へ" @click="showModal" class="next_btn" />
-  </div>
-  <c-modal :message="message" v-show="modal" @execute-method="executeMethod" />
+  <section class="fields">
+    <span class="label" style="font-size: 1.875em">退会手続き</span>
+  </section>
+
+  <section>
+    <div class="fields">
+      <span class="label">ユーザー名</span>
+      <span class="user">{{ user.name }}</span>
+    </div>
+    <div class="fields">
+      <span class="label">メールアドレス</span>
+      <span class="mail">{{ user.email }}</span>
+    </div>
+  </section>
+
+  <section style="text-align: center; margin: 0">
+    <p-button label="次へ" @click="showDialog" class="next_btn" />
+  </section>
+
+  <p-dialog
+    modal
+    :closable="false"
+    :visible="dialog"
+    style="min-width: 620px; text-align: center"
+  >
+    <template #header>
+      <span class="title">退会してよろしいですか？</span>
+    </template>
+
+    <label style="display: block; margin: auto; width: 500px; text-align: left">
+      <span class="label" style="font-size: 0.75em">
+        パスワードを入力して退会する
+      </span>
+      <p-input-text
+        v-model="password"
+        type="password"
+        autocomplete="current-password"
+        style="width: 100%"
+      />
+    </label>
+
+    <template #footer>
+      <div class="actions">
+        <p-button
+          label="キャンセル"
+          @click="closeDialog"
+          class="p-button-outlined"
+        />
+        <p-button label="退会する" @click="deleteAccount" />
+      </div>
+    </template>
+  </p-dialog>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { ToastSeverity } from "primevue/api";
+import { defineComponent, inject } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
-import PButton from "primevue/button";
+import { deleteUser, User } from "../../util/api";
 
-import CModal from "../../components/Alert.vue";
+import PButton from "primevue/button";
+import PDialog from "primevue/dialog";
+import PInputText from "primevue/inputtext";
+
+import { userKey } from "../../App.vue";
+import { route as Home } from "../Index.vue";
 
 const component = defineComponent({
   components: {
-    CModal,
     PButton,
+    PDialog,
+    PInputText,
   },
-  data() {
-    return {
-      message: "退会してよろしいですか？",
-      modal: false,
-    };
-  },
-  props: {
-    msg: String,
+  data: () => ({
+    dialog: false,
+    password: "",
+    user: inject(userKey) as User,
+  }),
+  computed: {
+    isEmptyPassword() {
+      return this.password.length <= 0;
+    },
   },
   methods: {
-    showModal() {
-      // モーダル表示する際の処理が必要ならここに書く
-      this.modal = true;
+    showDialog() {
+      this.dialog = true;
     },
-    executeMethod(yes: boolean) {
-      // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
-      this.modal = false;
-      if (yes) {
-        alert("退会する が押されました。");
-      } else {
-        alert("キャンセル が押されました。");
+    closeDialog() {
+      this.dialog = false;
+    },
+    deleteAccount() {
+      if (this.isEmptyPassword) {
+        return
       }
+      
+      deleteUser(this.user.accountId, { password: this.password }).then(
+        () =>
+          this.$router.push({ path: Home.path }).then(() =>
+            this.$toast.add({
+              severity: ToastSeverity.SUCCESS,
+              life: 5000,
+              summary: "退会しました",
+            })
+          ),
+        () =>
+          this.$toast.add({
+            severity: ToastSeverity.ERROR,
+            life: 5000,
+            closable: false,
+            summary: "退会できませんでした",
+            detail: "パスワードを確認した上でもう一度試してください。",
+          })
+      );
     },
   },
 });
 
-export const route: RouteRecordRaw = { path: "/mypage/deleteaccount", component }
-export default component
+export const route: RouteRecordRaw = {
+  path: "/mypage/deleteaccount",
+  component,
+};
+export default component;
 </script>
 
 <style scoped>
-/* TODO: Rework on styles */
+section {
+  margin-left: 280px;
+  margin-bottom: 40px;
+}
+
 .label {
-  color: hsl(0, 0%, 44%);
+  color: var(--text-color-secondary);
+}
+
+.user,
+.mail {
+  font-size: 1.5em;
+}
+
+.fields .label {
+  font-size: 1.5em;
 }
 
 .fields .user {
   margin-left: 125px;
-  font-size: 24px;
 }
 
 .fields .mail {
   margin-left: 80px;
-  font-size: 24px;
-}
-
-.cancel_btn {
-  display: inline-block;
-  margin: 0 auto;
-  margin-right: 20px;
-  text-decoration: none;
-  width: 150px;
-  height: 50px;
-  text-decoration: none;
-  border: solid 1px #ff8c00;
-  transition: 0.4s;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 15px;
-  background-color: #ffffff;
 }
 
 .next_btn {
-  display: inline-block;
-  margin: 0 auto;
-  text-decoration: none;
   width: 150px;
   height: 50px;
-  text-decoration: none;
-  color: #ffffff;
-  border: solid 1px #ff8c00;
-  transition: 0.4s;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 15px;
-  background-color: #ff8c00;
 }
 
-.one_d {
-  margin-left: 200px;
-  margin-bottom: 40px;
+.actions {
+  text-align: center;
 }
 
-.two_d {
-  text-align: center;
-  margin-bottom: 0px;
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 280px;
+.actions button {
+  height: 50px;
+  margin-right: 40px;
+  cursor: pointer;
 }
 
-.three_d {
-  text-align: center;
-  margin-bottom: 40px;
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 280px;
+.actions button:last-of-type {
+  margin-right: 0;
 }
 
-.four_d {
+.title {
   text-align: center;
+  color: var(--primary-color);
+  font-size: 22px;
+  flex: 1 1;
 }
 </style>

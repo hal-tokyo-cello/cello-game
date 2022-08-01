@@ -54,14 +54,12 @@ const component = defineComponent({
     PAvatar,
     PButton,
   },
-  data() {
-    return {
-      DeleteAccount,
-      UpdateInfo,
-      UpdatePassword,
-      user: inject<User>(userKey) as User,
-    };
-  },
+  data: () => ({
+    DeleteAccount,
+    UpdateInfo,
+    UpdatePassword,
+    user: inject(userKey) as User,
+  }),
   computed: {
     avatarIcon() {
       return this.user.avatar.iconUrl ?? "";
