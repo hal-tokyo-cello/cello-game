@@ -69,3 +69,4 @@ export interface Avatar {
 }
 
 export * from "./auth";
+export * from "./mypage";
