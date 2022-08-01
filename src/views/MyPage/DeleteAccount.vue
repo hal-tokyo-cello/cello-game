@@ -18,11 +18,23 @@
     <p-button label="次へ" @click="showModal" class="next_btn" />
   </section>
 
-  <c-modal
-    message="退会してよろしいですか？"
-    v-show="modal"
-    @execute-method="executeMethod"
-  />
+  <p-dialog
+    modal
+    :closable="false"
+    v-model:visible="modal"
+    style="min-width: 620px; text-align: center"
+  >
+    <template #header>
+      <span class="title">退会してよろしいですか？</span>
+    </template>
+
+    <template #footer>
+      <div class="actions">
+        <p-button label="キャンセル" class="p-button-outlined" />
+        <p-button label="退会する" />
+      </div>
+    </template>
+  </p-dialog>
 </template>
 
 <script lang="ts">
@@ -32,14 +44,14 @@ import { RouteRecordRaw } from "vue-router";
 import { User } from "../../util/api";
 
 import PButton from "primevue/button";
+import PDialog from "primevue/dialog";
 
 import { userKey } from "../../App.vue";
-import CModal from "../../components/Alert.vue";
 
 const component = defineComponent({
   components: {
-    CModal,
     PButton,
+    PDialog,
   },
   data: () => ({
     modal: false,
@@ -102,5 +114,26 @@ section {
 .next_btn {
   width: 150px;
   height: 50px;
+}
+
+.actions {
+  text-align: center;
+}
+
+.actions button {
+  height: 50px;
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+.actions button:last-of-type {
+  margin-right: 0;
+}
+
+.title {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 22px;
+  flex: 1 1;
 }
 </style>
