@@ -4,24 +4,31 @@
   </div>
   <div class="fields two_d">
     <p class="label" style="font-size: 1.5em">ユーザー名</p>
-    <p class="user">User01</p>
+    <p class="user">{{ user.name }}</p>
   </div>
   <div class="fields three_d">
     <p class="label" style="font-size: 1.5em">メールアドレス</p>
-    <p class="mail">example@gmail.co.jp</p>
+    <p class="mail">{{ user.email }}</p>
   </div>
   <div class="fields four_d">
     <p-button label="次へ" @click="showModal" class="next_btn" />
   </div>
-  <c-modal :message="message" v-show="modal" @execute-method="executeMethod" />
+  <c-modal
+    message="退会してよろしいですか？"
+    v-show="modal"
+    @execute-method="executeMethod"
+  />
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, inject } from "vue";
 import { RouteRecordRaw } from "vue-router";
+
+import { User } from "../../util/api";
 
 import PButton from "primevue/button";
 
+import { userKey } from "../../App.vue";
 import CModal from "../../components/Alert.vue";
 
 const component = defineComponent({
@@ -29,12 +36,10 @@ const component = defineComponent({
     CModal,
     PButton,
   },
-  data() {
-    return {
-      message: "退会してよろしいですか？",
-      modal: false,
-    };
-  },
+  data: () => ({
+    modal: false,
+    user: inject(userKey) as User,
+  }),
   props: {
     msg: String,
   },
@@ -55,8 +60,11 @@ const component = defineComponent({
   },
 });
 
-export const route: RouteRecordRaw = { path: "/mypage/deleteaccount", component }
-export default component
+export const route: RouteRecordRaw = {
+  path: "/mypage/deleteaccount",
+  component,
+};
+export default component;
 </script>
 
 <style scoped>
@@ -92,19 +100,8 @@ export default component
 }
 
 .next_btn {
-  display: inline-block;
-  margin: 0 auto;
-  text-decoration: none;
   width: 150px;
   height: 50px;
-  text-decoration: none;
-  color: #ffffff;
-  border: solid 1px #ff8c00;
-  transition: 0.4s;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 15px;
-  background-color: #ff8c00;
 }
 
 .one_d {
