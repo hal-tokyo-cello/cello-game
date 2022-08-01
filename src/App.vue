@@ -2,7 +2,12 @@
   <p-toast />
   <header>
     <img src="./assets/images/cello_logo.png" class="logo" />
-    <p-avatar :image="userIcon" class="mr-2 avatar" size="xlarge" shape="circle" />
+    <p-avatar
+      :image="user.avatar?.iconUrl"
+      class="mr-2 avatar"
+      size="xlarge"
+      shape="circle"
+    />
   </header>
 
   <main>
@@ -13,23 +18,36 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 
 import PAvatar from "primevue/avatar";
-import PToast from 'primevue/toast';
+import PToast from "primevue/toast";
 
-import userIcon from "./assets/images/small.jpeg"
+import { getUser, User } from "./util/api";
+
+/**
+ * Provide key to inject user across the app.
+ */
+export const userKey = Symbol();
 
 export default defineComponent({
   components: {
     PAvatar,
-    PToast
+    PToast,
   },
-  data() {
+  provide() {
     return {
-      userIcon
-    }
-  }
+      [userKey]: computed(() => this.user),
+    };
+  },
+  data: () => ({
+    user: {} as User,
+  }),
+  mounted() {
+    getUser("1").then((data) => {
+      this.user = data.user;
+    });
+  },
 });
 </script>
 
