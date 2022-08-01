@@ -62,13 +62,13 @@ export default component
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: space-between;
+  gap: 40px
 }
 
 .quest-card {
   width: 377px;
   height: 115px;
   border: 1px solid #fc8c0d;
-  margin-top: 40px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
