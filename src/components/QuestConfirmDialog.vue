@@ -41,12 +41,13 @@ export default defineComponent({
   },
   data() { return { visible: true, } },
   emits: {
-    action: (yes: boolean) => true,
+    confirm: () => true,
+    cancel: () => true,
     "update:modelValue": (visible: boolean) => true
   },
   methods: {
-    confirm() { this.$emit("action", true) },
-    cancel() { this.$emit("action", false) },
+    confirm() { this.$emit("confirm") },
+    cancel() { this.$emit("cancel") },
     onVisible(visible: boolean) { this.$emit("update:modelValue", visible) }
   },
 });
