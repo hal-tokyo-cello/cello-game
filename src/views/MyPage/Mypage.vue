@@ -9,21 +9,29 @@
     <div style="flex: 3 3">
       <div class="change">
         <p><span class="label">ユーザー名</span>{{ user.name }}</p>
-        <p-button label="変更する" />
+        <router-link :to="UpdateInfo.path">
+          <p-button label="変更する" />
+        </router-link>
       </div>
       <div class="change">
         <p><span class="label">メールアドレス</span> {{ user.email }}</p>
-        <p-button label="変更する" />
+        <router-link :to="UpdateInfo.path">
+          <p-button label="変更する" />
+        </router-link>
       </div>
       <div class="change">
         <p>パスワード</p>
-        <p-button label="変更する" />
+        <router-link :to="UpdatePassword.path">
+          <p-button label="変更する" />
+        </router-link>
       </div>
     </div>
   </div>
 
   <div style="float: right; margin-top: 40px; padding-right: 5px">
-    <p-button label="▶退会する" class="p-button-outlined" />
+    <router-link :to="DeleteAccount.path">
+      <p-button label="▶退会する" class="p-button-outlined" />
+    </router-link>
   </div>
 </template>
 
@@ -37,6 +45,9 @@ import PAvatar from "primevue/avatar";
 import PButton from "primevue/button";
 
 import { userKey } from "../../App.vue";
+import { route as UpdateInfo } from "./UpdateUserInfo.vue";
+import { route as UpdatePassword } from "./UpdateUserPassword.vue";
+import { route as DeleteAccount } from "./DeleteAccount.vue";
 
 const component = defineComponent({
   components: {
@@ -45,6 +56,9 @@ const component = defineComponent({
   },
   data() {
     return {
+      DeleteAccount,
+      UpdateInfo,
+      UpdatePassword,
       user: inject<User>(userKey) as User,
     };
   },
@@ -74,5 +88,9 @@ span.label::after {
 
 :deep(button) {
   width: 120px;
+}
+
+:deep(a) {
+  text-decoration: none;
 }
 </style>
