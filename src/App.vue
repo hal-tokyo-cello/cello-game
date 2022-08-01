@@ -2,16 +2,18 @@
   <p-toast />
   <header>
     <img src="./assets/images/cello_logo.png" class="logo" />
-    <p-avatar
-      :image="user.avatar?.iconUrl"
-      class="mr-2 avatar"
-      size="xlarge"
-      shape="circle"
-    />
+    <router-link :to="MyPage.path">
+      <p-avatar
+        :image="user.avatar?.iconUrl"
+        class="mr-2 avatar"
+        size="xlarge"
+        shape="circle"
+      />
+    </router-link>
   </header>
 
   <main>
-    <router-view></router-view>
+    <router-view />
   </main>
 
   <footer>&copy; CELLO 2022</footer>
@@ -24,6 +26,8 @@ import PAvatar from "primevue/avatar";
 import PToast from "primevue/toast";
 
 import { getUser, User } from "./util/api";
+
+import { route as MyPage } from "./views/MyPage/Mypage.vue";
 
 /**
  * Provide key to inject user across the app.
@@ -41,6 +45,7 @@ export default defineComponent({
     };
   },
   data: () => ({
+    MyPage,
     user: {} as User,
   }),
   mounted() {
