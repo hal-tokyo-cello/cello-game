@@ -39,7 +39,7 @@ export default defineComponent({
       required: true
     },
   },
-  data() { return { visible: true, } },
+  data: () => ({ visible: true }),
   emits: {
     confirm: () => true,
     cancel: () => true,

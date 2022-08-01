@@ -21,30 +21,18 @@
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
-import { getQuestSummaryList } from "../../util/api/quest";
+import { getQuestSummaryList, QuestSummary } from "../../util/api/quest";
 
 import CModal from "../../components/QuestConfirmDialog.vue";
 
-interface Quest {
-  title: String,
-  genre: String,
-  experience: Number
-}
-
 const component = defineComponent({
-  name: "Quest",
   components: {
     CModal,
   },
-  data() {
-    return {
-      quests: [] as Quest[],
-      modal: false,
-    };
-  },
-  // props: {
-  //   msg: String,
-  // },
+  data: () => ({
+    quests: [] as QuestSummary[],
+    modal: false,
+  }),
   methods: {
     showModal() {
       this.modal = true;
