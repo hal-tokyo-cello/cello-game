@@ -15,64 +15,104 @@
   </section>
 
   <section style="text-align: center; margin: 0">
-    <p-button label="次へ" @click="showModal" class="next_btn" />
+    <p-button label="次へ" @click="showDialog" class="next_btn" />
   </section>
 
   <p-dialog
     modal
     :closable="false"
-    v-model:visible="modal"
+    :visible="dialog"
     style="min-width: 620px; text-align: center"
   >
     <template #header>
       <span class="title">退会してよろしいですか？</span>
     </template>
 
+    <label style="display: block; margin: auto; width: 500px; text-align: left">
+      <span class="label" style="font-size: 0.75em">
+        パスワードを入力して退会する
+      </span>
+      <p-input-text
+        v-model="password"
+        type="password"
+        autocomplete="current-password"
+        style="width: 100%"
+      />
+    </label>
+
     <template #footer>
       <div class="actions">
-        <p-button label="キャンセル" class="p-button-outlined" />
-        <p-button label="退会する" />
+        <p-button
+          label="キャンセル"
+          @click="closeDialog"
+          class="p-button-outlined"
+        />
+        <p-button label="退会する" @click="deleteAccount" />
       </div>
     </template>
   </p-dialog>
 </template>
 
 <script lang="ts">
+import { ToastSeverity } from "primevue/api";
 import { defineComponent, inject } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
-import { User } from "../../util/api";
+import { deleteUser, User } from "../../util/api";
 
 import PButton from "primevue/button";
 import PDialog from "primevue/dialog";
+import PInputText from "primevue/inputtext";
 
 import { userKey } from "../../App.vue";
+import { route as Home } from "../Index.vue";
 
 const component = defineComponent({
   components: {
     PButton,
     PDialog,
+    PInputText,
   },
   data: () => ({
-    modal: false,
+    dialog: false,
+    password: "",
     user: inject(userKey) as User,
   }),
-  props: {
-    msg: String,
+  computed: {
+    isEmptyPassword() {
+      return this.password.length <= 0;
+    },
   },
   methods: {
-    showModal() {
-      // モーダル表示する際の処理が必要ならここに書く
-      this.modal = true;
+    showDialog() {
+      this.dialog = true;
     },
-    executeMethod(yes: boolean) {
-      // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
-      this.modal = false;
-      if (yes) {
-        alert("退会する が押されました。");
-      } else {
-        alert("キャンセル が押されました。");
+    closeDialog() {
+      this.dialog = false;
+    },
+    deleteAccount() {
+      if (this.isEmptyPassword) {
+        return
       }
+      
+      deleteUser(this.user.accountId, { password: this.password }).then(
+        () =>
+          this.$router.push({ path: Home.path }).then(() =>
+            this.$toast.add({
+              severity: ToastSeverity.SUCCESS,
+              life: 5000,
+              summary: "退会しました",
+            })
+          ),
+        () =>
+          this.$toast.add({
+            severity: ToastSeverity.ERROR,
+            life: 5000,
+            closable: false,
+            summary: "退会できませんでした",
+            detail: "パスワードを確認した上でもう一度試してください。",
+          })
+      );
     },
   },
 });
