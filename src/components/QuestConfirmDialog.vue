@@ -1,68 +1,75 @@
-<template >
-  <div class="modal">
-    <p class="title">{{ title }}</p>
-    <p class="genre">穴埋め</p>
-    <p class="experience">300</p>
+<template>
+  <p-dialog modal dismissable-mask close-on-escape :draggable="false" :visible="modelValue" @update:visible="onVisible"
+    style="min-width: 620px; text-align: center;">
+    <template #header>
+      <p class="title">{{ quest?.title }}</p>
+    </template>
 
-    <div class="actions">
-      <div class="cancel" @click="returnFalse">キャンセル</div>
-      <div class="primary" @click="returnTrue">解答へ</div>
+    <div>
+      <p class="genre">{{ quest?.genre }}</p>
+      <p class="experience">{{ quest?.experience }}</p>
     </div>
-  </div>
 
-  <div class="overlay" @click="returnFalse"></div>
+    <template #footer>
+      <div class="actions" style="text-align: center;">
+        <p-button label="キャンセル" @click="cancel" />
+        <p-button label="解答へ" @click="confirm" autofocus />
+      </div>
+    </template>
+  </p-dialog>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+
+import { QuestSummary } from "../util/api/quest";
+
+import PButton from "primevue/button";
+import PDialog from "primevue/dialog";
 
 export default defineComponent({
+  components: {
+    PButton,
+    PDialog,
+  },
   props: {
-    title: String,
-    genre: String,
-    experience: Number
+    modelValue: Boolean,
+    quest: {
+      type: Object as PropType<QuestSummary>,
+      required: true
+    },
+  },
+  data: () => ({ visible: true }),
+  emits: {
+    confirm: () => true,
+    cancel: () => true,
+    "update:modelValue": (visible: boolean) => true
   },
   methods: {
-    returnFalse() {
-      this.$emit("execute-method", false);
-    },
-    returnTrue() {
-      this.$emit("execute-method", true);
-    },
+    confirm() { this.$emit("confirm") },
+    cancel() { this.$emit("cancel") },
+    onVisible(visible: boolean) { this.$emit("update:modelValue", visible) }
   },
 });
 </script>
 
 <style scoped>
-.modal {
-  width: 620px;
-  height: 253px;
-  background: white;
-  z-index: 2;
-  display: block;
-  text-align: center;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0px 0px 6px #00000029;
-  border: 1px solid #ff8c00;
+.title,
+.genre,
+.experience {
+  font-weight: bold;
 }
 
 .title {
-  margin-top: 53px;
-  margin-bottom: 0px;
-  text-align: center;
-  font: normal normal bold 21px/25px Segoe UI;
-  letter-spacing: 0px;
+  flex: 1 1;
+  font-size: 21px;
+  line-height: 25px;
   color: #ff8c00;
 }
 
 .genre {
-  margin-top: 20px;
-  margin-bottom: 6px;
-  font: normal normal bold 12px/14px Segoe UI;
-  letter-spacing: 0px;
+  font-size: 12px;
+  line-height: 14px;
   color: #666666;
 }
 
@@ -72,7 +79,8 @@ export default defineComponent({
 
 .experience {
   margin: 0;
-  font: normal normal bold 15px/18px Segoe UI;
+  font-size: 15px;
+  line-height: 18px;
   letter-spacing: 0px;
   color: #666666;
 }
@@ -81,48 +89,15 @@ export default defineComponent({
   content: "🅿︎";
 }
 
-.actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 340px;
-  margin: 2rem auto;
-}
-
-.actions .cancel {
+.actions button {
   width: 150px;
   height: 52px;
-  font: normal normal 600 15px/18px Segoe UI;
-  letter-spacing: 0px;
-  color: #fc8c0d;
-  border: 1px solid #fc8c0d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 0;
   cursor: pointer;
+  margin-right: 40px;
 }
 
-.actions .primary {
-  width: 150px;
-  height: 52px;
-  background: #fc8c0d 0% 0% no-repeat padding-box;
-  cursor: pointer;
-  font: normal normal 600 15px/18px Segoe UI;
-  letter-spacing: 0px;
-  color: #f8f8f8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.overlay {
-  z-index: 1;
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 120%;
-  background-color: rgba(255, 255, 255, 0.6);
+.actions button:last-of-type {
+  margin-right: 0;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div v-for="(quest, idx) in quests" :key="idx" @click="showModal" class="quest-card">
+    <div v-for="(quest, idx) in quests" :key="idx" @click="onSelectQuest(quest)" class="quest-card">
       <div class="title-box">
         <h4 class="title">{{ quest.title }}</h4>
       </div>
@@ -14,67 +14,36 @@
     </div>
   </div>
 
-  <c-modal v-if="modal" :quest="{ quests: 'title' }" @execute-method="executeMethod" />
+  <c-confirm-dialog v-model="dialog" :quest="selectedQuest" @cancel="closeDialog"
+    @confirm="$router.push({ path: `/quests/` + selectedQuest.id })" />
 </template>
 
 <script lang="ts">
-import axios from "axios";
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
-import CModal from "../../components/QuestConfirmDialog.vue";
+import { getQuestSummaryList, QuestSummary } from "../../util/api/quest";
 
-interface Quest {
-  title: String,
-  genre: String,
-  experience: Number
-}
+import CConfirmDialog from "../../components/QuestConfirmDialog.vue";
 
 const component = defineComponent({
-  name: "Quest",
   components: {
-    CModal,
+    CConfirmDialog,
   },
-  data() {
-    return {
-      quests: [] as Quest[],
-      modal: false,
-    };
-  },
-  // props: {
-  //   msg: String,
-  // },
+  data: () => ({
+    quests: [] as QuestSummary[],
+    dialog: false,
+    selectedQuest: {} as QuestSummary
+  }),
   methods: {
-    // api関連
-    getData() {
-      axios
-        // クエスト情報の取得
-        .get(
-          "https://5355e573-a35a-4859-af9d-475ba909dbb6.mock.pstmn.io/quests"
-        )
-        //取得成功時
-        .then(
-          (response) =>
-            // console.log(response.data["quests"]),
-            (this.quests = response.data["quests"])
-        )
-        .catch((error) => console.log(error));
-    },
-
-    // モーダル表示処理
-    showModal() {
-      this.modal = true;
-    },
-    executeMethod(yes: boolean) {
-      // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
-      this.modal = false;
-      if (yes) {
-      } else {
-      }
-    },
+    closeDialog() { this.dialog = false },
+    onSelectQuest(quest: QuestSummary) {
+      this.selectedQuest = quest
+      this.dialog = true
+    }
   },
-  mounted: function () {
-    this.getData();
+  mounted() {
+    getQuestSummaryList().then(data => { this.quests = data.quests }).catch(error => console.log(error))
   },
 });
 
@@ -90,13 +59,13 @@ export default component
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: space-between;
+  gap: 40px
 }
 
 .quest-card {
   width: 377px;
   height: 115px;
   border: 1px solid #fc8c0d;
-  margin-top: 40px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
