@@ -5,12 +5,12 @@
     <p class="experience">{{ quest?.experience }}</p>
 
     <div class="actions">
-      <div class="cancel" @click="returnFalse">キャンセル</div>
-      <div class="primary" @click="returnTrue">解答へ</div>
+      <div class="cancel" @click="cancel">キャンセル</div>
+      <div class="primary" @click="confirm">解答へ</div>
     </div>
   </div>
 
-  <div class="overlay" @click="returnFalse"></div>
+  <div class="overlay" @click="cancel" />
 </template>
 
 <script lang="ts">
@@ -25,13 +25,12 @@ export default defineComponent({
       required: true
     },
   },
+  emits: {
+    action: (yes: boolean) => true,
+  },
   methods: {
-    returnFalse() {
-      this.$emit("execute-method", false);
-    },
-    returnTrue() {
-      this.$emit("execute-method", true);
-    },
+    confirm() { this.$emit("action", true) },
+    cancel() { this.$emit("action", false) }
   },
 });
 </script>
