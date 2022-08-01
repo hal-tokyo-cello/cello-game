@@ -28,42 +28,30 @@
 </template>
 
 <script lang="ts">
-import { ToastSeverity } from "primevue/api";
-import { defineComponent } from "vue";
+import { defineComponent, inject } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
-import { ApiError, getUser, User } from "../../util/api";
+import { User } from "../../util/api";
 
 import PAvatar from "primevue/avatar";
 import PButton from "primevue/button";
+
+import { userKey } from "../../App.vue";
 
 const component = defineComponent({
   components: {
     PAvatar,
     PButton,
   },
-  data: () => ({
-    user: {} as User,
-  }),
+  data() {
+    return {
+      user: inject<User>(userKey) as User,
+    };
+  },
   computed: {
     avatarIcon() {
       return this.user.avatar.iconUrl ?? "";
     },
-  },
-  mounted() {
-    getUser("1").then(
-      (data) => {
-        this.user = data.user;
-      },
-      (error: ApiError) =>
-        this.$toast.add({
-          severity: ToastSeverity.ERROR,
-          life: 5000,
-          closable: false,
-          summary: "ユーザーの情報を取得できませんでした",
-          detail: "未登録の場合はホームページにて登録してください。",
-        })
-    );
   },
 });
 
