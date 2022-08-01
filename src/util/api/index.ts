@@ -53,6 +53,7 @@ export const isApiError = (value: any): value is ApiError =>
 export interface User {
   accountId: string;
   name: string;
+  email: string;
   avatar: Avatar;
   createDate?: number;
   updateDate?: number;
@@ -68,3 +69,4 @@ export interface Avatar {
 }
 
 export * from "./auth";
+export * from "./mypage";
