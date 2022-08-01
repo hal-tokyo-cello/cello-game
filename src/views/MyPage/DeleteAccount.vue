@@ -1,18 +1,23 @@
 <template>
-  <div class="fields one_d">
-    <p class="label" style="font-size: 1.875em">退会手続き</p>
-  </div>
-  <div class="fields two_d">
-    <p class="label" style="font-size: 1.5em">ユーザー名</p>
-    <p class="user">{{ user.name }}</p>
-  </div>
-  <div class="fields three_d">
-    <p class="label" style="font-size: 1.5em">メールアドレス</p>
-    <p class="mail">{{ user.email }}</p>
-  </div>
-  <div class="fields four_d">
+  <section class="fields">
+    <span class="label" style="font-size: 1.875em">退会手続き</span>
+  </section>
+
+  <section>
+    <div class="fields">
+      <span class="label">ユーザー名</span>
+      <span class="user">{{ user.name }}</span>
+    </div>
+    <div class="fields">
+      <span class="label">メールアドレス</span>
+      <span class="mail">{{ user.email }}</span>
+    </div>
+  </section>
+
+  <section style="text-align: center; margin: 0">
     <p-button label="次へ" @click="showModal" class="next_btn" />
-  </div>
+  </section>
+
   <c-modal
     message="退会してよろしいですか？"
     v-show="modal"
@@ -68,64 +73,34 @@ export default component;
 </script>
 
 <style scoped>
-/* TODO: Rework on styles */
+section {
+  margin-left: 280px;
+  margin-bottom: 40px;
+}
+
 .label {
-  color: hsl(0, 0%, 44%);
+  color: var(--text-color-secondary);
+}
+
+.user,
+.mail {
+  font-size: 1.5em;
+}
+
+.fields .label {
+  font-size: 1.5em;
 }
 
 .fields .user {
   margin-left: 125px;
-  font-size: 24px;
 }
 
 .fields .mail {
   margin-left: 80px;
-  font-size: 24px;
-}
-
-.cancel_btn {
-  display: inline-block;
-  margin: 0 auto;
-  margin-right: 20px;
-  text-decoration: none;
-  width: 150px;
-  height: 50px;
-  text-decoration: none;
-  border: solid 1px #ff8c00;
-  transition: 0.4s;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 15px;
-  background-color: #ffffff;
 }
 
 .next_btn {
   width: 150px;
   height: 50px;
-}
-
-.one_d {
-  margin-left: 200px;
-  margin-bottom: 40px;
-}
-
-.two_d {
-  text-align: center;
-  margin-bottom: 0px;
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 280px;
-}
-
-.three_d {
-  text-align: center;
-  margin-bottom: 40px;
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 280px;
-}
-
-.four_d {
-  text-align: center;
 }
 </style>
