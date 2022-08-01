@@ -12,8 +12,8 @@
 
     <template #footer>
       <div class="actions" style="text-align: center;">
-        <p-button label="キャンセル" @click="cancel" class="cancel" />
-        <p-button label="解答へ" @click="confirm" autofocus class="primary" />
+        <p-button label="キャンセル" @click="cancel" />
+        <p-button label="解答へ" @click="confirm" autofocus />
       </div>
     </template>
   </p-dialog>
@@ -67,10 +67,6 @@ export default defineComponent({
   color: #ff8c00;
 }
 
-:deep(.p-dialog-header-icons) {
-  display: none;
-}
-
 .genre {
   font-size: 12px;
   line-height: 14px;
@@ -98,9 +94,10 @@ export default defineComponent({
   height: 52px;
   margin: 0;
   cursor: pointer;
+  margin-right: 40px;
 }
 
-.actions button:first-of-type {
-  margin-right: 40px;
+.actions button:last-of-type {
+  margin-right: 0;
 }
 </style>
