@@ -1,16 +1,15 @@
 {
   "recommendations": [
-    "vue.volar",
-    "streetsidesoftware.code-spell-checker",
-    "vivaxy.vscode-conventional-commits",
-    "usernamehw.errorlens",
-    "mhutchie.git-graph",
-    "esbenp.prettier-vscode",
-    "visualstudioexptteam.vscodeintellicode",
-    "ms-vsliveshare.vsliveshare-pack",
     "dariofuzinato.vue-peek",
-    "octref.vetur",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "mhutchie.git-graph",
+    "ms-vsliveshare.vsliveshare-pack",
     "orta.vscode-jest",
-    "eamodio.gitlens"
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    "visualstudioexptteam.vscodeintellicode",
+    "vivaxy.vscode-conventional-commits",
+    "vue.volar"
   ]
 }
