@@ -1,37 +1,33 @@
 <template>
-  <main>
-    <div id="Secession">
-      <div class="secession-content">
-        <div class="one_d">
-          <p class="procedure">退会手続き</p>
-        </div>
-        <div class="two_d">
-          <p class="user">ユーザー名</p>
-          <p class="user_m">User01</p>
-        </div>
-        <div class="three_d">
-          <p class="mail">メールアドレス</p>
-          <p class="mail_m">example@gmail.co.jp</p>
-        </div>
-        <div class="four_d">
-          <button class="next_btn" @click="showModal()">次へ</button>
-        </div>
-        <modal
-          :message="message"
-          v-show="modal"
-          @execute-method="executeMethod"
-        ></modal>
-      </div>
-    </div>
-  </main>
+  <div class="fields one_d">
+    <p class="label" style="font-size: 1.875em">退会手続き</p>
+  </div>
+  <div class="fields two_d">
+    <p class="label" style="font-size: 1.5em">ユーザー名</p>
+    <p class="user">User01</p>
+  </div>
+  <div class="fields three_d">
+    <p class="label" style="font-size: 1.5em">メールアドレス</p>
+    <p class="mail">example@gmail.co.jp</p>
+  </div>
+  <div class="fields four_d">
+    <p-button label="次へ" @click="showModal" class="next_btn" />
+  </div>
+  <c-modal :message="message" v-show="modal" @execute-method="executeMethod" />
 </template>
 
-<script>
-import Modal from "../components/Alert.vue";
+<script lang="ts">
+import { defineComponent } from "vue";
+import { RouteRecordRaw } from "vue-router";
 
-export default {
+import PButton from "primevue/button";
+
+import CModal from "../../components/Alert.vue";
+
+const component = defineComponent({
   components: {
-    Modal,
+    CModal,
+    PButton,
   },
   data() {
     return {
@@ -47,7 +43,7 @@ export default {
       // モーダル表示する際の処理が必要ならここに書く
       this.modal = true;
     },
-    executeMethod(yes) {
+    executeMethod(yes: boolean) {
       // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
       this.modal = false;
       if (yes) {
@@ -57,38 +53,24 @@ export default {
       }
     },
   },
-};
+});
+
+export const route: RouteRecordRaw = { path: "/mypage/deleteaccount", component }
+export default component
 </script>
 
 <style scoped>
-main {
-  width: 960px;
-  margin: 0 auto;
-  padding-top: 10px;
-  background: #f8f8f8;
+/* TODO: Rework on styles */
+.label {
+  color: hsl(0, 0%, 44%);
 }
 
-.procedure {
-  font-size: 30px;
-  color: #707070;
-}
-
-.user {
-  font-size: 24px;
-  color: #707070;
-}
-
-.user_m {
+.fields .user {
   margin-left: 125px;
   font-size: 24px;
 }
 
-.mail {
-  font-size: 24px;
-  color: #707070;
-}
-
-.mail_m {
+.fields .mail {
   margin-left: 80px;
   font-size: 24px;
 }

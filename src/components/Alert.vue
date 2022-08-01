@@ -9,13 +9,15 @@
   </div>
 </template>
 
-<script>
-import { thisExpression } from "@babel/types";
-import axios from "axios";
+<script lang="ts">
+import { defineComponent } from "vue";
 
-export default {
-  name: "Modal",
-  props: ["message"],
+export default defineComponent({
+  props: {
+    message: String,
+    mail: String,
+    password: String
+  },
   methods: {
     returnFalse() {
       this.$emit("execute-method", false);
@@ -24,13 +26,13 @@ export default {
       this.$emit("execute-method", true);
       //api処理
       const requestBody = {
-        email: thisExpression.mail,
+        email: this.mail,
         password: this.password,
       };
-      axios.get(import.meta.env.VITE_API_SERVER + );
+      // axios.get(process.env.CELLO_API_SERVER + );
     },
   },
-};
+});
 </script>
 
 <style scoped>
