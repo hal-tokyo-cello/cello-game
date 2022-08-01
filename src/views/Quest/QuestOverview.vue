@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div v-for="(quest, idx) in quests" :key="idx" @click="showModal" class="quest-card">
+    <div v-for="(quest, idx) in quests" :key="idx" @click="onSelectQuest(quest)" class="quest-card">
       <div class="title-box">
         <h4 class="title">{{ quest.title }}</h4>
       </div>
@@ -14,7 +14,8 @@
     </div>
   </div>
 
-  <c-modal v-if="modal" :quest="{ quests: 'title' }" @execute-method="executeMethod" />
+  <c-confirm-dialog v-model="dialog" :quest="selectedQuest" @cancel="closeDialog"
+    @confirm="$router.push({ path: `/quests/` + selectedQuest.id })" />
 </template>
 
 <script lang="ts">
@@ -23,27 +24,23 @@ import { RouteRecordRaw } from "vue-router";
 
 import { getQuestSummaryList, QuestSummary } from "../../util/api/quest";
 
-import CModal from "../../components/QuestConfirmDialog.vue";
+import CConfirmDialog from "../../components/QuestConfirmDialog.vue";
 
 const component = defineComponent({
   components: {
-    CModal,
+    CConfirmDialog,
   },
   data: () => ({
     quests: [] as QuestSummary[],
-    modal: false,
+    dialog: false,
+    selectedQuest: {} as QuestSummary
   }),
   methods: {
-    showModal() {
-      this.modal = true;
-    },
-    executeMethod(yes: boolean) {
-      // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
-      this.modal = false;
-      if (yes) {
-      } else {
-      }
-    },
+    closeDialog() { this.dialog = false },
+    onSelectQuest(quest: QuestSummary) {
+      this.selectedQuest = quest
+      this.dialog = true
+    }
   },
   mounted() {
     getQuestSummaryList().then(data => { this.quests = data.quests }).catch(error => console.log(error))
