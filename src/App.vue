@@ -1,68 +1,86 @@
 <template>
-  <div class="wrap">
-    <header>
-      <img src="/src/assets/img/cello_logo.png" alt="logo" />
-      <div class="avatar">
-        <Avatar
-          image="/src/assets/img/small.jpeg"
-          class="mr-2"
-          size="xlarge"
-          shape="circle"
-        />
-      </div>
-    </header>
-    <router-view></router-view>
-    <footer>©cello2022</footer>
-  </div>
-</template>
-<script>
-import Avatar from "primevue/avatar";
+  <p-toast />
+  <header>
+    <img src="./assets/images/cello_logo.png" class="logo" />
+    <router-link :to="MyPage.path">
+      <p-avatar
+        :image="user.avatar?.iconUrl"
+        class="mr-2 avatar"
+        size="xlarge"
+        shape="circle"
+      />
+    </router-link>
+  </header>
 
-export default {
+  <main>
+    <router-view />
+  </main>
+
+  <footer>&copy; CELLO 2022</footer>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent } from "vue";
+
+import PAvatar from "primevue/avatar";
+import PToast from "primevue/toast";
+
+import { getUser, User } from "./util/api";
+
+import { route as MyPage } from "./views/MyPage/Mypage.vue";
+
+/**
+ * Provide key to inject user across the app.
+ */
+export const userKey = Symbol();
+
+export default defineComponent({
   components: {
-    Avatar,
+    PAvatar,
+    PToast,
   },
-};
+  provide() {
+    return {
+      [userKey]: computed(() => this.user),
+    };
+  },
+  data: () => ({
+    MyPage,
+    user: {} as User,
+  }),
+  mounted() {
+    getUser("1").then((data) => {
+      this.user = data.user;
+    });
+  },
+});
 </script>
-<style>
-.wrap {
-  background: #f8f8f8;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+
+<style scoped>
 header {
   width: 100%;
   height: 80px;
-  background: #fff;
+  background: white;
   display: flex;
   justify-content: space-between;
 }
-header img {
-  width: 80px;
-  height: 80px;
+
+main {
+  width: 960px;
+  margin: 0 auto;
 }
-header .avatar {
-  margin-top: 8px;
-  margin-right: 20px;
-}
+
 footer {
-  margin-top: auto;
   text-align: center;
   padding: 10px 0;
 }
-#email,
-#password1,
-#checkPass {
-  width: 620px;
-  height: 70px;
+
+.logo {
+  width: 80px;
+  height: 80px;
 }
-#password2 {
-  width: 620px;
-  height: 70px;
-}
-#password3 {
-  width: 620px;
-  height: 70px;
+
+.avatar {
+  margin: 8px 20px 0 0;
 }
 </style>
