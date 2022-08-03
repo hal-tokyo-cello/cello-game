@@ -4,7 +4,7 @@
       <h1 class="head">Hello !! Excel !!</h1>
       <h2 class="subHead">Celloを使えばゲーム感覚で楽しくExcelを学べるよ</h2>
       <h2 class="subHead2">さあ！Celloをはじめてみよう！</h2>
-      <router-link style="text-decoration: none" to="/Signup">
+      <router-link style="text-decoration: none" :to="SignUp.path">
         <p-button label="はじめてみる" class="button" />
       </router-link>
     </section>
@@ -15,26 +15,26 @@
         <h2 class="sectionHead2">へようこそ</h2>
       </div>
 
-      <img src="../assets/images/pan1.png" alt="quiz" class="pan1" />
-      <img src="../assets/images/pan2.png" alt="quiz" class="pan2" />
+      <img src="../assets/images/pan1.png" class="pan1" />
+      <img src="../assets/images/pan2.png" class="pan2" />
       <div class="imageWrap">
-        <img src="../assets/images/quiz.png" alt="quiz" class="quizImg" />
+        <img src="../assets/images/quiz.png" class="quizImg" />
       </div>
     </section>
 
     <section class="section3">
       <h2 class="section3Head">問題を解いてアバターを進化させよう！</h2>
       <div class="section3Img">
-        <img src="../assets/images/doragon1.png" alt="doragon" class="doragon1" />
-        <img src="../assets/images/sankaku.png" alt="sankaku" class="sankaku" />
-        <img src="../assets/images/doragon2.png" alt="doragon" class="doragon2" />
+        <img src="../assets/images/doragon1.png" class="doragon1" />
+        <img src="../assets/images/sankaku.png" class="sankaku" />
+        <img src="../assets/images/doragon2.png" class="doragon2" />
       </div>
 
       <div class="section3Mon">
         <h2 class="section3Head2">レベルに合わせた問題でレベルを上げよう！</h2>
 
         <div class="section3Mon1">
-          <img src="../assets/images/mon1.png" alt="mon" class="mon1" />
+          <img src="../assets/images/mon1.png" class="mon1" />
           <div class="monCenter">
             <p class="monText">組み合わせ問題</p>
           </div>
@@ -44,11 +44,11 @@
           <div class="monCenter2">
             <p class="monText">４択問題</p>
           </div>
-          <img src="../assets/images/mon3.png" alt="mon" class="mon2" />
+          <img src="../assets/images/mon3.png" class="mon2" />
         </div>
 
         <div class="section3Mon3">
-          <img src="../assets/images/mon2.png" alt="mon" class="mon1" />
+          <img src="../assets/images/mon2.png" class="mon1" />
           <div class="monCenter">
             <p class="monText">穴埋め問題</p>
           </div>
@@ -60,7 +60,7 @@
       <h1 class="section4Head">さっそくはじめてみよう</h1>
 
       <div class="btnWrap">
-        <router-link style="text-decoration: none" to="/Signup">
+        <router-link style="text-decoration: none" :to="SignUp.path">
           <p-button label="はじめてみる" class="button2" />
         </router-link>
       </div>
@@ -74,13 +74,18 @@ import { RouteRecordRaw } from "vue-router";
 
 import PButton from "primevue/button";
 
+import { route as SignUp } from "./Auth/Signup.vue";
+
 const component = defineComponent({
   components: {
     PButton,
   },
+  data: () => ({
+    SignUp,
+  }),
 });
 
-export const route: RouteRecordRaw = { path: "/home", component }
+export const route: RouteRecordRaw = { path: "/home", component };
 export default component;
 </script>
 
