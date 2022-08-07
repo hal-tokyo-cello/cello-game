@@ -57,14 +57,12 @@ const component = defineComponent({
     PButton,
     PPassword,
   },
-  data() {
-    return {
-      value: null,
-      oldPass: null,
-      newPass: null,
-      confPass: null,
-    };
-  },
+  data: () => ({
+    value: null,
+    oldPass: "",
+    newPass: "",
+    confPass: "",
+  }),
   methods: {
     cancel() {
       this.$router.push("./Mypage.vue");
