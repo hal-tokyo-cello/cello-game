@@ -66,6 +66,23 @@ const component = defineComponent({
     newPass: "",
     confPass: "",
   }),
+  computed: {
+    isEmptyOldPassword() {
+      return this.oldPass.length <= 0;
+    },
+    isEmptyNewPassword() {
+      return this.newPass.length <= 0;
+    },
+    isEmptyConfPassword() {
+      return this.confPass.length <= 0;
+    },
+    isMismatchNewPassword() {
+      return this.newPass === this.confPass;
+    },
+    isReusedPassword() {
+      return this.oldPass === this.newPass;
+    },
+  },
   methods: {
     cancel() {
       this.$router.push("./Mypage.vue");
