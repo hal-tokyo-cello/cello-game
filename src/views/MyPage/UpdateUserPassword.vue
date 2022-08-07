@@ -38,8 +38,6 @@
       <p-button label="登録" type="submit" />
     </template>
   </c-form-layout>
-
-  <c-modal :message="message" v-show="modal" @execute-method="executeMethod" />
 </template>
 
 <script lang="ts">
@@ -50,20 +48,17 @@ import { RouteRecordRaw } from "vue-router";
 import PButton from "primevue/button";
 import PPassword from "primevue/password";
 
-import CModal from "../../components/AlertAddr.vue";
+import { ToastSeverity } from "primevue/api";
 import CFormLayout from "../../layout/Form.vue";
 
 const component = defineComponent({
   components: {
     CFormLayout,
-    CModal,
     PButton,
     PPassword,
   },
   data() {
     return {
-      message: "ユーザー名を変更しました",
-      modal: false,
       value: null,
       oldPass: null,
       newPass: null,
@@ -92,7 +87,11 @@ const component = defineComponent({
           .then((response) => {
             console.log("way");
             // 成功したときの処理はここに記述する
-            this.modal = true;
+            this.$toast.add({
+              severity: ToastSeverity.SUCCESS,
+              life: 3000,
+              summary: "ユーザー名を変更しました",
+            });
           })
           .catch((e) => {
             // レスポンスがエラーで返ってきたときの処理はここに記述する
@@ -102,10 +101,6 @@ const component = defineComponent({
           });
         return;
       }
-    },
-    executeMethod(yes: boolean) {
-      // モーダルを非表示にして、モーダルでの選択結果によって処理を変える
-      this.modal = false;
     },
   },
 });
