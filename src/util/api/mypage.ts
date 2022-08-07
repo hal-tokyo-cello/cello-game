@@ -6,6 +6,4 @@ export const getUser = (user: string) =>
   accessApi<{}, { user: User }>(`users/${user}`);
 
 export const deleteUser = (user: string, req: DeleteUserRequest) =>
-  accessApi<DeleteUserRequest, {}>(`users/${user}`, req, "DELETE", {
-    "x-mock-response-code": "200",
-  });
+  accessApi<DeleteUserRequest, {}>(`users/${user}`, req, "DELETE");
