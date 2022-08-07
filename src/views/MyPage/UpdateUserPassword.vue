@@ -78,7 +78,7 @@ const component = defineComponent({
       return this.confPass.length <= 0;
     },
     isMismatchNewPassword() {
-      return this.newPass === this.confPass;
+      return this.newPass !== this.confPass;
     },
     isReusedPassword() {
       return this.oldPass === this.newPass;
