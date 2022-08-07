@@ -42,13 +42,16 @@
 
 <script lang="ts">
 import axios from "axios";
-import { defineComponent } from "vue";
+import { ToastSeverity } from "primevue/api";
+import { defineComponent, inject } from "vue";
 import { RouteRecordRaw } from "vue-router";
+
+import { User } from "../../util/api";
 
 import PButton from "primevue/button";
 import PPassword from "primevue/password";
 
-import { ToastSeverity } from "primevue/api";
+import { userKey } from "../../App.vue";
 import CFormLayout from "../../layout/Form.vue";
 
 const component = defineComponent({
@@ -58,7 +61,7 @@ const component = defineComponent({
     PPassword,
   },
   data: () => ({
-    value: null,
+    user: inject(userKey) as User,
     oldPass: "",
     newPass: "",
     confPass: "",
@@ -75,7 +78,7 @@ const component = defineComponent({
       } else {
         //API処理
         const requestBody = {
-          name: this.value,
+          name: this.user.name,
         };
         axios
           .put(process.env.CELLO_API_SERVER + "/users/{accountID}", requestBody)
