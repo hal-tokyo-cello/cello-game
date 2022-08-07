@@ -72,10 +72,7 @@ const component = defineComponent({
           name: this.value,
         };
         axios
-          .put(
-            process.env.CELLO_API_SERVER + "/users/{accountID}",
-            requestBody
-          )
+          .put(process.env.CELLO_API_SERVER + "/users/{accountID}", requestBody)
           .then((response) => {
             console.log("way");
             // 成功したときの処理はここに記述する
@@ -97,9 +94,8 @@ const component = defineComponent({
   },
 });
 
-export const route: RouteRecordRaw = { path: "/mypage/password", component }
-export default component
+export const route: RouteRecordRaw = { path: "/mypage/password", component };
+export default component;
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
