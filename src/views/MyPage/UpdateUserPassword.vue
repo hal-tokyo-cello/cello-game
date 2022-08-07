@@ -53,6 +53,7 @@ import PPassword from "primevue/password";
 
 import { userKey } from "../../App.vue";
 import CFormLayout from "../../layout/Form.vue";
+import { route as MyPage } from "./Mypage.vue";
 
 const component = defineComponent({
   components: {
@@ -84,8 +85,11 @@ const component = defineComponent({
     },
   },
   methods: {
+    leave() {
+      this.$router.push({ path: MyPage.path });
+    },
     cancel() {
-      this.$router.push("./Mypage.vue");
+      this.leave();
     },
     showModal() {
       const error = false; // FIX: error means something else
@@ -107,6 +111,7 @@ const component = defineComponent({
               life: 3000,
               summary: "ユーザー名を変更しました",
             });
+            this.leave();
           })
           .catch((e) => {
             // レスポンスがエラーで返ってきたときの処理はここに記述する
