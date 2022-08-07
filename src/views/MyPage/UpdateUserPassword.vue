@@ -2,18 +2,34 @@
   <c-form-layout title="ユーザー情報の変更" @submit.prevent="showModal">
     <template #fields>
       <span class="p-float-label">
-        <p-password v-model="value1" :feedback="false" class="password" />
-        <label for="password">現在のパスワード</label>
+        <p-password
+          v-model="oldPass"
+          :feedback="false"
+          autocomplete="current-password"
+          id="oldPass"
+        />
+        <label for="oldPass">現在のパスワード</label>
       </span>
 
       <span class="p-float-label">
-        <p-password v-model="value2" toggle-mask class="password" />
-        <label for="password">新しいパスワード</label>
+        <p-password
+          v-model="newPass"
+          toggle-mask
+          autocomplete="new-password"
+          id="newPass"
+        />
+        <label for="newPass">新しいパスワード</label>
       </span>
 
       <span class="p-float-label">
-        <p-password v-model="value3" toggle-mask class="password" />
-        <label for="password">新しいパスワード</label>
+        <p-password
+          v-model="confPass"
+          toggle-mask
+          :feedback="false"
+          autocomplete="new-password"
+          id="confPass"
+        />
+        <label for="confPass">新しいパスワード</label>
       </span>
     </template>
 
@@ -49,9 +65,9 @@ const component = defineComponent({
       message: "ユーザー名を変更しました",
       modal: false,
       value: null,
-      value1: null,
-      value2: null,
-      value3: null,
+      oldPass: null,
+      newPass: null,
+      confPass: null,
     };
   },
   props: {
