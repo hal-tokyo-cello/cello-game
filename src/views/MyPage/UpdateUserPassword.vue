@@ -65,9 +65,6 @@ const component = defineComponent({
       confPass: null,
     };
   },
-  props: {
-    msg: String,
-  },
   methods: {
     cancel() {
       this.$router.push("./Mypage.vue");
