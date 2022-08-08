@@ -1,5 +1,5 @@
 <template>
-  <c-form-layout title="ユーザー情報の変更" @submit.prevent="showModal">
+  <c-form-layout title="ユーザー情報の変更" @submit.prevent="confirm">
     <template #fields>
       <span class="p-float-label">
         <p-password
@@ -41,12 +41,11 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
 import { ToastSeverity } from "primevue/api";
 import { defineComponent, inject } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
-import { User } from "../../util/api";
+import { ApiError, updatePassword, User } from "../../util/api";
 
 import PButton from "primevue/button";
 import PPassword from "primevue/password";
@@ -54,6 +53,11 @@ import PPassword from "primevue/password";
 import { userKey } from "../../App.vue";
 import CFormLayout from "../../layout/Form.vue";
 import { route as MyPage } from "./Mypage.vue";
+
+const updateErrorDetail: Record<number, string> = {
+  400: "指定されたパスワードは使用できません。",
+  401: "入力されたパスワードは登録されているパスワードと一致しません。",
+};
 
 const component = defineComponent({
   components: {
@@ -86,41 +90,48 @@ const component = defineComponent({
   },
   methods: {
     leave() {
-      this.$router.push({ path: MyPage.path });
+      return this.$router.push({ path: MyPage.path });
     },
     cancel() {
       this.leave();
     },
-    showModal() {
-      const error = false; // FIX: error means something else
-
-      if (error) {
+    confirm() {
+      if (
+        this.isEmptyOldPassword ||
+        this.isEmptyNewPassword ||
+        this.isReusedPassword ||
+        this.isEmptyConfPassword ||
+        this.isMismatchNewPassword
+      ) {
+        this.$toast.add({
+          severity: ToastSeverity.WARN,
+          life: 3000,
+          summary: "入力された情報に問題があります",
+          detail: "パスワードを確認した上、もう一度お試しください。",
+        });
         return;
-      } else {
-        //API処理
-        const requestBody = {
-          name: this.user.name,
-        };
-        axios
-          .put(process.env.CELLO_API_SERVER + "/users/{accountID}", requestBody)
-          .then((response) => {
-            console.log("way");
-            // 成功したときの処理はここに記述する
+      }
+
+      updatePassword(this.user.accountId, {
+        oldPassword: this.oldPass,
+        newPassword: this.newPass,
+      }).then(
+        () =>
+          this.leave().then(() =>
             this.$toast.add({
               severity: ToastSeverity.SUCCESS,
               life: 3000,
-              summary: "ユーザー名を変更しました",
-            });
-            this.leave();
+              summary: "パスワードを更新しました",
+            })
+          ),
+        (error: ApiError) =>
+          this.$toast.add({
+            severity: ToastSeverity.ERROR,
+            life: 5000,
+            summary: "パスワード更新できませんでした",
+            detail: updateErrorDetail[error.error.code],
           })
-          .catch((e) => {
-            // レスポンスがエラーで返ってきたときの処理はここに記述する
-            console.log("hoge");
-            //エラー回避用
-            this.$router.push("/ChangeName.vue");
-          });
-        return;
-      }
+      );
     },
   },
 });
