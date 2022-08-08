@@ -26,14 +26,14 @@ export const accessApi = <T, U>(
       ...headers,
     },
     method: method,
-  }).then<U>((res) => {
+  }).then<U>(async (res) => {
     const valid = respondValidator(res);
 
     if (typeof valid === "string") {
       return Promise.reject(valid);
     }
 
-    return valid ? res.json() : Promise.reject<ApiError>(res.json());
+    return valid ? res.json() : Promise.reject<ApiError>(await res.json());
   });
 
 export interface ApiError {
