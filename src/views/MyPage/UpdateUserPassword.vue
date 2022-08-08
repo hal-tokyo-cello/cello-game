@@ -10,6 +10,9 @@
         />
         <label for="oldPass">現在のパスワード</label>
       </span>
+      <p v-if="isEmptyOldPassword" class="p-error">
+        パスワードが入力されていません
+      </p>
 
       <span class="p-float-label">
         <p-password
@@ -18,8 +21,19 @@
           autocomplete="new-password"
           id="newPass"
         />
-        <label for="newPass">新しいパスワード</label>
+        <label for="newPass">
+          新しいパスワード
+          <span style="font-size: 12px">
+            ※半角英数字記号を含む8文字以上32文字以下
+          </span>
+        </label>
       </span>
+      <p v-if="isEmptyNewPassword" class="p-error">
+        パスワードが入力されていません
+      </p>
+      <p v-if="isMismatchNewPassword" class="p-error">
+        確認用パスワードと一致しません
+      </p>
 
       <span class="p-float-label">
         <p-password
@@ -31,6 +45,9 @@
         />
         <label for="confPass">新しいパスワード</label>
       </span>
+      <p v-if="isEmptyConfPassword" class="p-error">
+        確認用パスワードが入力されていません
+      </p>
     </template>
 
     <template #action>
@@ -70,22 +87,23 @@ const component = defineComponent({
     oldPass: "",
     newPass: "",
     confPass: "",
+    attempted: false,
   }),
   computed: {
     isEmptyOldPassword() {
-      return this.oldPass.length <= 0;
+      return this.attempted && this.oldPass.length <= 0;
     },
     isEmptyNewPassword() {
-      return this.newPass.length <= 0;
+      return this.attempted && this.newPass.length <= 0;
     },
     isEmptyConfPassword() {
-      return this.confPass.length <= 0;
+      return this.attempted && this.confPass.length <= 0;
     },
     isMismatchNewPassword() {
-      return this.newPass !== this.confPass;
+      return this.attempted && this.newPass !== this.confPass;
     },
     isReusedPassword() {
-      return this.oldPass === this.newPass;
+      return this.attempted && this.oldPass === this.newPass;
     },
   },
   methods: {
@@ -96,6 +114,8 @@ const component = defineComponent({
       this.leave();
     },
     confirm() {
+      this.attempted = true;
+
       if (
         this.isEmptyOldPassword ||
         this.isEmptyNewPassword ||
