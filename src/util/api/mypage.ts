@@ -7,6 +7,10 @@ interface UpdatePasswordRequest {
   newPassword: string;
 }
 
+interface UpdateUsernameRequest {
+  username: string;
+}
+
 export const getUser = (user: string) =>
   accessApi<{}, { user: User }>(`users/${user}`);
 
@@ -15,3 +19,6 @@ export const deleteUser = (user: string, req: DeleteUserRequest) =>
 
 export const updatePassword = (user: string, req: UpdatePasswordRequest) =>
   accessApi<UpdatePasswordRequest, {}>(`users/${user}/password`, req, "PUT");
+
+export const updateUsername = (user: string, req: UpdateUsernameRequest) =>
+  accessApi<UpdateUsernameRequest, {}>(`users/${user}/username`, req, "PUT");
