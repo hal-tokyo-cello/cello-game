@@ -41,11 +41,12 @@ const component = defineComponent({
   },
   data: () => ({
     username: "",
+    attempted: false,
     user: inject(userKey) as User,
   }),
   computed: {
     isInvalid() {
-      return this.username.length <= 0;
+      return this.attempted && this.username.length <= 0;
     },
   },
   methods: {
@@ -56,6 +57,8 @@ const component = defineComponent({
       this.leave();
     },
     confirm() {
+      this.attempted = true;
+
       if (this.isInvalid) {
         return;
       }
