@@ -9,7 +9,7 @@
     <div style="flex: 3 3">
       <div class="change">
         <p><span class="label">ユーザー名</span>{{ user.name }}</p>
-        <router-link :to="UpdateInfo.path">
+        <router-link :to="UpdateUsername.path">
           <p-button label="変更する" />
         </router-link>
       </div>
@@ -45,9 +45,10 @@ import PAvatar from "primevue/avatar";
 import PButton from "primevue/button";
 
 import { userKey } from "../../App.vue";
-import { route as UpdateInfo } from "./UpdateUserInfo.vue";
-import { route as UpdatePassword } from "./UpdateUserPassword.vue";
 import { route as DeleteAccount } from "./DeleteAccount.vue";
+import { route as UpdateInfo } from "./UpdateUserInfo.vue";
+import { route as UpdateUsername } from "./UpdateUsername.vue";
+import { route as UpdatePassword } from "./UpdateUserPassword.vue";
 
 const component = defineComponent({
   components: {
@@ -57,6 +58,7 @@ const component = defineComponent({
   data: () => ({
     DeleteAccount,
     UpdateInfo,
+    UpdateUsername,
     UpdatePassword,
     user: inject(userKey) as User,
   }),
