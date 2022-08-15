@@ -30,8 +30,14 @@
   </main>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { defineComponent } from "vue";
+import { RouteRecordRaw } from "vue-router";
+
+const component = defineComponent({});
+
+export const route: RouteRecordRaw = { path: "/avatar", component };
+export default component;
 </script>
 
 <style scoped>

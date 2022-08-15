@@ -1,19 +1,29 @@
 import PrimeVue from "primevue/config";
+import ToastService from "primevue/toastservice";
 import { createApp } from "vue";
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import "primevue/resources/themes/fluent-light/theme.css";
-import "primevue/resources/primevue.min.css";
-import "primeicons/primeicons.css";
-import App from "./App.vue";
-import Avatar from "./views/Avatar.vue";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-const routes: RouteRecordRaw[] = [
-  { path: "/avatar", name: "avatar", component: Avatar },
-];
+import "primeicons/primeicons.css";
+import "primevue/resources/primevue.min.css";
+import "./main.css";
+import "./theme.css";
+
+import App from "./App.vue";
+import { routes as Auth } from "./views/Auth";
+import { route as Avatar } from "./views/Avatar.vue";
+import { route as Home } from "./views/Index.vue";
+import { routes as MyPage } from "./views/MyPage";
+import { routes as Quests } from "./views/Quest";
+import { route as Reset } from "./views/Reset.vue";
+
+const routes: RouteRecordRaw[] = [Auth, MyPage, Quests]
+  .flat()
+  .concat(Home, Reset, Avatar);
+
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes: routes,
+  history: createWebHistory(),
+  routes,
+  strict: true,
 });
 
-const app = createApp(App);
-app.use(router).use(PrimeVue).mount("#app");
+createApp(App).use(router).use(PrimeVue).use(ToastService).mount("#app");
