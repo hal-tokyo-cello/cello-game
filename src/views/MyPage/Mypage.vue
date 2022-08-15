@@ -15,7 +15,7 @@
       </div>
       <div class="change">
         <p><span class="label">メールアドレス</span> {{ user.email }}</p>
-        <router-link :to="UpdateInfo.path">
+        <router-link :to="UpdateEmail.path">
           <p-button label="変更する" />
         </router-link>
       </div>
@@ -46,7 +46,7 @@ import PButton from "primevue/button";
 
 import { userKey } from "../../App.vue";
 import { route as DeleteAccount } from "./DeleteAccount.vue";
-import { route as UpdateInfo } from "./UpdateUserInfo.vue";
+import { route as UpdateEmail } from "./UpdateEmail.vue";
 import { route as UpdateUsername } from "./UpdateUsername.vue";
 import { route as UpdatePassword } from "./UpdateUserPassword.vue";
 
@@ -57,7 +57,7 @@ const component = defineComponent({
   },
   data: () => ({
     DeleteAccount,
-    UpdateInfo,
+    UpdateEmail,
     UpdateUsername,
     UpdatePassword,
     user: inject(userKey) as User,
