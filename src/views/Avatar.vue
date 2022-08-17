@@ -11,7 +11,7 @@
         <p-button class="evolve">進化</p-button>
       </div>
       <div class="living">
-        <img src="../../src/assets/images/beforepan.png" class="avatar" />
+        <img src="../../src/assets/images/pancake1.png" class="avatar" />
       </div>
     </div>
   </div>
@@ -40,7 +40,8 @@ export default component;
 }
 
 .home {
-  background: no-repeat center url("../../src/assets/images/background.png");
+  background: no-repeat center
+    url("../../src/assets/images/avatar-background.png");
   background-size: cover;
 }
 
