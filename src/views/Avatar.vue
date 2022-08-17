@@ -11,8 +11,8 @@
       </div>
       <!-- /.LevelWrap -->
       <div class="ButtonWrap">
-        <button class="ButtonItem">アイテム</button>
-        <button class="ButtonAdvance">進化</button>
+        <p-button class="ButtonItem">アイテム</p-button>
+        <p-button class="ButtonAdvance">進化</p-button>
       </div>
       <!-- /.ButtonWrap -->
       <div class="AvatarWrap">
@@ -32,7 +32,13 @@
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
-const component = defineComponent({});
+import PButton from "primevue/button";
+
+const component = defineComponent({
+  components: {
+    PButton,
+  },
+});
 
 export const route: RouteRecordRaw = { path: "/avatar", component };
 export default component;
