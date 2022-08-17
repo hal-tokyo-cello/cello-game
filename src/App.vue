@@ -1,7 +1,9 @@
 <template>
   <p-toast />
   <header>
-    <img src="./assets/images/cello_logo.png" class="logo" />
+    <router-link :to="Quests.path">
+      <img src="./assets/images/cello_logo.png" class="logo" />
+    </router-link>
     <router-link :to="MyPage.path">
       <p-avatar
         :image="user.avatar?.iconUrl"
@@ -28,6 +30,7 @@ import PToast from "primevue/toast";
 import { getUser, User } from "./util/api";
 
 import { route as MyPage } from "./views/MyPage/Mypage.vue";
+import { route as Quests } from "./views/Quest/QuestOverview.vue";
 
 /**
  * Provide key to inject user across the app.
@@ -46,6 +49,7 @@ export default defineComponent({
   },
   data: () => ({
     MyPage,
+    Quests,
     user: {} as User,
   }),
   mounted() {
