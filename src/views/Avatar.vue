@@ -1,33 +1,31 @@
 <template>
-  <main>
-    <div class="HomeBack">
-      <div class="Wrapper">
-        <div class="LevelWrap">
-          <p class="LevelText">Lv.12</p>
-          <div class="LevelPoint">
-            <span class="LevelGraf"></span>
-          </div>
-          <!-- /.LevelPoint -->
-          <p class="LevelStatus">235/600</p>
+  <div class="HomeBack">
+    <div class="Wrapper">
+      <div class="LevelWrap">
+        <p class="LevelText">Lv.12</p>
+        <div class="LevelPoint">
+          <span class="LevelGraf"></span>
         </div>
-        <!-- /.LevelWrap -->
-        <div class="ButtonWrap">
-          <button class="ButtonItem">アイテム</button>
-          <button class="ButtonAdvance">進化</button>
-        </div>
-        <!-- /.ButtonWrap -->
-        <div class="AvatarWrap">
-          <img
-            src="/src/assets/img/beforepan.png"
-            alt="Avatar"
-            class="AvatarIcon return"
-          />
-        </div>
-        <!-- /.AvatarWrap -->
+        <!-- /.LevelPoint -->
+        <p class="LevelStatus">235/600</p>
       </div>
-      <!-- /.Wrapper -->
+      <!-- /.LevelWrap -->
+      <div class="ButtonWrap">
+        <button class="ButtonItem">アイテム</button>
+        <button class="ButtonAdvance">進化</button>
+      </div>
+      <!-- /.ButtonWrap -->
+      <div class="AvatarWrap">
+        <img
+          src="../../src/assets/images/beforepan.png"
+          alt="Avatar"
+          class="AvatarIcon return"
+        />
+      </div>
+      <!-- /.AvatarWrap -->
     </div>
-  </main>
+    <!-- /.Wrapper -->
+  </div>
 </template>
 
 <script lang="ts">
@@ -56,8 +54,7 @@ button {
   align-items: center;
 }
 .HomeBack {
-  height: 90vh;
-  background-image: url("/src/assets/img/background.png");
+  background-image: url("../../src/assets/images/background.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
