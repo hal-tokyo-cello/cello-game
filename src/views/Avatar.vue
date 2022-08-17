@@ -1,30 +1,19 @@
 <template>
-  <div class="HomeBack">
-    <div class="Wrapper">
-      <div class="LevelWrap">
-        <p class="LevelText">Lv.12</p>
-        <div class="LevelPoint">
-          <span class="LevelGraf"></span>
-        </div>
-        <!-- /.LevelPoint -->
-        <p class="LevelStatus">235/600</p>
+  <div class="home">
+    <div class="home-wrapper">
+      <div>
+        <span class="level-text">12</span>
+        <meter :value="235" :max="600" class="level-bar" />
+        <p class="level-number">235 / 600</p>
       </div>
-      <!-- /.LevelWrap -->
-      <div class="ButtonWrap">
-        <p-button class="ButtonItem">アイテム</p-button>
-        <p-button class="ButtonAdvance">進化</p-button>
+      <div class="buttons">
+        <p-button class="item">アイテム</p-button>
+        <p-button class="evolve">進化</p-button>
       </div>
-      <!-- /.ButtonWrap -->
-      <div class="AvatarWrap">
-        <img
-          src="../../src/assets/images/beforepan.png"
-          alt="Avatar"
-          class="AvatarIcon return"
-        />
+      <div class="living">
+        <img src="../../src/assets/images/beforepan.png" class="avatar" />
       </div>
-      <!-- /.AvatarWrap -->
     </div>
-    <!-- /.Wrapper -->
   </div>
 </template>
 
@@ -49,77 +38,101 @@ export default component;
   margin: 0;
   padding: 0;
 }
-button {
-  font-size: 16px;
-  color: #ffffff;
-  width: 80px;
-  height: 32px;
-  display: flex;
-  border: solid 1px #ffffff;
-  justify-content: center;
-  align-items: center;
-}
-.HomeBack {
-  background-image: url("../../src/assets/images/background.png");
-  background-repeat: no-repeat;
+
+.home {
+  background: no-repeat center url("../../src/assets/images/background.png");
   background-size: cover;
 }
-.Wrapper {
+
+.home-wrapper {
   width: 790px;
   margin: 0 auto;
   position: relative;
 }
-.LevelText {
+
+.level-text {
+  display: block;
   font-size: 24px;
-  padding-top: 40px;
-  padding-bottom: 20px;
+  padding: 40px 0 20px;
 }
-.LevelPoint {
+
+.level-text::before {
+  content: "Lv. ";
+}
+
+.level-bar {
   width: 250px;
-  height: 12px;
-  background-color: #f4f4f4;
-  position: relative;
+  height: 24px;
 }
-.LevelGraf {
-  width: 100px;
-  height: 12px;
+
+meter.level-bar::-webkit-meter-bar {
+  border-radius: 0;
+  border: none;
+}
+
+meter.level-bar::-webkit-meter-optimum-value {
   background-color: #fc8c0d;
-  position: absolute;
 }
-.LevelStatus {
+
+.level-number {
   font-size: 16px;
-  padding-top: 6px;
+  margin-top: 6px;
 }
-.ButtonWrap {
-  display: flex;
-  gap: 20px;
+
+.buttons {
   position: absolute;
   right: 0;
-  margin-top: -30px;
+  margin-top: -32px;
 }
-.ButtonItem {
+
+.buttons :last-child {
+  margin-left: 20px;
+}
+
+.buttons button {
+  width: 80px;
+  height: 32px;
+  display: inline;
+  border: solid 1px #ffffff;
+  font-size: 16px;
+  cursor: grab;
+}
+
+button.item {
   background-color: #fc8c0d;
 }
-.ButtonItem:hover {
+
+button.item:hover {
   background-color: #ffb900;
-  cursor: grab;
 }
-.ButtonAdvance {
+
+button.evolve {
   background-color: #ea4307;
 }
-.ButtonAdvance:hover {
+
+button.evolve:hover {
   background-color: #ff2f00;
-  cursor: grab;
 }
-.AvatarWrap {
-  display: flex;
-  justify-content: center;
-  margin-top: 200px;
+
+.living {
+  text-align: center;
+  margin-top: 188px;
 }
-.AvatarIcon {
+
+.avatar {
+  position: relative;
+  top: 0;
+  left: 0;
+
   width: 288px;
   height: 288px;
+
+  animation-name: wandering;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
+
 @keyframes wandering {
   0% {
     top: 36px;
@@ -141,16 +154,5 @@ button {
     top: 36px;
     left: 263px;
   }
-}
-
-.return {
-  position: relative;
-  top: 0;
-  left: 0;
-
-  animation-name: wandering;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
 }
 </style>
