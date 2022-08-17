@@ -29,9 +29,11 @@
 import { defineComponent, inject } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
-import PButton from "primevue/button";
-import { userKey } from "../App.vue";
 import { User } from "../util/api";
+
+import PButton from "primevue/button";
+
+import { userKey } from "../App.vue";
 
 const component = defineComponent({
   components: {
