@@ -13,7 +13,7 @@
         </p>
       </div>
       <div class="buttons">
-        <p-button class="item">アイテム</p-button>
+        <p-button disabled="disabled" class="item">アイテム</p-button>
         <p-button disabled="disabled" class="evolve">進化</p-button>
       </div>
       <div class="living">
