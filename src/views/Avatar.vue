@@ -8,14 +8,16 @@
           :max="user.avatar.levelMax"
           class="level-bar"
         />
-        <p class="level-number">
+        <span class="level-number">
           {{ `${user.avatar.totalExp} / ${user.avatar.levelMax}` }}
-        </p>
+        </span>
       </div>
+
       <div class="buttons">
         <p-button disabled="disabled" class="item">アイテム</p-button>
         <p-button disabled="disabled" class="evolve">進化</p-button>
       </div>
+
       <div class="living">
         <img :src="user.avatar.imageUrl" class="avatar" />
       </div>
@@ -87,6 +89,7 @@ meter.level-bar::-webkit-meter-optimum-value {
 }
 
 .level-number {
+  display: block;
   font-size: 16px;
   margin-top: 6px;
 }
