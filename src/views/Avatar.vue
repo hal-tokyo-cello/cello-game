@@ -108,7 +108,7 @@ button {
 .AvatarWrap {
   display: flex;
   justify-content: center;
-  margin-top: 280px;
+  margin-top: 200px;
 }
 .AvatarIcon {
   width: 288px;
