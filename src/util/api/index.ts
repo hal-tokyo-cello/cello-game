@@ -63,9 +63,12 @@ export interface User {
 
 export interface Avatar {
   race: number;
+  level: number;
+  levelMax: number;
   totalExp: number;
   evolved: boolean;
   iconUrl?: string;
+  imageUrl?: string;
 }
 
 export * from "./auth";

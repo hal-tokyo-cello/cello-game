@@ -2,31 +2,42 @@
   <div class="home">
     <div class="home-wrapper">
       <div>
-        <span class="level-text">12</span>
-        <meter :value="235" :max="600" class="level-bar" />
-        <p class="level-number">235 / 600</p>
+        <span class="level-text">{{ user.avatar.level }}</span>
+        <meter
+          :value="user.avatar.totalExp"
+          :max="user.avatar.levelMax"
+          class="level-bar"
+        />
+        <p class="level-number">
+          {{ `${user.avatar.totalExp} / ${user.avatar.levelMax}` }}
+        </p>
       </div>
       <div class="buttons">
         <p-button class="item">アイテム</p-button>
         <p-button class="evolve">進化</p-button>
       </div>
       <div class="living">
-        <img src="../../src/assets/images/pancake1.png" class="avatar" />
+        <img :src="user.avatar.imageUrl" class="avatar" />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, inject } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
 import PButton from "primevue/button";
+import { userKey } from "../App.vue";
+import { User } from "../util/api";
 
 const component = defineComponent({
   components: {
     PButton,
   },
+  data: () => ({
+    user: inject(userKey) as User,
+  }),
 });
 
 export const route: RouteRecordRaw = { path: "/avatar", component };
