@@ -114,29 +114,37 @@ button {
   width: 288px;
   height: 288px;
 }
-@keyframes return {
+@keyframes wandering {
+  0% {
+    top: 36px;
+    left: 263px;
+  }
   25% {
-    top: 30px;
+    top: -62px;
+    left: 275px;
   }
   50% {
-    left: 200px;
+    top: -83px;
+    left: -85px;
   }
   75% {
-    top: -30px;
+    top: 0px;
+    left: -200px;
   }
   100% {
-    left: -200px;
+    top: 36px;
+    left: 263px;
   }
 }
 
 .return {
   position: relative;
-  left: 0px;
   top: 0;
+  left: 0;
 
-  animation-name: return;
+  animation-name: wandering;
   animation-duration: 10s;
   animation-iteration-count: infinite;
-  animation-timing-function: ease;
+  animation-timing-function: ease-in-out;
 }
 </style>
