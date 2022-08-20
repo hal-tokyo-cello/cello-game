@@ -28,9 +28,12 @@
 </template>
 
 <script lang="ts">
+import { ToastSeverity } from "primevue/api";
 import validator from "validator";
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
+
+import { ApiError, forget } from "../../util/api";
 
 import PButton from "primevue/button";
 import PInputText from "primevue/inputtext";
@@ -38,6 +41,11 @@ import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
 import { route as SignIn } from "./Signin.vue";
+
+const toastDetail: Record<number, string> = {
+  400: "もう一度確認してやり直してください。",
+  404: "未登録のメールアドレスが送信されました。",
+};
 
 const component = defineComponent({
   components: {
@@ -68,6 +76,26 @@ const component = defineComponent({
       if (this.isEmptyEmail || this.isInvalidEmail) {
         return;
       }
+
+      forget({ email: this.mail }).then(
+        () =>
+          this.$router.push({ path: SignIn.path }).then(() =>
+            this.$toast.add({
+              severity: ToastSeverity.SUCCESS,
+              life: 3000,
+              summary: "パスワードリセット用メールを送信しました",
+              detail:
+                "メールをチェックして、指示通りにパスワードをリセットしてください。",
+            })
+          ),
+        (error: ApiError) =>
+          this.$toast.add({
+            severity: ToastSeverity.ERROR,
+            life: 3000,
+            summary: "リセット用メールを発行できませんでした",
+            detail: toastDetail[error.error.code],
+          })
+      );
     },
   },
 });
