@@ -14,11 +14,10 @@ import { route as Avatar } from "./views/Avatar.vue";
 import { route as Home } from "./views/Index.vue";
 import { routes as MyPage } from "./views/MyPage";
 import { routes as Quests } from "./views/Quest";
-import { route as Reset } from "./views/Reset.vue";
 
 const routes: RouteRecordRaw[] = [Auth, MyPage, Quests]
   .flat()
-  .concat(Home, Reset, Avatar);
+  .concat(Home, Avatar);
 
 const router = createRouter({
   history: createWebHistory(),
