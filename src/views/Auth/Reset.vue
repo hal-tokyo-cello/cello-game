@@ -31,7 +31,10 @@
 
     <template #links>
       <router-link style="text-decoration: none" to="/signin">
-        <p-button label="サインインはこちら" class="p-button-link p-button-sm" />
+        <p-button
+          label="サインインはこちら"
+          class="p-button-link p-button-sm"
+        />
       </router-link>
     </template>
   </c-form-layout>
@@ -44,7 +47,7 @@ import { RouteRecordRaw } from "vue-router";
 import PButton from "primevue/button";
 import PPassword from "primevue/password";
 
-import CFormLayout from "../layout/Form.vue";
+import CFormLayout from "../../layout/Form.vue";
 
 const component = defineComponent({
   components: {
@@ -97,9 +100,8 @@ const component = defineComponent({
   },
 });
 
-export const route: RouteRecordRaw = { path: "/resetpassword", component }
+export const route: RouteRecordRaw = { path: "/auth/resetpassword", component };
 export default component;
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
