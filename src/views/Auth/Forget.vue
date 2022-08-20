@@ -17,7 +17,11 @@
     </template>
 
     <template #action>
-      <p-button label="キャンセル" class="p-button-outlined" />
+      <p-button
+        label="キャンセル"
+        @click="onCancel"
+        class="p-button-outlined"
+      />
       <p-button label="次へ" type="submit" />
     </template>
   </c-form-layout>
@@ -33,6 +37,7 @@ import PInputText from "primevue/inputtext";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
+import { route as SignIn } from "./Signin.vue";
 
 const component = defineComponent({
   components: {
@@ -54,6 +59,9 @@ const component = defineComponent({
     },
   },
   methods: {
+    onCancel() {
+      this.$router.push({ path: SignIn.path });
+    },
     requestReset() {
       this.attempted = false;
 
