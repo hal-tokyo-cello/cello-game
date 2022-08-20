@@ -1,12 +1,19 @@
 <template>
-  <c-form-layout title="パスワード再設定" @submit.prevent="Signin">
+  <c-form-layout title="パスワード再設定" @submit.prevent="requestReset">
     <template #fields>
       <span class="p-float-label">
-        <p-input-text id="email" type="text" v-model="mail" />
+        <p-input-text
+          v-model="mail"
+          id="email"
+          type="email"
+          autocomplete="email"
+        />
         <label for="email">メールアドレス</label>
       </span>
-      <p v-if="mailFlag" class="p-error">メールアドレスが入力されていません</p>
-      <p v-if="mailValFlag" class="p-error">メールアドレスではありません</p>
+      <p v-if="isEmptyEmail" class="p-error">
+        メールアドレスが入力されていません
+      </p>
+      <p v-if="isInvalidEmail" class="p-error">メールアドレスではありません</p>
     </template>
 
     <template #action>
@@ -34,49 +41,34 @@ const component = defineComponent({
     PInputText,
     PPassword,
   },
-  data() {
-    return {
-      mail: "",
-      password: "",
-      mailFlag: false,
-      passFlag: false,
-      mailValFlag: false,
-    };
+  data: () => ({
+    mail: "",
+    attempted: false,
+  }),
+  computed: {
+    isEmptyEmail() {
+      return this.attempted && this.mail.length <= 0;
+    },
+    isInvalidEmail() {
+      return this.attempted && !validator.isEmail(this.mail);
+    },
   },
   methods: {
-    Signin() {
-      var error = false;
-      this.mailFlag = false;
-      this.passFlag = false;
-      this.mailValFlag = false;
-      //入力判定
-      if (this.mail.length) {
-        if (validator.isEmail(this.mail)) {
-        } else {
-          this.mailValFlag = true;
-          error = true;
-        }
-      } else {
-        this.mailFlag = true;
-        error = true;
-      }
-      if (this.password.length == 0) {
-        this.passFlag = true;
-        error = true;
-      }
-      if (error) {
-        return;
-      } else {
-        //API処理
+    requestReset() {
+      this.attempted = false;
+
+      if (this.isEmptyEmail || this.isInvalidEmail) {
         return;
       }
     },
   },
 });
 
-export const route: RouteRecordRaw = { path: "/auth/forgetpassword", component }
-export default component
+export const route: RouteRecordRaw = {
+  path: "/auth/forgetpassword",
+  component,
+};
+export default component;
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
