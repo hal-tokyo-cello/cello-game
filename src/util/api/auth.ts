@@ -24,4 +24,4 @@ export const signUp = (req: SignUpRequest) =>
   accessApi<SignUpRequest, SignUpResponse>("users/signup", req, "POST");
 
 export const forget = (req: ForgetPasswordRequest) =>
-  accessApi<ForgetPasswordRequest, {}>("users/forget", req, "POST");
+  accessApi<ForgetPasswordRequest, {}>("forgetpassword", req, "POST");
