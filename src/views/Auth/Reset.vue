@@ -41,7 +41,7 @@
     </template>
 
     <template #links>
-      <router-link to="/signin">
+      <router-link :to="SignIn.path">
         <p-button
           label="サインインはこちら"
           class="p-button-link p-button-sm"
@@ -72,6 +72,7 @@ const component = defineComponent({
     PPassword,
   },
   data: () => ({
+    SignIn,
     password: "",
     confPassword: "",
     attempted: false,
