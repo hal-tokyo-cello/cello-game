@@ -64,8 +64,10 @@ import PInputText from "primevue/inputtext";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
-import { route as Verification } from "./Verification.vue";
 import { route as SignIn } from "./Signin.vue";
+import { route as Verification } from "./Verification.vue";
+
+export const signUpMailKey = "SIGN_UP_MAIL";
 
 const component = defineComponent({
   components: {
@@ -113,7 +115,10 @@ const component = defineComponent({
       }
 
       signUp({ email: this.mail, password: this.password }).then(
-        () => this.$router.push({ path: Verification.path }),
+        () =>
+          this.$router
+            .push({ path: Verification.path })
+            .then(() => localStorage.setItem(signUpMailKey, this.mail)),
         () =>
           this.$toast.add({
             severity: ToastSeverity.ERROR,
