@@ -1,5 +1,5 @@
 <template>
-  <c-form-layout title="新規登録" @submit.prevent="Signup">
+  <c-form-layout title="サインアップ" @submit.prevent="Signup">
     <template #fields>
       <span class="p-float-label">
         <p-input-text id="email" type="email" v-model="mail" />
