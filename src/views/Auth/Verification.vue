@@ -13,7 +13,7 @@
 
     <template #action>
       <router-link :to="SignUp.path" style="text-decoration: none">
-        <p-button label="キャンセル" class="p-button-outlined" />
+        <p-button label="戻る" class="p-button-outlined" />
       </router-link>
       <p-button label="送信" :disabled="!canTry" type="submit" />
     </template>
@@ -36,7 +36,7 @@ import { route as SignUp, signUpMailKey } from "./Signup.vue";
 
 const errorDetail: Record<number, string> = {
   400: "OTPが一致しません。",
-  404: "メールアドレスが登録していません。",
+  404: "メールアドレスが登録していません、サインアップ画面に戻ってやり直してください。",
 };
 
 const component = defineComponent({
@@ -81,7 +81,7 @@ const component = defineComponent({
         severity: ToastSeverity.ERROR,
         life: 5000,
         summary: "未知のエラーが発生しました",
-        detail: "サインアップ画面からやり直してください。",
+        detail: "サインアップ画面に戻ってやり直してください。",
       });
     } else {
       this.email = mail;
