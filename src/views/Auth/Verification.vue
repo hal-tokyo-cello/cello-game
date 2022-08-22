@@ -12,7 +12,9 @@
     </template>
 
     <template #action>
-      <p-button label="キャンセル" class="p-button-outlined" />
+      <router-link :to="SignUp.path">
+        <p-button label="キャンセル" class="p-button-outlined" />
+      </router-link>
       <p-button label="送信" type="submit" />
     </template>
   </c-form-layout>
@@ -27,6 +29,7 @@ import PInputText from "primevue/inputtext";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
+import { route as SignUp } from "./Signup.vue";
 
 const component = defineComponent({
   components: {
@@ -37,6 +40,7 @@ const component = defineComponent({
   },
   data() {
     return {
+      SignUp,
       value: "",
     };
   },
