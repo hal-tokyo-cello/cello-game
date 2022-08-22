@@ -12,7 +12,7 @@
     </template>
 
     <template #action>
-      <router-link :to="SignUp.path">
+      <router-link :to="SignUp.path" style="text-decoration: none">
         <p-button label="キャンセル" class="p-button-outlined" />
       </router-link>
       <p-button label="送信" type="submit" />
