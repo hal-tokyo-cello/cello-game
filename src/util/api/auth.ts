@@ -20,6 +20,15 @@ export interface ResetPasswordRequest {
   password: string;
 }
 
+export interface VerifyEmailRequest {
+  email: string;
+  otp: string;
+}
+
+export interface ResendOtpRequest {
+  email: string;
+}
+
 export const signIn = (req: SignInRequest) =>
   accessApi<SignInRequest, SignInResponse>("users/signin", req, "POST").then(
     (data) => (isApiError(data) ? Promise.reject(data) : data)
@@ -33,3 +42,9 @@ export const forget = (req: ForgetPasswordRequest) =>
 
 export const reset = (req: ResetPasswordRequest) =>
   accessApi("resetpassword", req, "POST");
+
+export const verify = (req: VerifyEmailRequest) =>
+  accessApi("users/signup/verify", req, "POST");
+
+export const resend = (req: ResendOtpRequest) =>
+  accessApi("users/signup/resend", req, "POST");
