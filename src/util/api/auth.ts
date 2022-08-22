@@ -25,6 +25,10 @@ export interface VerifyEmailRequest {
   otp: string;
 }
 
+export interface ResendOtpRequest {
+  email: string;
+}
+
 export const signIn = (req: SignInRequest) =>
   accessApi<SignInRequest, SignInResponse>("users/signin", req, "POST").then(
     (data) => (isApiError(data) ? Promise.reject(data) : data)
@@ -41,3 +45,6 @@ export const reset = (req: ResetPasswordRequest) =>
 
 export const verify = (req: VerifyEmailRequest) =>
   accessApi("users/signup/verify", req, "POST");
+
+export const resend = (req: ResendOtpRequest) =>
+  accessApi("users/signup/resend", req, "POST");
