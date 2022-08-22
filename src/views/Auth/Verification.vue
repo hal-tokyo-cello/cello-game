@@ -17,6 +17,14 @@
       </router-link>
       <p-button label="送信" :disabled="!canTry" type="submit" />
     </template>
+
+    <template #links>
+      <p-button
+        label="認証メールを再送信"
+        :click="resendOTP"
+        class="p-button-link p-button-sm"
+      />
+    </template>
   </c-form-layout>
 </template>
 
@@ -30,11 +38,15 @@ import PInputText from "primevue/inputtext";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
-import { ApiError, verify } from "../../util/api";
+import { ApiError, resend, verify } from "../../util/api";
 import { route as SignIn } from "./Signin.vue";
 import { route as SignUp, signUpMailKey } from "./Signup.vue";
 
-const errorDetail: Record<number, string> = {
+const resendErrorDetail: Record<number, string> = {
+  404: "メールアドレスが登録していません、サインアップ画面に戻ってやり直してください。",
+};
+
+const verifyErrorDetail: Record<number, string> = {
   400: "OTPが一致しません。",
   404: "メールアドレスが登録していません、サインアップ画面に戻ってやり直してください。",
 };
@@ -53,6 +65,23 @@ const component = defineComponent({
     canTry: true,
   }),
   methods: {
+    resendOTP() {
+      resend({ email: this.email }).then(
+        () =>
+          this.$toast.add({
+            severity: ToastSeverity.SUCCESS,
+            life: 3000,
+            summary: "認証メールを再送しました",
+          }),
+        (error: ApiError) =>
+          this.$toast.add({
+            severity: ToastSeverity.ERROR,
+            life: 5000,
+            summary: "メールアドレス認証できませんでした",
+            detail: resendErrorDetail[error.error.code],
+          })
+      );
+    },
     confirm(ev: SubmitEvent) {
       Promise.resolve(() => {
         this.canTry = false;
@@ -65,7 +94,7 @@ const component = defineComponent({
               severity: ToastSeverity.ERROR,
               life: 5000,
               summary: "メールアドレス認証できませんでした",
-              detail: errorDetail[error.error.code],
+              detail: verifyErrorDetail[error.error.code],
             })
         )
         .then(() => {
