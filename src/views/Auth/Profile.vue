@@ -1,6 +1,6 @@
 <template>
   <c-form-layout title="プロフィール">
-    <div class="avatar" style="margin: auto; width: 150px; height: 150px">
+    <div style="margin: auto; width: 150px; height: 150px">
       <p-avatar
         v-if="race"
         :image="avatarImage"
@@ -27,6 +27,29 @@
       <p-button label="登録" type="submit" class="p-button-lg" />
     </template>
   </c-form-layout>
+
+  <p-dialog
+    modal
+    dismissableMask
+    :visible="true"
+    style="min-width: 620px; text-align: center"
+  >
+    <template #header>
+      <h2 style="color: #707070; flex: 1 1">育てたい子を選んでね</h2>
+    </template>
+
+    <div class="races-wrapper">
+      <div v-for="opt in options" class="race">
+        <p-avatar
+          :image="opt.image"
+          shape="circle"
+          size="xlarge"
+          class="mr-2 race-image"
+        />
+        <span class="race-text">{{ opt.display }}</span>
+      </div>
+    </div>
+  </p-dialog>
 </template>
 
 <script lang="ts">
@@ -35,6 +58,7 @@ import { RouteRecordRaw } from "vue-router";
 
 import PAvatar from "primevue/avatar";
 import PButton from "primevue/button";
+import PDialog from "primevue/dialog";
 import PInputText from "primevue/inputtext";
 
 import CFormLayout from "../../layout/Form.vue";
@@ -46,11 +70,17 @@ const component = defineComponent({
     CFormLayout,
     PAvatar,
     PButton,
+    PDialog,
     PInputText,
   },
   data: () => ({
     avatarImage,
     race: undefined as undefined | number,
+    options: [] as Array<{
+      id: number;
+      display: string;
+      image: string;
+    }>,
   }),
 });
 
@@ -61,4 +91,27 @@ export const route: RouteRecordRaw = {
 export default component;
 </script>
 
-<style></style>
+<style scoped>
+.races-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.race {
+  display: flex;
+  flex-direction: column;
+}
+
+.race-image {
+  border: 1px solid #707070;
+  width: 150px;
+  height: 150px;
+  padding: 10px;
+}
+
+.race-text {
+  display: block;
+  margin: 10px 0;
+}
+</style>
