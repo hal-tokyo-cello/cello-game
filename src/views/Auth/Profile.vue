@@ -21,7 +21,12 @@
 
     <template #fields>
       <span class="p-float-label">
-        <p-input-text id="player" type="text" autocomplete="username" />
+        <p-input-text
+          v-model="name"
+          id="player"
+          type="text"
+          autocomplete="username"
+        />
         <label for="player">名前</label>
       </span>
     </template>
@@ -80,6 +85,7 @@ const component = defineComponent({
   },
   data: () => ({
     avatarImage,
+    name: "",
     race: undefined as RaceOption | undefined,
     options: [] as RaceOption[],
     selecting: false,
