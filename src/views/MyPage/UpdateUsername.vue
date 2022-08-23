@@ -70,13 +70,17 @@ const component = defineComponent({
 
       updateUsername(this.user.accountId, { username: this.username }).then(
         () =>
-          this.leave().then(() =>
-            this.$toast.add({
-              severity: ToastSeverity.SUCCESS,
-              life: 3000,
-              summary: "ユーザー名を更新しました",
-            })
-          ),
+          this.leave()
+            .then(() =>
+              this.$toast.add({
+                severity: ToastSeverity.SUCCESS,
+                life: 3000,
+                summary: "ユーザー名を更新しました",
+              })
+            )
+            .then(() => {
+              this.user.name = this.username;
+            }),
         () =>
           this.$toast.add({
             severity: ToastSeverity.ERROR,
