@@ -56,6 +56,8 @@
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
+import { getAvatarRaceOptions, RaceOption } from "../../util/api";
+
 import PAvatar from "primevue/avatar";
 import PButton from "primevue/button";
 import PDialog from "primevue/dialog";
@@ -76,12 +78,13 @@ const component = defineComponent({
   data: () => ({
     avatarImage,
     race: undefined as undefined | number,
-    options: [] as Array<{
-      id: number;
-      display: string;
-      image: string;
-    }>,
+    options: [] as RaceOption[],
   }),
+  mounted() {
+    getAvatarRaceOptions().then((data) => {
+      this.options = data.options;
+    });
+  },
 });
 
 export const route: RouteRecordRaw = {

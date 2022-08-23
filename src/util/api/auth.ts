@@ -29,6 +29,16 @@ export interface ResendOtpRequest {
   email: string;
 }
 
+export interface RaceOption {
+  id: number;
+  display: string;
+  image: string;
+}
+
+export interface RaceOptionsResponse {
+  options: RaceOption[];
+}
+
 export const signIn = (req: SignInRequest) =>
   accessApi<SignInRequest, SignInResponse>("users/signin", req, "POST").then(
     (data) => (isApiError(data) ? Promise.reject(data) : data)
@@ -48,3 +58,6 @@ export const verify = (req: VerifyEmailRequest) =>
 
 export const resend = (req: ResendOtpRequest) =>
   accessApi("users/signup/resend", req, "POST");
+
+export const getAvatarRaceOptions = () =>
+  accessApi<{}, RaceOptionsResponse>("avatars", undefined, "GET");
