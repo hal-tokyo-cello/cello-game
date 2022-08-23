@@ -1,5 +1,5 @@
 <template>
-  <c-form-layout title="プロフィール">
+  <c-form-layout title="プロフィール" @submit.prevent="submit">
     <div
       @click="selecting = true"
       style="margin: auto; width: 150px; height: 150px"
@@ -65,7 +65,7 @@ import { ToastSeverity } from "primevue/api";
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
-import { getAvatarRaceOptions, RaceOption } from "../../util/api";
+import { getAvatarRaceOptions, RaceOption, selectAvatar } from "../../util/api";
 
 import PAvatar from "primevue/avatar";
 import PButton from "primevue/button";
@@ -73,9 +73,8 @@ import PDialog from "primevue/dialog";
 import PInputText from "primevue/inputtext";
 
 import CFormLayout from "../../layout/Form.vue";
+import { route as Quests } from "../Quest/QuestOverview.vue";
 import { verifiedUser } from "./Verification.vue";
-
-import avatarImage from "../../assets/images/pancake1.png";
 
 const component = defineComponent({
   components: {
@@ -86,7 +85,6 @@ const component = defineComponent({
     PInputText,
   },
   data: () => ({
-    avatarImage,
     userId: "",
     name: "",
     race: undefined as RaceOption | undefined,
@@ -97,6 +95,39 @@ const component = defineComponent({
     selectRace(option: RaceOption) {
       this.race = option;
       this.selecting = false;
+    },
+    submit(ev: SubmitEvent) {
+      if (this.race == undefined) {
+        this.$toast.add({
+          severity: ToastSeverity.ERROR,
+          life: 3000,
+          summary: "プロフィールの設定は完成されていません",
+          detail: "アバターの種族を選んでいません。",
+        });
+        return;
+      }
+
+      if (this.name == "") {
+        this.$toast.add({
+          severity: ToastSeverity.ERROR,
+          life: 3000,
+          summary: "プロフィールの設定は完成されていません",
+          detail: "プレイヤー名は入力していません。",
+        });
+        return;
+      }
+
+      selectAvatar(this.userId, { race: this.race.id }).then(
+        () => this.$router.push({ path: Quests.path }),
+        () =>
+          this.$toast.add({
+            severity: ToastSeverity.ERROR,
+            life: 5000,
+            summary: "プロフィール設定できませんでした",
+            detail:
+              "未登録のアカウントのプロフィールを設定している。サインアップ画面に戻ってやり直してください。",
+          })
+      );
     },
   },
   mounted() {

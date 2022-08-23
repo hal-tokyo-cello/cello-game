@@ -43,6 +43,10 @@ export interface RaceOptionsResponse {
   options: RaceOption[];
 }
 
+export interface SelectAvatarRequest {
+  race: number;
+}
+
 export const signIn = (req: SignInRequest) =>
   accessApi<SignInRequest, SignInResponse>("users/signin", req, "POST").then(
     (data) => (isApiError(data) ? Promise.reject(data) : data)
@@ -69,3 +73,6 @@ export const resend = (req: ResendOtpRequest) =>
 
 export const getAvatarRaceOptions = () =>
   accessApi<{}, RaceOptionsResponse>("avatars", undefined, "GET");
+
+export const selectAvatar = (user: string, req: SelectAvatarRequest) =>
+  accessApi<SelectAvatarRequest, {}>(`users/${user}/avatar`, req, "POST");
