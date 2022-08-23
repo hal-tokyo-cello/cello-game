@@ -1,12 +1,15 @@
 <template>
   <c-form-layout title="プロフィール">
-    <div style="margin: auto; width: 150px; height: 150px">
+    <div
+      @click="selecting = true"
+      style="margin: auto; width: 150px; height: 150px"
+    >
       <p-avatar
         v-if="race"
-        :image="avatarImage"
-        class="mr-2"
+        :image="race.image"
         size="xlarge"
         shape="circle"
+        class="mr-2 race-image"
         style="width: 100%; height: 100%"
       />
       <svg v-else viewBox="0 0 40 40">
@@ -31,7 +34,7 @@
   <p-dialog
     modal
     dismissableMask
-    :visible="true"
+    v-model:visible="selecting"
     style="min-width: 620px; text-align: center"
   >
     <template #header>
@@ -39,7 +42,7 @@
     </template>
 
     <div class="races-wrapper">
-      <div v-for="opt in options" class="race">
+      <div v-for="opt in options" @click="selectRace(opt)" class="race">
         <p-avatar
           :image="opt.image"
           shape="circle"
@@ -77,9 +80,16 @@ const component = defineComponent({
   },
   data: () => ({
     avatarImage,
-    race: undefined as undefined | number,
+    race: undefined as RaceOption | undefined,
     options: [] as RaceOption[],
+    selecting: false,
   }),
+  methods: {
+    selectRace(option: RaceOption) {
+      this.race = option;
+      this.selecting = false;
+    },
+  },
   mounted() {
     getAvatarRaceOptions().then((data) => {
       this.options = data.options;
