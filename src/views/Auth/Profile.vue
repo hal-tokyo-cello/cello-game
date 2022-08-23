@@ -61,6 +61,7 @@
 </template>
 
 <script lang="ts">
+import { ToastSeverity } from "primevue/api";
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
@@ -72,6 +73,7 @@ import PDialog from "primevue/dialog";
 import PInputText from "primevue/inputtext";
 
 import CFormLayout from "../../layout/Form.vue";
+import { verifiedUser } from "./Verification.vue";
 
 import avatarImage from "../../assets/images/pancake1.png";
 
@@ -85,6 +87,7 @@ const component = defineComponent({
   },
   data: () => ({
     avatarImage,
+    userId: "",
     name: "",
     race: undefined as RaceOption | undefined,
     options: [] as RaceOption[],
@@ -97,6 +100,19 @@ const component = defineComponent({
     },
   },
   mounted() {
+    const userId = localStorage.getItem(verifiedUser);
+    localStorage.removeItem(verifiedUser);
+    if (typeof userId !== "string") {
+      this.$toast.add({
+        severity: ToastSeverity.ERROR,
+        life: 5000,
+        summary: "未知のエラーが発生しました",
+        detail: "サインアップ画面に戻ってやり直してください。",
+      });
+    } else {
+      this.userId = userId;
+    }
+
     getAvatarRaceOptions().then((data) => {
       this.options = data.options;
     });
