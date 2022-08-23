@@ -39,7 +39,7 @@ import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
 import { ApiError, resend, verify } from "../../util/api";
-import { route as SignIn } from "./Signin.vue";
+import { route as Profile } from "./Profile.vue";
 import { route as SignUp, signUpMailKey } from "./Signup.vue";
 
 const resendErrorDetail: Record<number, string> = {
@@ -50,6 +50,8 @@ const verifyErrorDetail: Record<number, string> = {
   400: "OTPが一致しません。",
   404: "メールアドレスが登録していません、サインアップ画面に戻ってやり直してください。",
 };
+
+export const verifiedUser = "VERIFIED_USER";
 
 const component = defineComponent({
   components: {
@@ -87,8 +89,9 @@ const component = defineComponent({
         this.canTry = false;
       })
         .then(() => verify({ email: this.email, otp: this.otp }))
+        .then((data) => localStorage.setItem(verifiedUser, data.userId))
         .then(
-          () => this.$router.push({ path: SignIn.path }),
+          () => this.$router.push({ path: Profile.path }),
           (error: ApiError) =>
             this.$toast.add({
               severity: ToastSeverity.ERROR,
