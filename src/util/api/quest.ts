@@ -12,6 +12,14 @@ export interface QuestDetail extends QuestSummary {
   options: string[];
 }
 
+export interface AnswerQuestRequest {
+  answer: string;
+}
+
+export interface AnswerQuestResponse {
+  correct: boolean;
+}
+
 export const genreText: Record<string, string> = {
   MUL: "４択問題",
   COM: "組み合わせ問題",
@@ -22,3 +30,10 @@ export const getQuestSummaryList = () =>
 
 export const getQuest = (quest: string) =>
   accessApi<{}, { quest: QuestDetail }>(`quests/${quest}`);
+
+export const answerQuest = (quest: string, req: AnswerQuestRequest) =>
+  accessApi<AnswerQuestRequest, AnswerQuestResponse>(
+    `quests/${quest}/answer`,
+    req,
+    "POST"
+  );
