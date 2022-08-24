@@ -9,14 +9,14 @@
   <c-excel-button style="margin: 60px 0 30px" />
 
   <ol style="margin-left: 40px">
-    <li v-for="(opt, idx) in quest.options" :key="idx" class="selectable">
+    <li
+      v-for="(opt, idx) in quest.options"
+      :key="idx"
+      class="selectable option"
+    >
       {{ opt }}
     </li>
   </ol>
-
-  <div style="text-align: center; margin-top: 50px">
-    <button v-for="(opt, idx) in 4" :key="idx">{{ opt }}</button>
-  </div>
 </template>
 
 <script lang="ts">
@@ -39,22 +39,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-button {
-  margin-left: 30px;
-  width: 50px;
-  height: 50px;
-  color: #f8f8f8;
-  background-color: #fc8c0d;
-  border-color: #fc8c0d;
-  font-size: 24px;
-}
-
-button:hover {
-  background-color: #f8f8f8;
-  color: black;
-}
-
-li {
+.option {
   font-size: 20px;
   cursor: pointer;
   margin: 1rem 0;
