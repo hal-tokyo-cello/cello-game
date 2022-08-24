@@ -1,10 +1,6 @@
 <template>
   <ol style="margin-left: 40px">
-    <li
-      v-for="(opt, idx) in quest.options"
-      :key="idx"
-      class="selectable option"
-    >
+    <li v-for="(opt, idx) in quest.options" :key="idx" class="option">
       {{ opt }}
     </li>
   </ol>
