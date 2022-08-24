@@ -1,6 +1,11 @@
 <template>
   <div class="wrapper">
-    <div v-for="(quest, idx) in quests" :key="idx" @click="onSelectQuest(quest)" class="quest-card">
+    <div
+      v-for="(quest, idx) in quests"
+      :key="idx"
+      @click="selectedQuest = quest"
+      class="quest-card"
+    >
       <div class="title-box">
         <h4 class="title">{{ quest.title }}</h4>
       </div>
@@ -14,8 +19,14 @@
     </div>
   </div>
 
-  <c-confirm-dialog v-model="dialog" :quest="selectedQuest" @cancel="closeDialog"
-    @confirm="$router.push({ path: `/quests/` + selectedQuest.id })" />
+  <c-confirm-dialog
+    :modelValue="!!selectedQuest"
+    :quest="selectedQuest"
+    @cancel="selectedQuest = undefined"
+    @confirm="
+      !!selectedQuest && $router.push({ path: `/quests/` + selectedQuest.id })
+    "
+  />
 </template>
 
 <script lang="ts">
@@ -32,23 +43,17 @@ const component = defineComponent({
   },
   data: () => ({
     quests: [] as QuestSummary[],
-    dialog: false,
-    selectedQuest: {} as QuestSummary
+    selectedQuest: undefined as QuestSummary | undefined,
   }),
-  methods: {
-    closeDialog() { this.dialog = false },
-    onSelectQuest(quest: QuestSummary) {
-      this.selectedQuest = quest
-      this.dialog = true
-    }
-  },
   mounted() {
-    getQuestSummaryList().then(data => { this.quests = data.quests }).catch(error => console.log(error))
+    getQuestSummaryList().then((data) => {
+      this.quests = data.quests;
+    });
   },
 });
 
-export const route: RouteRecordRaw = { path: "/quests", component }
-export default component
+export const route: RouteRecordRaw = { path: "/quests", component };
+export default component;
 </script>
 
 <style scoped>
@@ -59,7 +64,7 @@ export default component
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: space-between;
-  gap: 40px
+  gap: 40px;
 }
 
 .quest-card {
