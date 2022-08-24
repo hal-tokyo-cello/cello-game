@@ -11,7 +11,7 @@
       </div>
       <div class="title-decoration" />
 
-      <p class="genre">{{ quest.genre }}</p>
+      <p class="genre">{{ genreText[quest.genre] }}</p>
 
       <span class="point-badge">
         {{ quest.experience }}
@@ -53,7 +53,11 @@
 import { defineComponent } from "vue";
 import { RouteLocationRaw, RouteRecordRaw } from "vue-router";
 
-import { getQuestSummaryList, QuestSummary } from "../../util/api/quest";
+import {
+  getQuestSummaryList,
+  QuestSummary,
+  genreText,
+} from "../../util/api/quest";
 
 import PButton from "primevue/button";
 import PDialog from "primevue/dialog";
@@ -66,6 +70,7 @@ const component = defineComponent({
     PDialog,
   },
   data: () => ({
+    genreText,
     quests: [] as QuestSummary[],
     selectedQuest: undefined as QuestSummary | undefined,
   }),
