@@ -1,15 +1,6 @@
 <template>
-  <h1>組み合わせ問題</h1>
-
   <div style="display: flex; justify-content: space-between">
     <div>
-      <c-question-label
-        number="1"
-        text="C2のセルにリンゴとバナナの合計を入れよう！"
-      />
-
-      <c-excel-button style="margin: 60px 0 30px" />
-
       <div class="answer-field">
         <div class="answer-box red"></div>
         <div class="answer-box yellow"></div>
@@ -51,15 +42,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import CExcelButton from "../../components/ExcelDownloadButton.vue";
-import CQuestionLabel from "../../components/QuestionLabel.vue";
-
-export default defineComponent({
-  components: {
-    CExcelButton,
-    CQuestionLabel,
-  },
-});
+export default defineComponent({});
 </script>
 
 <style scoped>
@@ -82,12 +65,6 @@ export default defineComponent({
   height: 102%;
   background: hsl(0, 0%, 75%);
   mix-blend-mode: hard-light;
-}
-
-h1 {
-  font-size: 40px;
-  color: #707070;
-  margin: 70px 0 60px;
 }
 
 .answer-field {

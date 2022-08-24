@@ -1,10 +1,4 @@
 <template>
-  <h1 style="font-size: 2.5rem">4択問題</h1>
-
-  <c-question-label :number="quest.id" :text="quest.title" />
-
-  <c-excel-button style="margin: 60px 0 30px" />
-
   <ol style="margin-left: 40px">
     <li
       v-for="(opt, idx) in quest.options"
@@ -20,14 +14,7 @@
 import { defineComponent, PropType } from "vue";
 import { QuestDetail } from "../../util/api/quest";
 
-import CExcelButton from "../../components/ExcelDownloadButton.vue";
-import CQuestionLabel from "../../components/QuestionLabel.vue";
-
 export default defineComponent({
-  components: {
-    CExcelButton,
-    CQuestionLabel,
-  },
   props: {
     quest: {
       type: Object as PropType<QuestDetail>,
@@ -42,21 +29,6 @@ export default defineComponent({
   font-size: 20px;
   cursor: pointer;
   margin: 1rem 0;
-}
-
-.question-no {
-  padding: 8px;
-  padding-top: 3px;
-  color: white;
-  font-size: 18px;
-  background: center no-repeat url("../../assets/images/question.png");
-  background-size: contain;
-}
-.question-no::before {
-  content: "Q";
-}
-
-.selectable {
   cursor: pointer;
 }
 </style>
