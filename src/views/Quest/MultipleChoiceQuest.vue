@@ -1,49 +1,66 @@
 <template>
-  <h1 style="font-size: 2.5rem">4択問題</h1>
-
-  <span>
-    <span style="font-size: 18px">Q1</span>
-    <span>{{ question }}</span>
-  </span>
-
-  <ol>
-    <li v-for="(opt, idx) in 4" :key="idx">Option {{ opt }}</li>
+  <ol style="margin-left: 40px">
+    <li
+      v-for="(opt, idx) in quest.options"
+      @click="answer(idx.toString())"
+      class="option"
+    >
+      {{ opt }}
+    </li>
   </ol>
-
-  <div style="text-align: center; margin-top: 50px">
-    <button v-for="(opt, idx) in 4" :key="idx">{{ opt }}</button>
-  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { ToastSeverity } from "primevue/api";
+import { defineComponent, PropType } from "vue";
+
+import { answerQuest, QuestDetail } from "../../util/api/quest";
+
+import { route as Quests } from "./QuestOverview.vue";
 
 export default defineComponent({
   props: {
-    question: String
-  }
-})
+    quest: {
+      type: Object as PropType<QuestDetail>,
+      required: true,
+    },
+  },
+  methods: {
+    answer(answer: string) {
+      answerQuest(this.quest.id, { answer: answer }).then(
+        (data) =>
+          data.correct
+            ? this.$router.push({ path: Quests.path }).then(() =>
+                this.$toast.add({
+                  severity: ToastSeverity.SUCCESS,
+                  life: 3000,
+                  summary: "正解しました",
+                  detail: "次のクエストにチャレンジしよう！",
+                })
+              )
+            : this.$toast.add({
+                severity: ToastSeverity.WARN,
+                life: 3000,
+                summary: "不正解でした",
+                detail: "お題をよくみて、もう一度チャレンジしよう！",
+              }),
+        () =>
+          this.$toast.add({
+            severity: ToastSeverity.ERROR,
+            life: 3000,
+            summary: "もう一度試してください",
+          })
+      );
+    },
+  },
+});
 </script>
 
 <style scoped>
-button {
-  margin-left: 30px;
-  width: 50px;
-  height: 50px;
-  color: #f8f8f8;
-  background-color: #fc8c0d;
-  border-color: #fc8c0d;
-  font-size: 24px;
-}
-
-button:hover {
-  background-color: #f8f8f8;
-  color: black;
-}
-
-li {
+.option {
   font-size: 20px;
   cursor: pointer;
   margin: 1rem 0;
+  cursor: pointer;
 }
 </style>
