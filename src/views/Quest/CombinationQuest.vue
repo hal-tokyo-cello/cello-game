@@ -3,10 +3,10 @@
 
   <div style="display: flex; justify-content: space-between">
     <div>
-      <div class="question-text">
-        <div class="question-badge">Q</div>
-        <span>C2のセルにリンゴとバナナの合計を入れよう！</span>
-      </div>
+      <c-question-label
+        number="1"
+        text="C2のセルにリンゴとバナナの合計を入れよう！"
+      />
 
       <c-excel-button style="margin: 60px 0 30px" />
 
@@ -52,10 +52,12 @@
 import { defineComponent } from "vue";
 
 import CExcelButton from "../../components/ExcelDownloadButton.vue";
+import CQuestionLabel from "../../components/QuestionLabel.vue";
 
 export default defineComponent({
   components: {
     CExcelButton,
+    CQuestionLabel,
   },
 });
 </script>
@@ -86,29 +88,6 @@ h1 {
   font-size: 40px;
   color: #707070;
   margin: 70px 0 60px;
-}
-
-.question-text {
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-}
-
-.question-text span {
-  margin-left: 20px;
-  color: #545454;
-}
-
-.question-badge {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 42px;
-  height: 42px;
-  padding-bottom: 4px;
-  background-image: url(../../assets/images/question.png);
-  color: white;
 }
 
 .answer-field {

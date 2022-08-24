@@ -1,10 +1,7 @@
 <template>
   <h1 style="font-size: 2.5rem">4択問題</h1>
 
-  <span>
-    <span class="question-no">{{ quest.id }}</span>
-    <span style="margin-left: 1em">{{ quest.title }}</span>
-  </span>
+  <c-question-label :number="quest.id" :text="quest.title" />
 
   <c-excel-button style="margin: 60px 0 30px" />
 
@@ -24,10 +21,12 @@ import { defineComponent, PropType } from "vue";
 import { QuestDetail } from "../../util/api/quest";
 
 import CExcelButton from "../../components/ExcelDownloadButton.vue";
+import CQuestionLabel from "../../components/QuestionLabel.vue";
 
 export default defineComponent({
   components: {
     CExcelButton,
+    CQuestionLabel,
   },
   props: {
     quest: {
