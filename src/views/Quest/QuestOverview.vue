@@ -1,12 +1,17 @@
 <template>
   <div class="wrapper">
-    <div v-for="(quest, idx) in quests" :key="idx" @click="onSelectQuest(quest)" class="quest-card">
+    <div
+      v-for="(quest, idx) in quests"
+      :key="idx"
+      @click="selectedQuest = quest"
+      class="quest-card"
+    >
       <div class="title-box">
         <h4 class="title">{{ quest.title }}</h4>
       </div>
       <div class="title-decoration" />
 
-      <p class="genre">{{ quest.genre }}</p>
+      <p class="genre">{{ genreText[quest.genre] }}</p>
 
       <span class="point-badge">
         {{ quest.experience }}
@@ -14,41 +19,80 @@
     </div>
   </div>
 
-  <c-confirm-dialog v-model="dialog" :quest="selectedQuest" @cancel="closeDialog"
-    @confirm="$router.push({ path: `/quests/` + selectedQuest.id })" />
+  <p-dialog
+    modal
+    dismissable-mask
+    close-on-escape
+    :draggable="false"
+    :visible="!!selectedQuest"
+    style="min-width: 620px; text-align: center"
+  >
+    <template #header>
+      <p class="title">{{ selectedQuest?.title }}</p>
+    </template>
+
+    <div>
+      <p class="genre">{{ selectedQuest?.genre }}</p>
+      <p class="experience">{{ selectedQuest?.experience }}</p>
+    </div>
+
+    <template #footer>
+      <div class="actions" style="text-align: center">
+        <p-button label="キャンセル" @click="selectedQuest = undefined" />
+        <p-button
+          label="解答へ"
+          autofocus
+          @click="!!selectedQuest && $router.push(questRoute)"
+        />
+      </div>
+    </template>
+  </p-dialog>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { RouteRecordRaw } from "vue-router";
+import { RouteLocationRaw, RouteRecordRaw } from "vue-router";
 
-import { getQuestSummaryList, QuestSummary } from "../../util/api/quest";
+import {
+  getQuestSummaryList,
+  QuestSummary,
+  genreText,
+} from "../../util/api/quest";
 
-import CConfirmDialog from "../../components/QuestConfirmDialog.vue";
+import PButton from "primevue/button";
+import PDialog from "primevue/dialog";
+
+import { questRouteParam, route as Quest } from "./Quest.vue";
 
 const component = defineComponent({
   components: {
-    CConfirmDialog,
+    PButton,
+    PDialog,
   },
   data: () => ({
+    genreText,
     quests: [] as QuestSummary[],
-    dialog: false,
-    selectedQuest: {} as QuestSummary
+    selectedQuest: undefined as QuestSummary | undefined,
   }),
-  methods: {
-    closeDialog() { this.dialog = false },
-    onSelectQuest(quest: QuestSummary) {
-      this.selectedQuest = quest
-      this.dialog = true
-    }
+  computed: {
+    questRoute(): RouteLocationRaw {
+      return {
+        name: Quest.name,
+        params: {
+          [questRouteParam]: this.selectedQuest?.id,
+        },
+      };
+    },
   },
   mounted() {
-    getQuestSummaryList().then(data => { this.quests = data.quests }).catch(error => console.log(error))
+    getQuestSummaryList().then((data) => {
+      this.quests = data.quests;
+    });
   },
 });
 
-export const route: RouteRecordRaw = { path: "/quests", component }
-export default component
+export const route: RouteRecordRaw = { path: "/quests", component };
+export default component;
 </script>
 
 <style scoped>
@@ -59,7 +103,7 @@ export default component
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: space-between;
-  gap: 40px
+  gap: 40px;
 }
 
 .quest-card {
@@ -118,5 +162,52 @@ export default component
   font: normal normal bold 16px/27px "Tsukushi A Round Gothic";
   letter-spacing: 0px;
   color: white;
+}
+
+.title,
+.genre,
+.experience {
+  font-weight: bold;
+}
+
+.title {
+  flex: 1 1;
+  font-size: 21px;
+  line-height: 25px;
+  color: #ff8c00;
+}
+
+.genre {
+  font-size: 12px;
+  line-height: 14px;
+  color: #666666;
+}
+
+.genre::before {
+  content: "ジャンル：";
+}
+
+.experience {
+  margin: 0;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  color: #666666;
+}
+
+.experience::before {
+  content: "🅿︎";
+}
+
+.actions button {
+  width: 150px;
+  height: 52px;
+  margin: 0;
+  cursor: pointer;
+  margin-right: 40px;
+}
+
+.actions button:last-of-type {
+  margin-right: 0;
 }
 </style>

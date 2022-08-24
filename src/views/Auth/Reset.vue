@@ -65,6 +65,12 @@ import CFormLayout from "../../layout/Form.vue";
 import { route as SignIn } from "./Signin.vue";
 import { route as Forget } from "./Forget.vue";
 
+/**
+ * Name of query param for password reset request id.
+ * Expecting "/auth/resetpassword?requestId=e0111f64-9e36-4601-b708-c2099b2499b9".
+ */
+const requestIdRouteQuery = "requestId";
+
 const component = defineComponent({
   components: {
     CFormLayout,
@@ -126,7 +132,7 @@ const component = defineComponent({
     },
   },
   mounted() {
-    if (typeof this.$route.query.requestId !== "string") {
+    if (typeof this.$route.query[requestIdRouteQuery] !== "string") {
       this.$toast.add({
         severity: ToastSeverity.ERROR,
         life: 5000,
@@ -134,7 +140,7 @@ const component = defineComponent({
         detail: "パスワードリセット用メールからやり直してください。",
       });
     } else {
-      this.request = this.$route.query.requestId;
+      this.request = this.$route.query[requestIdRouteQuery];
     }
   },
 });
