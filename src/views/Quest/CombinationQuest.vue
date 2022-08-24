@@ -8,10 +8,7 @@
         <span>C2のセルにリンゴとバナナの合計を入れよう！</span>
       </div>
 
-      <button class="excel-download">
-        <span class="icon">＋</span>
-        <span>ファイルダウンロード</span>
-      </button>
+      <c-excel-button style="margin: 60px 0 30px" />
 
       <div class="answer-field">
         <div class="answer-box red"></div>
@@ -31,7 +28,7 @@
         <div class="answer-box yellow"></div>
       </div>
 
-      <button class="answer">解答する</button>
+      <button class="answer button">解答する</button>
     </div>
 
     <div class="option-field">
@@ -44,8 +41,8 @@
       <div class="answer-box symbol">×</div>
       <div class="answer-box symbol">＝</div>
       <div class="button-bar">
-        <button class="clear">全て消す</button>
-        <button class="backspace">←</button>
+        <button class="clear button">全て消す</button>
+        <button class="backspace button">←</button>
       </div>
     </div>
   </div>
@@ -54,11 +51,17 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-export default defineComponent({});
+import CExcelButton from "../../components/ExcelDownloadButton.vue";
+
+export default defineComponent({
+  components: {
+    CExcelButton,
+  },
+});
 </script>
 
 <style scoped>
-button {
+.button {
   font-size: 16px;
   color: white;
   width: 80px;
@@ -68,7 +71,7 @@ button {
   position: relative;
 }
 
-button:hover::before {
+.button:hover::before {
   content: "";
   position: absolute;
   top: -1%;
@@ -94,21 +97,6 @@ h1 {
 .question-text span {
   margin-left: 20px;
   color: #545454;
-}
-
-.excel-download {
-  background-color: #107c10;
-  width: 220px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 60px 0 30px;
-}
-
-.excel-download .icon {
-  margin-right: 8px;
-  font-size: 30px;
 }
 
 .question-badge {

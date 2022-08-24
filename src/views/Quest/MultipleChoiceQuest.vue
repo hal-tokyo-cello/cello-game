@@ -6,6 +6,8 @@
     <span style="margin-left: 1em">{{ quest.title }}</span>
   </span>
 
+  <c-excel-button style="margin: 60px 0 30px" />
+
   <ol style="margin-left: 40px">
     <li v-for="(opt, idx) in quest.options" :key="idx" class="selectable">
       {{ opt }}
@@ -21,7 +23,12 @@
 import { defineComponent, PropType } from "vue";
 import { QuestDetail } from "../../util/api/quest";
 
+import CExcelButton from "../../components/ExcelDownloadButton.vue";
+
 export default defineComponent({
+  components: {
+    CExcelButton,
+  },
   props: {
     quest: {
       type: Object as PropType<QuestDetail>,
