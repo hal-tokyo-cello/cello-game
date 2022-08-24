@@ -42,10 +42,7 @@
         <p-button
           label="解答へ"
           autofocus
-          @click="
-            !!selectedQuest &&
-              $router.push({ path: `/quests/` + selectedQuest.id })
-          "
+          @click="!!selectedQuest && $router.push(questRoute)"
         />
       </div>
     </template>
@@ -54,12 +51,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { RouteRecordRaw } from "vue-router";
+import { RouteLocationRaw, RouteRecordRaw } from "vue-router";
 
 import { getQuestSummaryList, QuestSummary } from "../../util/api/quest";
 
 import PButton from "primevue/button";
 import PDialog from "primevue/dialog";
+
+import { questRouteParam, route as Quest } from "./Quest.vue";
 
 const component = defineComponent({
   components: {
@@ -70,6 +69,16 @@ const component = defineComponent({
     quests: [] as QuestSummary[],
     selectedQuest: undefined as QuestSummary | undefined,
   }),
+  computed: {
+    questRoute(): RouteLocationRaw {
+      return {
+        name: Quest.name,
+        params: {
+          [questRouteParam]: this.selectedQuest?.id,
+        },
+      };
+    },
+  },
   mounted() {
     getQuestSummaryList().then((data) => {
       this.quests = data.quests;
