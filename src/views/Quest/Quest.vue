@@ -7,7 +7,7 @@
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
-import { getQuest, QuestSummary } from "../../util/api/quest";
+import { getQuest, QuestDetail } from "../../util/api/quest";
 
 import Combine from "./CombinationQuest.vue";
 import Multiple from "./MultipleChoiceQuest.vue";
@@ -23,7 +23,7 @@ const component = defineComponent({
     Multiple,
   },
   data: () => ({
-    quest: {} as QuestSummary,
+    quest: {} as QuestDetail,
   }),
   computed: {
     component() {

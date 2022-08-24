@@ -8,6 +8,10 @@ export interface QuestSummary {
   cleared: boolean;
 }
 
+export interface QuestDetail extends QuestSummary {
+  options: string[];
+}
+
 export const genreText: Record<string, string> = {
   MUL: "４択問題",
   COM: "組み合わせ問題",
@@ -17,4 +21,4 @@ export const getQuestSummaryList = () =>
   accessApi<{}, { quests: QuestSummary[] }>("quests");
 
 export const getQuest = (quest: string) =>
-  accessApi<{}, { quest: QuestSummary }>(`quests/${quest}`);
+  accessApi<{}, { quest: QuestDetail }>(`quests/${quest}`);
