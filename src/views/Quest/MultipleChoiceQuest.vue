@@ -6,8 +6,10 @@
     <span style="margin-left: 1em">{{ quest.title }}</span>
   </span>
 
-  <ol>
-    <li v-for="(opt, idx) in 4" :key="idx">Option {{ opt }}</li>
+  <ol style="margin-left: 40px">
+    <li v-for="(opt, idx) in quest.options" :key="idx" class="selectable">
+      {{ opt }}
+    </li>
   </ol>
 
   <div style="text-align: center; margin-top: 50px">
@@ -61,5 +63,9 @@ li {
 }
 .question-no::before {
   content: "Q";
+}
+
+.selectable {
+  cursor: pointer;
 }
 </style>
