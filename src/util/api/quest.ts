@@ -15,3 +15,6 @@ export const genreText: Record<string, string> = {
 
 export const getQuestSummaryList = () =>
   accessApi<{}, { quests: QuestSummary[] }>("quests");
+
+export const getQuest = (quest: string) =>
+  accessApi<{}, { quest: QuestSummary }>(`quests/${quest}`);
