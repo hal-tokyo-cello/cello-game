@@ -2,8 +2,8 @@
   <h1 style="font-size: 2.5rem">4択問題</h1>
 
   <span>
-    <span style="font-size: 18px">Q1</span>
-    <span>{{ question }}</span>
+    <span class="question-no">{{ quest.id }}</span>
+    <span style="margin-left: 1em">{{ quest.title }}</span>
   </span>
 
   <ol>
@@ -49,5 +49,17 @@ li {
   font-size: 20px;
   cursor: pointer;
   margin: 1rem 0;
+}
+
+.question-no {
+  padding: 8px;
+  padding-top: 3px;
+  color: white;
+  font-size: 18px;
+  background: center no-repeat url("../../assets/images/question.png");
+  background-size: contain;
+}
+.question-no::before {
+  content: "Q";
 }
 </style>
