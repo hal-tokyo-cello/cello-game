@@ -16,13 +16,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+import { QuestDetail } from "../../util/api/quest";
 
 export default defineComponent({
   props: {
-    question: String
-  }
-})
+    quest: {
+      type: Object as PropType<QuestDetail>,
+      required: true,
+    },
+  },
+});
 </script>
 
 <style scoped>
