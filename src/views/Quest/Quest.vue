@@ -1,6 +1,6 @@
 <template>
   <template v-if="!!quest">
-    <h1 class="quest-genre-text">{{ questGenreText }}</h1>
+    <h1 class="quest-genre-text">{{ questGenre[quest.genre].text }}</h1>
 
     <div class="question">
       <div class="question-badge">{{ quest.id }}</div>
@@ -11,14 +11,14 @@
       <span>ファイルダウンロード</span>
     </button>
 
-    <component v-if="!!component" :is="component" :quest="quest" />
+    <component :is="questGenre[quest.genre].component" :quest="quest" />
   </template>
 
   <p v-else style="text-align: center">このクエストよくわからん。。。</p>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { Component, defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
 import { getQuest, QuestDetail } from "../../util/api/quest";
@@ -31,36 +31,26 @@ import Multiple from "./MultipleChoiceQuest.vue";
  */
 export const questRouteParam = "quest";
 
+const questGenre: Record<string, { text: string; component: Component }> = {
+  COM: {
+    text: "組み合わせ問題",
+    component: Combine,
+  },
+  MUL: {
+    text: "4択問題",
+    component: Multiple,
+  },
+};
+
 const component = defineComponent({
   components: {
     Combine,
     Multiple,
   },
   data: () => ({
+    questGenre,
     quest: undefined as QuestDetail | undefined,
   }),
-  computed: {
-    questGenreText() {
-      switch (this.quest?.genre) {
-        case "COM":
-          return "組み合わせ問題";
-        case "MUL":
-          return "4択問題";
-        default:
-          return undefined;
-      }
-    },
-    component() {
-      switch (this.quest?.genre) {
-        case "COM":
-          return Combine;
-        case "MUL":
-          return Multiple;
-        default:
-          return undefined;
-      }
-    },
-  },
   mounted() {
     const questId = this.$route.params[questRouteParam] as string;
     if (typeof questId === "string") {
