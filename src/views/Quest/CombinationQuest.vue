@@ -1,40 +1,38 @@
 <template>
-  <div style="display: flex; justify-content: space-between">
-    <div>
-      <div class="answer-field">
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-      </div>
-
-      <button class="answer button">解答する</button>
+  <div>
+    <div class="answer-field">
+      <div class="answer-box red"></div>
+      <div class="answer-box yellow"></div>
+      <div class="answer-box red"></div>
+      <div class="answer-box yellow"></div>
+      <div class="answer-box red"></div>
+      <div class="answer-box yellow"></div>
+      <div class="answer-box red"></div>
+      <div class="answer-box yellow"></div>
+      <div class="answer-box red"></div>
+      <div class="answer-box yellow"></div>
+      <div class="answer-box red"></div>
+      <div class="answer-box yellow"></div>
+      <div class="answer-box yellow"></div>
+      <div class="answer-box red"></div>
+      <div class="answer-box yellow"></div>
     </div>
 
-    <div class="option-field">
-      <div class="answer-box red">A2</div>
-      <div class="answer-box red">B2</div>
-      <div class="answer-box red">C2</div>
-      <div class="answer-box red">D2</div>
-      <div class="answer-box symbol">＋</div>
-      <div class="answer-box symbol">−</div>
-      <div class="answer-box symbol">×</div>
-      <div class="answer-box symbol">＝</div>
-      <div class="button-bar">
-        <button class="clear button">全て消す</button>
-        <button class="backspace button">←</button>
-      </div>
+    <button class="answer button">解答する</button>
+  </div>
+
+  <div class="option-field">
+    <div class="answer-box red">A2</div>
+    <div class="answer-box red">B2</div>
+    <div class="answer-box red">C2</div>
+    <div class="answer-box red">D2</div>
+    <div class="answer-box symbol">＋</div>
+    <div class="answer-box symbol">−</div>
+    <div class="answer-box symbol">×</div>
+    <div class="answer-box symbol">＝</div>
+    <div class="button-bar">
+      <button class="clear button">全て消す</button>
+      <button class="backspace button">←</button>
     </div>
   </div>
 </template>
@@ -111,6 +109,9 @@ export default defineComponent({});
 }
 
 .option-field {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   width: 360px;
   height: 360px;
   background-color: white;

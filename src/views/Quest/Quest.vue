@@ -1,5 +1,5 @@
 <template>
-  <template v-if="!!quest">
+  <div v-if="!!quest" style="position: relative">
     <h1 class="quest-genre-text">{{ questGenreText }}</h1>
 
     <div class="question">
@@ -12,7 +12,7 @@
     </button>
 
     <component v-if="!!component" :is="component" :quest="quest" />
-  </template>
+  </div>
 
   <p v-else style="text-align: center">このクエストよくわからん。。。</p>
 </template>
