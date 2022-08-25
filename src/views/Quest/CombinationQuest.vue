@@ -45,7 +45,7 @@
         @click="startRemoving"
         @dragstart="startRemoving"
       >
-        ←
+        <i class="pi pi-trash" />
       </button>
     </div>
   </div>
@@ -79,6 +79,10 @@ export default defineComponent({
     moving: undefined as string | "remove" | undefined,
   }),
   methods: {
+    resetAnswers() {
+      this.options = [...this.quest.options];
+      this.answers = this.quest.options.map(() => "");
+    },
     removeAnswer(idx: number) {
       if (this.answers[idx] === "") {
         return;
@@ -86,10 +90,6 @@ export default defineComponent({
 
       this.options = [...this.options, this.answers[idx]];
       this.answers[idx] = "";
-    },
-    resetAnswers() {
-      this.options = [...this.quest.options];
-      this.answers = this.quest.options.map(() => "");
     },
     startAnswering(idx: number) {
       this.moving = this.options[idx];
