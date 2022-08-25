@@ -10,7 +10,7 @@
         @drop="endMoving(idx)"
         @dragover.prevent="() => {}"
         class="answer-box"
-        :class="{ red: ans === '', yellow: ans !== '' }"
+        :class="{ red: ans === '', yellow: ans !== '', draggable: ans !== '' }"
       >
         {{ ans }}
       </div>
@@ -32,14 +32,14 @@
       draggable="true"
       @click="startAnswering(idx)"
       @dragstart="startAnswering(idx)"
-      class="clickable answer-box yellow"
+      class="draggable answer-box yellow"
     >
       {{ opt }}
     </div>
     <div class="button-bar">
       <button class="clear button" @click="resetAnswers">全て消す</button>
       <button
-        class="backspace button"
+        class="draggable backspace button"
         draggable="true"
         @click="startRemoving"
         @dragstart="startRemoving"
@@ -146,19 +146,12 @@ export default defineComponent({
   position: relative;
 }
 
-.button:hover::before {
-  content: "";
-  position: absolute;
-  top: -1%;
-  left: -1%;
-  width: 102%;
-  height: 102%;
-  background: hsl(0, 0%, 75%);
-  mix-blend-mode: hard-light;
+.button:hover {
+  opacity: 0.7;
 }
 
-.clickable:hover {
-  cursor: pointer;
+.draggable:hover {
+  cursor: grab;
 }
 
 .answer-field {
