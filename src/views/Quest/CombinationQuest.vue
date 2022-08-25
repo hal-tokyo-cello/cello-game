@@ -1,35 +1,18 @@
 <template>
   <div>
     <div class="answer-field">
-      <div class="answer-box red"></div>
-      <div class="answer-box yellow"></div>
-      <div class="answer-box red"></div>
-      <div class="answer-box yellow"></div>
-      <div class="answer-box red"></div>
-      <div class="answer-box yellow"></div>
-      <div class="answer-box red"></div>
-      <div class="answer-box yellow"></div>
-      <div class="answer-box red"></div>
-      <div class="answer-box yellow"></div>
-      <div class="answer-box red"></div>
-      <div class="answer-box yellow"></div>
-      <div class="answer-box yellow"></div>
-      <div class="answer-box red"></div>
-      <div class="answer-box yellow"></div>
+      <div v-for="ans in answers" class="answer-box red">
+        {{ ans }}
+      </div>
     </div>
 
     <button class="answer button">解答する</button>
   </div>
 
   <div class="option-field">
-    <div class="answer-box red">A2</div>
-    <div class="answer-box red">B2</div>
-    <div class="answer-box red">C2</div>
-    <div class="answer-box red">D2</div>
-    <div class="answer-box symbol">＋</div>
-    <div class="answer-box symbol">−</div>
-    <div class="answer-box symbol">×</div>
-    <div class="answer-box symbol">＝</div>
+    <div v-for="opt in quest.options" class="answer-box yellow">
+      {{ opt }}
+    </div>
     <div class="button-bar">
       <button class="clear button">全て消す</button>
       <button class="backspace button">←</button>
@@ -38,9 +21,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+import { QuestDetail } from "../../util/api/quest";
 
-export default defineComponent({});
+export default defineComponent({
+  props: {
+    quest: {
+      type: Object as PropType<QuestDetail>,
+      required: true,
+    },
+  },
+  data: () => ({
+    answers: [] as string[],
+  }),
+  mounted() {
+    this.answers = this.quest.options.map(() => "");
+  },
+});
 </script>
 
 <style scoped>
