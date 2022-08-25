@@ -72,7 +72,7 @@ export default defineComponent({
     /**
      * Index of the answer field block when moving.
      */
-    movingFrom: undefined as number | undefined,
+    movingFrom: undefined as number | "option" | undefined,
     /**
      * The concrete value of the option.
      */
@@ -88,6 +88,7 @@ export default defineComponent({
     },
     startAnswering(idx: number) {
       this.moving = this.options[idx];
+      this.movingFrom = "option";
     },
     startRemoving() {
       this.moving = "remove";
@@ -103,12 +104,16 @@ export default defineComponent({
 
       if (this.moving === "remove") {
         this.removeAnswer(idx);
-      } else if (this.movingFrom != undefined) {
+      } else if (typeof this.movingFrom === "number") {
         // moving within answer field
         this.answers[this.movingFrom] = this.answers[idx];
         this.answers[idx] = this.moving;
-      } else {
+      } else if (this.movingFrom === "option") {
         // moving from option field
+        if (this.answers[idx] != "") {
+          this.options = [...this.options, this.answers[idx]];
+        }
+
         this.answers[idx] = this.moving;
         this.options.splice(
           this.options.findIndex((opt) => opt === this.moving),
