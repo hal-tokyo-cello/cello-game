@@ -68,6 +68,13 @@ export default defineComponent({
   },
   data: () => ({
     answers: [] as string[],
+    /**
+     * Index of the answer field block when moving.
+     */
+    movingFrom: undefined as number | undefined,
+    /**
+     * The concrete value of the option.
+     */
     moving: undefined as string | "remove" | undefined,
   }),
   methods: {
@@ -88,6 +95,7 @@ export default defineComponent({
     },
     startMovingAnswer(idx: number) {
       this.moving = this.answers[idx];
+      this.movingFrom = idx;
     },
     endMoving(idx: number) {
       if (this.moving == undefined) {
@@ -96,14 +104,21 @@ export default defineComponent({
 
       if (this.moving === "remove") {
         this.removeAnswer(idx);
+      } else if (this.movingFrom != undefined) {
+        // moving within answer field
+        this.answers[this.movingFrom] = this.answers[idx];
+        this.answers[idx] = this.moving;
       } else {
+        // moving from option field
         this.answers[idx] = this.moving;
         this.quest.options.splice(
           this.quest.options.findIndex((opt) => opt === this.moving),
           1
         );
-        this.moving = undefined;
       }
+
+      this.moving = undefined;
+      this.movingFrom = undefined;
     },
     generalDragOver(ev: DragEvent) {
       if (ev.dataTransfer) {
