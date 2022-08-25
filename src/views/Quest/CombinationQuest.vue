@@ -14,7 +14,14 @@
       </div>
     </div>
 
-    <button class="answer button">解答する</button>
+    <button
+      class="answer button"
+      @click="
+        $emit('submitAnswer', answers.filter((ans) => ans != '').join('|'))
+      "
+    >
+      解答する
+    </button>
   </div>
 
   <div class="option-field">
@@ -43,9 +50,13 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+
 import { QuestDetail } from "../../util/api/quest";
 
 export default defineComponent({
+  emits: {
+    submitAnswer: (answer: string) => true,
+  },
   props: {
     quest: {
       type: Object as PropType<QuestDetail>,

@@ -19,22 +19,29 @@
       />
     </a>
 
-    <component v-if="!!component" :is="component" :quest="quest" />
+    <component
+      v-if="!!component"
+      :is="component"
+      :quest="quest"
+      @submitAnswer="submitAnswer"
+    />
   </div>
 
   <p v-else style="text-align: center">このクエストよくわからん。。。</p>
 </template>
 
 <script lang="ts">
+import { ToastSeverity } from "primevue/api";
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
-import { getQuest, QuestDetail } from "../../util/api/quest";
+import { answerQuest, getQuest, QuestDetail } from "../../util/api/quest";
 
 import PButton from "primevue/button";
 
 import Combine from "./CombinationQuest.vue";
 import Multiple from "./MultipleChoiceQuest.vue";
+import { route as Quests } from "./QuestOverview.vue";
 
 /**
  * Name of route param for quest id.
@@ -66,6 +73,38 @@ const component = defineComponent({
     },
     component() {
       return !!this.quest && questGenreComponent[this.quest.genre];
+    },
+  },
+  methods: {
+    submitAnswer(answer: string) {
+      if (!this.quest) {
+        return;
+      }
+
+      answerQuest(this.quest.id, { answer: answer }).then(
+        (data) =>
+          data.correct
+            ? this.$router.push({ path: Quests.path }).then(() =>
+                this.$toast.add({
+                  severity: ToastSeverity.SUCCESS,
+                  life: 3000,
+                  summary: "正解しました",
+                  detail: "次のクエストにチャレンジしよう！",
+                })
+              )
+            : this.$toast.add({
+                severity: ToastSeverity.WARN,
+                life: 3000,
+                summary: "不正解でした",
+                detail: "お題をよくみて、もう一度チャレンジしよう！",
+              }),
+        () =>
+          this.$toast.add({
+            severity: ToastSeverity.ERROR,
+            life: 3000,
+            summary: "もう一度試してください",
+          })
+      );
     },
   },
   mounted() {
