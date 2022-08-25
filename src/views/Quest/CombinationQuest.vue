@@ -4,9 +4,9 @@
       <div
         v-for="(ans, idx) in answers"
         dropzone="true"
-        @click="endMovingAnswer(idx)"
+        @click="endMoving(idx)"
+        @drop="endMoving(idx)"
         @dragover.prevent="generalDragOver"
-        @drop="endMovingAnswer(idx)"
         class="answer-box"
         :class="{ red: ans === '', yellow: ans !== '' }"
       >
@@ -21,15 +21,22 @@
     <div
       v-for="(opt, idx) in quest.options"
       draggable="true"
-      @click="startMovingAnswer(idx)"
-      @dragstart="startMovingAnswer(idx)"
+      @click="startAnswering(idx)"
+      @dragstart="startAnswering(idx)"
       class="clickable answer-box yellow"
     >
       {{ opt }}
     </div>
     <div class="button-bar">
       <button class="clear button" @click="resetAnswers">全て消す</button>
-      <button class="backspace button">←</button>
+      <button
+        class="backspace button"
+        draggable="true"
+        @click="startRemoving"
+        @dragstart="startRemoving"
+      >
+        ←
+      </button>
     </div>
   </div>
 </template>
@@ -47,21 +54,29 @@ export default defineComponent({
   },
   data: () => ({
     answers: [] as string[],
-    moving: undefined as number | undefined,
+    moving: undefined as number | "remove" | undefined,
   }),
   methods: {
     resetAnswers() {
       this.answers = this.quest.options.map(() => "");
     },
-    startMovingAnswer(idx: number) {
+    startAnswering(idx: number) {
       this.moving = idx;
     },
-    endMovingAnswer(idx: number) {
+    startRemoving() {
+      this.moving = "remove";
+    },
+    endMoving(idx: number) {
       if (this.moving == undefined) {
         return;
       }
-      this.answers[idx] = this.quest.options[this.moving];
-      this.moving = undefined;
+
+      if (this.moving === "remove") {
+        this.answers[idx] = "";
+      } else {
+        this.answers[idx] = this.quest.options[this.moving];
+        this.moving = undefined;
+      }
     },
     generalDragOver(ev: DragEvent) {
       if (ev.dataTransfer) {
