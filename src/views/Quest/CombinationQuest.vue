@@ -3,7 +3,10 @@
     <div class="answer-field">
       <div
         v-for="(ans, idx) in answers"
+        draggable="true"
         dropzone="true"
+        @dragstart="startMovingAnswer(idx)"
+        @dragend="removeAnswer(idx)"
         @click="endMoving(idx)"
         @drop="endMoving(idx)"
         @dragover.prevent="generalDragOver"
@@ -65,17 +68,23 @@ export default defineComponent({
   },
   data: () => ({
     answers: [] as string[],
-    moving: undefined as number | "remove" | undefined,
+    moving: undefined as string | "remove" | undefined,
   }),
   methods: {
+    removeAnswer(idx: number) {
+      this.answers[idx] = "";
+    },
     resetAnswers() {
       this.answers = this.quest.options.map(() => "");
     },
     startAnswering(idx: number) {
-      this.moving = idx;
+      this.moving = this.quest.options[idx];
     },
     startRemoving() {
       this.moving = "remove";
+    },
+    startMovingAnswer(idx: number) {
+      this.moving = this.answers[idx];
     },
     endMoving(idx: number) {
       if (this.moving == undefined) {
@@ -83,9 +92,9 @@ export default defineComponent({
       }
 
       if (this.moving === "remove") {
-        this.answers[idx] = "";
+        this.removeAnswer(idx);
       } else {
-        this.answers[idx] = this.quest.options[this.moving];
+        this.answers[idx] = this.moving;
         this.moving = undefined;
       }
     },
