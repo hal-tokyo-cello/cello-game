@@ -6,6 +6,7 @@
         draggable="true"
         dropzone="true"
         @dragstart="startMovingAnswer(idx)"
+        @dragend="(ev) => discardAnswer(ev, idx)"
         @click="endMoving(idx)"
         @drop="endMoving(idx)"
         @dragover.prevent="() => {}"
@@ -127,6 +128,13 @@ export default defineComponent({
 
       this.moving = undefined;
       this.movingFrom = undefined;
+    },
+    discardAnswer(ev: DragEvent, idx: number) {
+      if (this.answers[idx] === "" || ev.dataTransfer?.dropEffect !== "none") {
+        return;
+      }
+
+      this.removeAnswer(idx);
     },
   },
   mounted() {
