@@ -1,7 +1,15 @@
 <template>
   <div>
     <div class="answer-field">
-      <div v-for="ans in answers" class="answer-box red">
+      <div
+        v-for="(ans, idx) in answers"
+        dropzone="true"
+        @click="endMovingAnswer(idx)"
+        @dragover.prevent="generalDragOver"
+        @drop="endMovingAnswer(idx)"
+        class="answer-box"
+        :class="{ red: ans === '', yellow: ans !== '' }"
+      >
         {{ ans }}
       </div>
     </div>
@@ -10,7 +18,13 @@
   </div>
 
   <div class="option-field">
-    <div v-for="opt in quest.options" class="answer-box yellow">
+    <div
+      v-for="(opt, idx) in quest.options"
+      draggable="true"
+      @click="startMovingAnswer(idx)"
+      @dragstart="startMovingAnswer(idx)"
+      class="clickable answer-box yellow"
+    >
       {{ opt }}
     </div>
     <div class="button-bar">
@@ -33,7 +47,25 @@ export default defineComponent({
   },
   data: () => ({
     answers: [] as string[],
+    moving: undefined as number | undefined,
   }),
+  methods: {
+    startMovingAnswer(idx: number) {
+      this.moving = idx;
+    },
+    endMovingAnswer(idx: number) {
+      if (this.moving == undefined) {
+        return;
+      }
+      this.answers[idx] = this.quest.options[this.moving];
+      this.moving = undefined;
+    },
+    generalDragOver(ev: DragEvent) {
+      if (ev.dataTransfer) {
+        ev.dataTransfer.dropEffect = "copy";
+      }
+    },
+  },
   mounted() {
     this.answers = this.quest.options.map(() => "");
   },
@@ -60,6 +92,10 @@ export default defineComponent({
   height: 102%;
   background: hsl(0, 0%, 75%);
   mix-blend-mode: hard-light;
+}
+
+.clickable:hover {
+  cursor: pointer;
 }
 
 .answer-field {
