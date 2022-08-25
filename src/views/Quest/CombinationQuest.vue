@@ -28,7 +28,7 @@
       {{ opt }}
     </div>
     <div class="button-bar">
-      <button class="clear button">全て消す</button>
+      <button class="clear button" @click="resetAnswers">全て消す</button>
       <button class="backspace button">←</button>
     </div>
   </div>
@@ -50,6 +50,9 @@ export default defineComponent({
     moving: undefined as number | undefined,
   }),
   methods: {
+    resetAnswers() {
+      this.answers = this.quest.options.map(() => "");
+    },
     startMovingAnswer(idx: number) {
       this.moving = idx;
     },
@@ -67,7 +70,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.answers = this.quest.options.map(() => "");
+    this.resetAnswers();
   },
 });
 </script>
