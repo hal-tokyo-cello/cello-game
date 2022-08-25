@@ -1,48 +1,146 @@
 <template>
-  <div style="display: flex; justify-content: space-between">
-    <div>
-      <div class="answer-field">
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box yellow"></div>
-        <div class="answer-box red"></div>
-        <div class="answer-box yellow"></div>
+  <div>
+    <div class="answer-field">
+      <div
+        v-for="(ans, idx) in answers"
+        draggable="true"
+        dropzone="true"
+        @dragstart="startMovingAnswer(idx)"
+        @dragend="(ev) => discardAnswer(ev, idx)"
+        @click="endMoving(idx)"
+        @drop="endMoving(idx)"
+        @dragover.prevent="() => {}"
+        class="answer-box"
+        :class="{ red: ans === '', yellow: ans !== '', draggable: ans !== '' }"
+      >
+        {{ ans }}
       </div>
-
-      <button class="answer button">解答する</button>
     </div>
 
-    <div class="option-field">
-      <div class="answer-box red">A2</div>
-      <div class="answer-box red">B2</div>
-      <div class="answer-box red">C2</div>
-      <div class="answer-box red">D2</div>
-      <div class="answer-box symbol">＋</div>
-      <div class="answer-box symbol">−</div>
-      <div class="answer-box symbol">×</div>
-      <div class="answer-box symbol">＝</div>
-      <div class="button-bar">
-        <button class="clear button">全て消す</button>
-        <button class="backspace button">←</button>
-      </div>
+    <button
+      class="answer button"
+      @click="
+        $emit('submitAnswer', answers.filter((ans) => ans != '').join('|'))
+      "
+    >
+      解答する
+    </button>
+  </div>
+
+  <div class="option-field">
+    <div
+      v-for="(opt, idx) in options"
+      draggable="true"
+      @click="startAnswering(idx)"
+      @dragstart="startAnswering(idx)"
+      class="draggable answer-box yellow"
+    >
+      {{ opt }}
+    </div>
+    <div class="button-bar">
+      <button class="clear button" @click="resetAnswers">全て消す</button>
+      <button
+        class="draggable backspace button"
+        draggable="true"
+        @click="startRemoving"
+        @dragstart="startRemoving"
+      >
+        <i class="pi pi-trash" />
+      </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
-export default defineComponent({});
+import { QuestDetail } from "../../util/api/quest";
+
+export default defineComponent({
+  emits: {
+    submitAnswer: (answer: string) => true,
+  },
+  props: {
+    quest: {
+      type: Object as PropType<QuestDetail>,
+      required: true,
+    },
+  },
+  data: () => ({
+    answers: [] as string[],
+    options: [] as string[],
+    /**
+     * Index of the answer field block when moving.
+     */
+    movingFrom: undefined as number | "option" | undefined,
+    /**
+     * The concrete value of the option.
+     */
+    moving: undefined as string | "remove" | undefined,
+  }),
+  methods: {
+    resetAnswers() {
+      this.options = [...this.quest.options];
+      this.answers = this.quest.options.map(() => "");
+    },
+    removeAnswer(idx: number) {
+      if (this.answers[idx] === "") {
+        return;
+      }
+
+      this.options = [...this.options, this.answers[idx]];
+      this.answers[idx] = "";
+    },
+    startAnswering(idx: number) {
+      this.moving = this.options[idx];
+      this.movingFrom = "option";
+    },
+    startRemoving() {
+      this.moving = "remove";
+    },
+    startMovingAnswer(idx: number) {
+      this.moving = this.answers[idx];
+      this.movingFrom = idx;
+    },
+    endMoving(idx: number) {
+      if (this.moving == undefined) {
+        return;
+      }
+
+      if (this.moving === "remove") {
+        this.removeAnswer(idx);
+      } else if (typeof this.movingFrom === "number") {
+        // moving within answer field
+        this.answers[this.movingFrom] = this.answers[idx];
+        this.answers[idx] = this.moving;
+      } else if (this.movingFrom === "option") {
+        // moving from option field
+        if (this.answers[idx] != "") {
+          this.options = [...this.options, this.answers[idx]];
+        }
+
+        this.answers[idx] = this.moving;
+        this.options.splice(
+          this.options.findIndex((opt) => opt === this.moving),
+          1
+        );
+      }
+
+      this.moving = undefined;
+      this.movingFrom = undefined;
+    },
+    discardAnswer(ev: DragEvent, idx: number) {
+      if (this.answers[idx] === "" || ev.dataTransfer?.dropEffect !== "none") {
+        return;
+      }
+
+      this.removeAnswer(idx);
+    },
+  },
+  mounted() {
+    this.resetAnswers();
+  },
+});
 </script>
 
 <style scoped>
@@ -56,15 +154,12 @@ export default defineComponent({});
   position: relative;
 }
 
-.button:hover::before {
-  content: "";
-  position: absolute;
-  top: -1%;
-  left: -1%;
-  width: 102%;
-  height: 102%;
-  background: hsl(0, 0%, 75%);
-  mix-blend-mode: hard-light;
+.button:hover {
+  opacity: 0.7;
+}
+
+.draggable:hover {
+  cursor: grab;
 }
 
 .answer-field {
@@ -111,6 +206,9 @@ export default defineComponent({});
 }
 
 .option-field {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   width: 360px;
   height: 360px;
   background-color: white;

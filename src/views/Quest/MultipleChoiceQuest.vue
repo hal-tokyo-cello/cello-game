@@ -2,7 +2,7 @@
   <ol style="margin-left: 40px">
     <li
       v-for="(opt, idx) in quest.options"
-      @click="answer(idx.toString())"
+      @click="$emit('submitAnswer', idx.toString())"
       class="option"
     >
       {{ opt }}
@@ -19,6 +19,9 @@ import { answerQuest, QuestDetail } from "../../util/api/quest";
 import { route as Quests } from "./QuestOverview.vue";
 
 export default defineComponent({
+  emits: {
+    submitAnswer: (answer: string) => true,
+  },
   props: {
     quest: {
       type: Object as PropType<QuestDetail>,
