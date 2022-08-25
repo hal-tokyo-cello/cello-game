@@ -9,7 +9,7 @@
         @dragend="removeAnswer(idx)"
         @click="endMoving(idx)"
         @drop="endMoving(idx)"
-        @dragover.prevent="generalDragOver"
+        @dragover.prevent="() => {}"
         class="answer-box"
         :class="{ red: ans === '', yellow: ans !== '' }"
       >
@@ -119,11 +119,6 @@ export default defineComponent({
 
       this.moving = undefined;
       this.movingFrom = undefined;
-    },
-    generalDragOver(ev: DragEvent) {
-      if (ev.dataTransfer) {
-        ev.dataTransfer.dropEffect = "copy";
-      }
     },
   },
   mounted() {
