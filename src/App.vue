@@ -4,7 +4,7 @@
     <router-link :to="Quests.path">
       <img src="./assets/images/cello_logo.png" class="logo" />
     </router-link>
-    <router-link :to="MyPage.path">
+    <router-link :to="MyPage.path" style="float: right">
       <p-avatar
         :image="user.avatar?.iconUrl"
         class="mr-2 avatar"
@@ -65,8 +65,6 @@ header {
   width: 100%;
   height: 80px;
   background: white;
-  display: flex;
-  justify-content: space-between;
 }
 
 main {
