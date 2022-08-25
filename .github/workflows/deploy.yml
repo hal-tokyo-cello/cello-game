@@ -2,7 +2,7 @@ name: Deploy to Azure Blob Storage
 
 on:
   push:
-    branches: ["dev"]
+    branches: ["main"]
 
 env:
   STORAGE_ACCOUNT_NAME: "th22ih4ciw4cg01celloblob"
