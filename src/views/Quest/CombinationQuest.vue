@@ -6,7 +6,6 @@
         draggable="true"
         dropzone="true"
         @dragstart="startMovingAnswer(idx)"
-        @dragend="removeAnswer(idx)"
         @click="endMoving(idx)"
         @drop="endMoving(idx)"
         @dragover.prevent="() => {}"
