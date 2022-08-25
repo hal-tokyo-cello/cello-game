@@ -75,6 +75,9 @@ export default defineComponent({
       this.answers[idx] = "";
     },
     resetAnswers() {
+      this.quest.options = this.quest.options.concat(
+        this.answers.filter((ans) => ans != "")
+      );
       this.answers = this.quest.options.map(() => "");
     },
     startAnswering(idx: number) {
@@ -95,6 +98,10 @@ export default defineComponent({
         this.removeAnswer(idx);
       } else {
         this.answers[idx] = this.moving;
+        this.quest.options.splice(
+          this.quest.options.findIndex((opt) => opt === this.moving),
+          1
+        );
         this.moving = undefined;
       }
     },
