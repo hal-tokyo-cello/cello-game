@@ -29,7 +29,7 @@
 
   <div class="option-field">
     <div
-      v-for="(opt, idx) in quest.options"
+      v-for="(opt, idx) in options"
       draggable="true"
       @click="startAnswering(idx)"
       @dragstart="startAnswering(idx)"
@@ -68,6 +68,7 @@ export default defineComponent({
   },
   data: () => ({
     answers: [] as string[],
+    options: [] as string[],
     /**
      * Index of the answer field block when moving.
      */
@@ -82,13 +83,11 @@ export default defineComponent({
       this.answers[idx] = "";
     },
     resetAnswers() {
-      this.quest.options = this.quest.options.concat(
-        this.answers.filter((ans) => ans != "")
-      );
+      this.options = [...this.quest.options];
       this.answers = this.quest.options.map(() => "");
     },
     startAnswering(idx: number) {
-      this.moving = this.quest.options[idx];
+      this.moving = this.options[idx];
     },
     startRemoving() {
       this.moving = "remove";
@@ -111,8 +110,8 @@ export default defineComponent({
       } else {
         // moving from option field
         this.answers[idx] = this.moving;
-        this.quest.options.splice(
-          this.quest.options.findIndex((opt) => opt === this.moving),
+        this.options.splice(
+          this.options.findIndex((opt) => opt === this.moving),
           1
         );
       }
