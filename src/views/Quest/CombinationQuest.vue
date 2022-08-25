@@ -79,6 +79,10 @@ export default defineComponent({
   }),
   methods: {
     removeAnswer(idx: number) {
+      if (this.answers[idx] === "") {
+        return;
+      }
+
       this.options = [...this.options, this.answers[idx]];
       this.answers[idx] = "";
     },
