@@ -80,6 +80,7 @@ export default defineComponent({
   }),
   methods: {
     removeAnswer(idx: number) {
+      this.options = [...this.options, this.answers[idx]];
       this.answers[idx] = "";
     },
     resetAnswers() {
