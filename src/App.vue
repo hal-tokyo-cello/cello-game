@@ -14,7 +14,7 @@
     </router-link>
   </header>
 
-  <main>
+  <main @update:user="reloadUser">
     <router-view />
   </main>
 
@@ -52,10 +52,15 @@ export default defineComponent({
     Quests,
     user: {} as User,
   }),
+  methods: {
+    reloadUser() {
+      getUser("1").then((data) => {
+        this.user = data.user;
+      });
+    },
+  },
   mounted() {
-    getUser("1").then((data) => {
-      this.user = data.user;
-    });
+    this.reloadUser();
   },
 });
 </script>

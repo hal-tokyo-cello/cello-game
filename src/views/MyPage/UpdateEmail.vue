@@ -42,6 +42,9 @@ const component = defineComponent({
     PButton,
     PInputText,
   },
+  emits: {
+    "update:user": (user: User) => true,
+  },
   data: () => ({
     email: "",
     attempted: false,
@@ -76,17 +79,17 @@ const component = defineComponent({
 
       updateUserEmail(this.user.accountId, { email: this.email }).then(
         () =>
-          this.leave()
+          Promise.resolve(
+            this.$emit("update:user", { ...this.user, email: this.email })
+          )
+            .then(() => this.leave())
             .then(() =>
               this.$toast.add({
                 severity: ToastSeverity.SUCCESS,
                 life: 3000,
                 summary: "メールアドレスを更新しました",
               })
-            )
-            .then(() => {
-              this.user.email = this.email;
-            }),
+            ),
         () =>
           this.$toast.add({
             severity: ToastSeverity.ERROR,

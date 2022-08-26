@@ -11,12 +11,9 @@
 </template>
 
 <script lang="ts">
-import { ToastSeverity } from "primevue/api";
 import { defineComponent, PropType } from "vue";
 
-import { answerQuest, QuestDetail } from "../../util/api/quest";
-
-import { route as Quests } from "./QuestOverview.vue";
+import { QuestDetail } from "../../util/api/quest";
 
 export default defineComponent({
   emits: {
@@ -26,34 +23,6 @@ export default defineComponent({
     quest: {
       type: Object as PropType<QuestDetail>,
       required: true,
-    },
-  },
-  methods: {
-    answer(answer: string) {
-      answerQuest(this.quest.id, { answer: answer }).then(
-        (data) =>
-          data.correct
-            ? this.$router.push({ path: Quests.path }).then(() =>
-                this.$toast.add({
-                  severity: ToastSeverity.SUCCESS,
-                  life: 3000,
-                  summary: "正解しました",
-                  detail: "次のクエストにチャレンジしよう！",
-                })
-              )
-            : this.$toast.add({
-                severity: ToastSeverity.WARN,
-                life: 3000,
-                summary: "不正解でした",
-                detail: "お題をよくみて、もう一度チャレンジしよう！",
-              }),
-        () =>
-          this.$toast.add({
-            severity: ToastSeverity.ERROR,
-            life: 3000,
-            summary: "もう一度試してください",
-          })
-      );
     },
   },
 });

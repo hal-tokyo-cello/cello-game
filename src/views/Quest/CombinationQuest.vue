@@ -6,12 +6,16 @@
         draggable="true"
         dropzone="true"
         @dragstart="startMovingAnswer(idx)"
-        @dragend="(ev) => discardAnswer(ev, idx)"
+        @dragend="(ev) => releaseAnswer(idx)(ev)"
         @click="endMoving(idx)"
         @drop="endMoving(idx)"
         @dragover.prevent="() => {}"
         class="answer-box"
-        :class="{ red: ans === '', yellow: ans !== '', draggable: ans !== '' }"
+        :class="{
+          empty: ans === '',
+          option: ans !== '',
+          draggable: ans !== '',
+        }"
       >
         {{ ans }}
       </div>
@@ -33,14 +37,14 @@
       draggable="true"
       @click="startAnswering(idx)"
       @dragstart="startAnswering(idx)"
-      class="draggable answer-box yellow"
+      class="draggable answer-box option"
     >
       {{ opt }}
     </div>
     <div class="button-bar">
       <button class="clear button" @click="resetAnswers">全て消す</button>
       <button
-        class="draggable backspace button"
+        class="draggable remove button"
         draggable="true"
         @click="startRemoving"
         @dragstart="startRemoving"
@@ -107,16 +111,18 @@ export default defineComponent({
         return;
       }
 
+      const ans = this.answers[idx];
+
       if (this.moving === "remove") {
         this.removeAnswer(idx);
       } else if (typeof this.movingFrom === "number") {
         // moving within answer field
-        this.answers[this.movingFrom] = this.answers[idx];
+        this.answers[this.movingFrom] = ans;
         this.answers[idx] = this.moving;
       } else if (this.movingFrom === "option") {
         // moving from option field
-        if (this.answers[idx] != "") {
-          this.options = [...this.options, this.answers[idx]];
+        if (ans != "") {
+          this.options = [...this.options, ans];
         }
 
         this.answers[idx] = this.moving;
@@ -129,12 +135,17 @@ export default defineComponent({
       this.moving = undefined;
       this.movingFrom = undefined;
     },
-    discardAnswer(ev: DragEvent, idx: number) {
-      if (this.answers[idx] === "" || ev.dataTransfer?.dropEffect !== "none") {
-        return;
-      }
+    releaseAnswer(idx: number) {
+      return (ev: DragEvent) => {
+        if (
+          this.answers[idx] === "" ||
+          ev.dataTransfer?.dropEffect !== "none"
+        ) {
+          return;
+        }
 
-      this.removeAnswer(idx);
+        this.removeAnswer(idx);
+      };
     },
   },
   mounted() {
@@ -180,11 +191,11 @@ export default defineComponent({
   align-items: center;
 }
 
-.answer-box.red {
+.answer-box.empty {
   border: solid 1px #ea4307;
 }
 
-.answer-box.yellow {
+.answer-box.option {
   border: solid 1px #fdb913;
 }
 
@@ -194,14 +205,14 @@ export default defineComponent({
   font-size: 30px;
 }
 
-.answer {
+.button.answer {
   width: 150px;
   height: 52px;
   background-color: #ea4307;
   margin-left: 340px;
 }
 
-.answer:hover {
+.button.answer:hover {
   background-color: #ff4400;
 }
 
@@ -226,13 +237,13 @@ export default defineComponent({
   justify-content: end;
 }
 
-.clear {
+.button.clear {
   background-color: #fdb913;
   width: 80px;
   height: 40px;
 }
 
-.backspace {
+.button.remove {
   background-color: #fdb913;
   margin-left: 10px;
   width: 40px;
