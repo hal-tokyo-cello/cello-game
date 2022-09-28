@@ -48,7 +48,7 @@ export interface ApiError {
 }
 
 export const isApiError = (value: any): value is ApiError =>
-  value.error.errors != undefined;
+  value?.error?.errors != undefined;
 
 export interface User {
   accountId: string;
