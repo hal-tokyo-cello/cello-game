@@ -16,7 +16,7 @@ export const accessApi = <T, U>(
   endPoint: string,
   body?: T,
   method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
-  headers: HeadersInit = {},
+  headers: HeadersInit = { "x-mock-response-code": "200" },
   respondValidator = (res: Response) => res.status == 200
 ) =>
   fetch(`${ServerHost}/${endPoint}`, {
