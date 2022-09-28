@@ -32,6 +32,12 @@ import { getUser, User } from "./util/api";
 import { route as MyPage } from "./views/MyPage/Mypage.vue";
 import { route as Quests } from "./views/Quest/QuestOverview.vue";
 
+import { components as AuthViews } from "./views/Auth";
+import { default as Avatar } from "./views/Avatar.vue";
+import { default as Index } from "./views/Index.vue";
+import { components as MyPageViews } from "./views/MyPage";
+import { components as QuestViews } from "./views/Quest";
+
 /**
  * Provide key to inject user across the app.
  */
@@ -41,6 +47,11 @@ export default defineComponent({
   components: {
     PAvatar,
     PToast,
+    ...AuthViews,
+    ...MyPageViews,
+    ...QuestViews,
+    Avatar,
+    Index,
   },
   provide() {
     return {
