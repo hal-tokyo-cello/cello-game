@@ -11,7 +11,7 @@
       <p v-if="isInvalidMail" class="p-error">メールアドレスではありません</p>
 
       <span class="p-float-label">
-        <p-password v-model="password" id="password" />
+        <p-password v-model="password" :feedback="false" id="password" />
         <label for="password">パスワード</label>
       </span>
       <p v-if="isEmptyPassword" class="p-error">
