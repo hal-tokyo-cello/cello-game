@@ -1,10 +1,10 @@
 <template>
   <p-toast />
   <header>
-    <router-link :to="Quests.path">
+    <router-link :to="!!user ? Quests.path : ''">
       <img src="./assets/images/cello_logo.png" class="logo" />
     </router-link>
-    <router-link :to="MyPage.path" style="float: right">
+    <router-link v-if="!!user" :to="AvatarR.path" style="float: right">
       <p-avatar
         :image="user.avatar?.iconUrl"
         class="mr-2 avatar"
@@ -14,8 +14,8 @@
     </router-link>
   </header>
 
-  <main @update:user="reloadUser">
-    <router-view />
+  <main>
+    <router-view @update:user="reloadUser" />
   </main>
 
   <footer>&copy; CELLO 2022</footer>
@@ -29,11 +29,11 @@ import PToast from "primevue/toast";
 
 import { getUser, User } from "./util/api";
 
-import { route as MyPage } from "./views/MyPage/Mypage.vue";
 import { route as Quests } from "./views/Quest/QuestOverview.vue";
 
 import { components as AuthViews } from "./views/Auth";
-import { default as Avatar } from "./views/Avatar.vue";
+import { verifiedUser } from "./views/Auth/Verification.vue";
+import { default as Avatar, route as AvatarR } from "./views/Avatar.vue";
 import { default as Index } from "./views/Index.vue";
 import { components as MyPageViews } from "./views/MyPage";
 import { components as QuestViews } from "./views/Quest";
@@ -59,19 +59,18 @@ export default defineComponent({
     };
   },
   data: () => ({
-    MyPage,
+    AvatarR,
     Quests,
-    user: {} as User,
+    user: undefined as User | undefined,
   }),
   methods: {
-    reloadUser() {
-      getUser("1").then((data) => {
-        this.user = data.user;
-      });
+    reloadUser({ accountId }: User) {
+      getUser(accountId).then((data) => (this.user = data.user));
     },
   },
-  mounted() {
-    this.reloadUser();
+  async mounted() {
+    const userId = localStorage.getItem(verifiedUser);
+    this.user = !!userId ? (await getUser(userId)).user : undefined;
   },
 });
 </script>

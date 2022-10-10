@@ -6,12 +6,14 @@
       <div class="question-badge">{{ quest.id }}</div>
       <span class="question-text">{{ quest.title }}</span>
     </div>
+
     <a
-      :href="`/quests/${quest.id}/excel`"
+      :href="quest.playground"
       :download="`クエスト${quest.id}.xlsx`"
       style="text-decoration: none"
     >
       <p-button
+        :disabled="!!quest.playground ? undefined : 'disabled'"
         label="ファイルダウンロード"
         icon="pi pi-plus"
         iconPos="left"
@@ -27,7 +29,11 @@
     />
   </div>
 
-  <p v-else style="text-align: center">このクエストよくわからん。。。</p>
+  <p v-else-if="quest === null" style="text-align: center">
+    このクエストよくわからん。。。
+  </p>
+
+  <p v-else style="text-align: center">ろーでぃんぐ中。。。</p>
 </template>
 
 <script lang="ts">
@@ -65,7 +71,7 @@ const component = defineComponent({
     Multiple,
   },
   data: () => ({
-    quest: undefined as QuestDetail | undefined,
+    quest: undefined as QuestDetail | undefined | null,
   }),
   computed: {
     questGenreText() {
@@ -108,12 +114,13 @@ const component = defineComponent({
     },
   },
   mounted() {
-    const questId = this.$route.params[questRouteParam] as string;
-    if (typeof questId === "string") {
-      getQuest(questId).then((data) => {
-        this.quest = data.quest;
-      });
-    }
+    const questId = ((val: string | string[]) =>
+      val === "string" ? val : val[0])(this.$route.params[questRouteParam]);
+
+    getQuest(questId)
+      .then((data) => (this.quest = data.quest))
+      .catch(() => (this.quest = null))
+      .then(() => console.log(this.quest?.playground ?? "no playground"));
   },
 });
 
@@ -165,7 +172,7 @@ export default component;
   border-color: #107c10;
 }
 
-.excel-download:hover {
+.excel-download:hover:enabled {
   opacity: 0.7;
 }
 </style>
