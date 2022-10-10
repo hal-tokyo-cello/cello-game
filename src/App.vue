@@ -14,8 +14,8 @@
     </router-link>
   </header>
 
-  <main @update:user="(user: User) => reloadUser(user.accountId)">
-    <router-view />
+  <main>
+    <router-view @update:user="reloadUser" />
   </main>
 
   <footer>&copy; CELLO 2022</footer>
@@ -64,8 +64,8 @@ export default defineComponent({
     user: undefined as User | undefined,
   }),
   methods: {
-    reloadUser(userId: string) {
-      getUser(userId).then((data) => (this.user = data.user));
+    reloadUser({ accountId }: User) {
+      getUser(accountId).then((data) => (this.user = data.user));
     },
   },
   async mounted() {

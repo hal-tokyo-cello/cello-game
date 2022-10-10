@@ -47,7 +47,7 @@ import validator from "validator";
 import { defineComponent } from "vue";
 import { RouteRecordRaw } from "vue-router";
 
-import { ApiError, signIn } from "../../util/api";
+import { ApiError, signIn, User } from "../../util/api";
 
 import PButton from "primevue/button";
 import PInputText from "primevue/inputtext";
@@ -57,6 +57,7 @@ import CFormLayout from "../../layout/Form.vue";
 import { route as Quests } from "../Quest/QuestOverview.vue";
 import { route as Forget } from "./Forget.vue";
 import { route as SignUp } from "./Signup.vue";
+import { verifiedUser } from "./Verification.vue";
 
 const signInErrorDetail = (code: number) => {
   switch (code) {
@@ -73,6 +74,9 @@ const component = defineComponent({
     PButton,
     PInputText,
     PPassword,
+  },
+  emits: {
+    "update:user": (user: User) => true,
   },
   data: () => ({
     SignUp,
@@ -100,17 +104,27 @@ const component = defineComponent({
         return;
       }
 
-      signIn({ email: this.mail, password: this.password }).then(
-        (data) => this.$router.push({ path: Quests.path }),
-        (error: ApiError) =>
-          this.$toast.add({
-            severity: ToastSeverity.ERROR,
-            life: 3000,
-            closable: false,
-            summary: "サインインできません",
-            detail: signInErrorDetail(error.error.code),
-          })
-      );
+      signIn({ email: this.mail, password: this.password })
+        .catch((error: ApiError) =>
+          Promise.reject(
+            this.$toast.add({
+              severity: ToastSeverity.ERROR,
+              life: 3000,
+              closable: false,
+              summary: "サインインできません",
+              detail: signInErrorDetail(error.error.code),
+            })
+          )
+        )
+        .then(({ accountId }) => {
+          const userId = accountId ?? "24dccd20-a401-4bd4-923c-d0cdccfddb38";
+          localStorage.setItem(verifiedUser, userId);
+          return userId;
+        })
+        .then((userId) =>
+          this.$emit("update:user", { accountId: userId } as User)
+        )
+        .then(() => this.$router.push({ path: Quests.path }));
     },
   },
 });
