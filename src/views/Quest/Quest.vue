@@ -122,12 +122,13 @@ const component = defineComponent({
   },
   mounted() {
     const questId = ((val: string | string[]) =>
-      val === "string" ? val : val[0])(this.$route.params[questRouteParam]);
+      typeof val === "string" ? val : val[0])(
+      this.$route.params[questRouteParam]
+    );
 
     getQuest(questId)
       .then((data) => (this.quest = data.quest))
-      .catch(() => (this.quest = null))
-      .then(() => console.log(this.quest?.playground ?? "no playground"));
+      .catch(() => (this.quest = null));
   },
 });
 
