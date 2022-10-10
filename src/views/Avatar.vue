@@ -55,10 +55,7 @@ const component = defineComponent({
   }),
   computed: {
     canEvolve() {
-      return (
-        this.user.avatar.totalExp > this.user.avatar.levelMax &&
-        !this.user.avatar.evolved
-      );
+      return this.user.avatar.totalExp > 2500 && !this.user.avatar.evolved;
     },
   },
   methods: {
