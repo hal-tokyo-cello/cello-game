@@ -4,7 +4,7 @@
     <router-link :to="Quests.path">
       <img src="./assets/images/cello_logo.png" class="logo" />
     </router-link>
-    <router-link :to="MyPage.path" style="float: right">
+    <router-link :to="AvatarR.path" style="float: right">
       <p-avatar
         :image="user.avatar?.iconUrl"
         class="mr-2 avatar"
@@ -29,11 +29,10 @@ import PToast from "primevue/toast";
 
 import { getUser, User } from "./util/api";
 
-import { route as MyPage } from "./views/MyPage/Mypage.vue";
 import { route as Quests } from "./views/Quest/QuestOverview.vue";
 
 import { components as AuthViews } from "./views/Auth";
-import { default as Avatar } from "./views/Avatar.vue";
+import { default as Avatar, route as AvatarR } from "./views/Avatar.vue";
 import { default as Index } from "./views/Index.vue";
 import { components as MyPageViews } from "./views/MyPage";
 import { components as QuestViews } from "./views/Quest";
@@ -59,7 +58,7 @@ export default defineComponent({
     };
   },
   data: () => ({
-    MyPage,
+    AvatarR,
     Quests,
     user: {} as User,
   }),

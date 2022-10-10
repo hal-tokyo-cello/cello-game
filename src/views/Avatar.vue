@@ -14,6 +14,9 @@
       </div>
 
       <div class="buttons">
+        <router-link :to="MyPage.path" style="text-decoration: none">
+          <p-button class="mypage">マイページ</p-button>
+        </router-link>
         <p-button disabled="disabled" class="item">アイテム</p-button>
         <p-button disabled="disabled" class="evolve">進化</p-button>
       </div>
@@ -34,6 +37,7 @@ import { User } from "../util/api";
 import PButton from "primevue/button";
 
 import { userKey } from "../App.vue";
+import { route as MyPage } from "../views/MyPage/Mypage.vue";
 
 const component = defineComponent({
   components: {
@@ -41,6 +45,7 @@ const component = defineComponent({
   },
   data: () => ({
     user: inject(userKey) as User,
+    MyPage,
   }),
 });
 
@@ -102,8 +107,12 @@ meter.level-bar::-webkit-meter-optimum-value {
   margin-top: -32px;
 }
 
+.buttons > * {
+  margin-right: 20px;
+}
+
 .buttons :last-child {
-  margin-left: 20px;
+  margin-right: 0;
 }
 
 .buttons button {
@@ -115,11 +124,13 @@ meter.level-bar::-webkit-meter-optimum-value {
   cursor: grab;
 }
 
-button.item {
+button.item,
+button.mypage {
   background-color: #fc8c0d;
 }
 
-button.item:hover {
+button.item:hover,
+button.mypage:hover {
   background-color: #ffb900;
 }
 
