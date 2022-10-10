@@ -1,17 +1,32 @@
 import { RouteRecordRaw } from "vue-router";
 
-import { route as ForgetPassword } from "./Forget.vue";
-import { route as Profile } from "./Profile.vue";
-import { route as Reset } from "./Reset.vue";
-import { route as SignIn } from "./Signin.vue";
-import { route as SignUp } from "./Signup.vue";
-import { route as VerifyEmail } from "./Verification.vue";
+import {
+  default as ForgetPassword,
+  route as ForgetPasswordRoute,
+} from "./Forget.vue";
+import { default as Profile, route as ProfileRoute } from "./Profile.vue";
+import { default as Reset, route as ResetRoute } from "./Reset.vue";
+import { default as SignIn, route as SignInRoute } from "./Signin.vue";
+import { default as SignUp, route as SignUpRoute } from "./Signup.vue";
+import {
+  default as VerifyEmail,
+  route as VerifyEmailRoute,
+} from "./Verification.vue";
 
 export const routes: RouteRecordRaw[] = [
+  ForgetPasswordRoute,
+  ProfileRoute,
+  ResetRoute,
+  SignInRoute,
+  SignUpRoute,
+  VerifyEmailRoute,
+];
+
+export const components = {
   ForgetPassword,
   Profile,
   Reset,
   SignIn,
   SignUp,
   VerifyEmail,
-];
+};
