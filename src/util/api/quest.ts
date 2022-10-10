@@ -10,6 +10,7 @@ export interface QuestSummary {
 
 export interface QuestDetail extends QuestSummary {
   options: string[];
+  playground?: string;
 }
 
 export interface AnswerQuestRequest {
