@@ -27,7 +27,11 @@
     />
   </div>
 
-  <p v-else style="text-align: center">このクエストよくわからん。。。</p>
+  <p v-else-if="quest === null" style="text-align: center">
+    このクエストよくわからん。。。
+  </p>
+
+  <p v-else style="text-align: center">ろーでぃんぐ中。。。</p>
 </template>
 
 <script lang="ts">
@@ -65,7 +69,7 @@ const component = defineComponent({
     Multiple,
   },
   data: () => ({
-    quest: undefined as QuestDetail | undefined,
+    quest: undefined as QuestDetail | undefined | null,
   }),
   computed: {
     questGenreText() {
@@ -110,9 +114,9 @@ const component = defineComponent({
   mounted() {
     const questId = this.$route.params[questRouteParam] as string;
     if (typeof questId === "string") {
-      getQuest(questId).then((data) => {
-        this.quest = data.quest;
-      });
+      getQuest(questId)
+        .then((data) => (this.quest = data.quest))
+        .catch(() => (this.quest = null));
     }
   },
 });
