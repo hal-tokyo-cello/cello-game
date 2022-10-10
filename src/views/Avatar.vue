@@ -64,6 +64,10 @@ const component = defineComponent({
   methods: {
     exp_cheat() {
       this.user.avatar.totalExp += 200;
+      if (this.user.avatar.totalExp > this.user.avatar.levelMax) {
+        this.user.avatar.level++;
+        this.user.avatar.levelMax += 1000;
+      }
     },
     evo_cheat() {
       this.user.avatar.imageUrl = this.user.avatar.imageUrl?.replace(
