@@ -1,10 +1,10 @@
 <template>
   <p-toast />
   <header>
-    <router-link :to="Quests.path">
+    <router-link :to="!!user ? Quests.path : ''">
       <img src="./assets/images/cello_logo.png" class="logo" />
     </router-link>
-    <router-link :to="AvatarR.path" style="float: right">
+    <router-link v-if="!!user" :to="AvatarR.path" style="float: right">
       <p-avatar
         :image="user.avatar?.iconUrl"
         class="mr-2 avatar"
@@ -14,7 +14,7 @@
     </router-link>
   </header>
 
-  <main @update:user="reloadUser">
+  <main @update:user="(user: User) => reloadUser(user.accountId)">
     <router-view />
   </main>
 
@@ -32,6 +32,7 @@ import { getUser, User } from "./util/api";
 import { route as Quests } from "./views/Quest/QuestOverview.vue";
 
 import { components as AuthViews } from "./views/Auth";
+import { verifiedUser } from "./views/Auth/Verification.vue";
 import { default as Avatar, route as AvatarR } from "./views/Avatar.vue";
 import { default as Index } from "./views/Index.vue";
 import { components as MyPageViews } from "./views/MyPage";
@@ -60,17 +61,16 @@ export default defineComponent({
   data: () => ({
     AvatarR,
     Quests,
-    user: {} as User,
+    user: undefined as User | undefined,
   }),
   methods: {
-    reloadUser() {
-      getUser("1").then((data) => {
-        this.user = data.user;
-      });
+    reloadUser(userId: string) {
+      getUser(userId).then((data) => (this.user = data.user));
     },
   },
-  mounted() {
-    this.reloadUser();
+  async mounted() {
+    const userId = localStorage.getItem(verifiedUser);
+    this.user = !!userId ? (await getUser(userId)).user : undefined;
   },
 });
 </script>

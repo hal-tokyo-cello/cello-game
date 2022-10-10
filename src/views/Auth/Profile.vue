@@ -132,7 +132,6 @@ const component = defineComponent({
   },
   mounted() {
     const userId = localStorage.getItem(verifiedUser);
-    localStorage.removeItem(verifiedUser);
     if (typeof userId !== "string") {
       this.$toast.add({
         severity: ToastSeverity.ERROR,
