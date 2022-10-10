@@ -139,10 +139,11 @@ const component = defineComponent({
         summary: "未知のエラーが発生しました",
         detail: "サインアップ画面に戻ってやり直してください。",
       });
-    } else {
-      this.userId = userId;
+
+      return;
     }
 
+    this.userId = userId;
     getAvatarRaceOptions().then((data) => {
       this.options = data.options;
     });
