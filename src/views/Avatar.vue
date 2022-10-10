@@ -2,7 +2,7 @@
   <div class="home">
     <div class="home-wrapper">
       <div>
-        <span class="level-text">{{ user.avatar.level }}</span>
+        <span class="level-text">{{ user?.avatar.level }}</span>
         <meter
           :value="user.avatar.totalExp"
           :max="user.avatar.levelMax"
@@ -17,8 +17,14 @@
         <router-link :to="MyPage.path" style="text-decoration: none">
           <p-button class="mypage">マイページ</p-button>
         </router-link>
-        <p-button disabled="disabled" class="item">アイテム</p-button>
-        <p-button disabled="disabled" class="evolve">進化</p-button>
+        <p-button @click="exp_cheat" class="item">アイテム</p-button>
+        <p-button
+          :disabled="canEvolve ? undefined : 'disabled'"
+          @click="evo_cheat"
+          class="evolve"
+        >
+          進化
+        </p-button>
       </div>
 
       <div class="living">
@@ -47,6 +53,26 @@ const component = defineComponent({
     user: inject(userKey) as User,
     MyPage,
   }),
+  computed: {
+    canEvolve() {
+      return (
+        this.user.avatar.totalExp > this.user.avatar.levelMax &&
+        !this.user.avatar.evolved
+      );
+    },
+  },
+  methods: {
+    exp_cheat() {
+      this.user.avatar.totalExp += 200;
+    },
+    evo_cheat() {
+      this.user.avatar.imageUrl = this.user.avatar.imageUrl?.replace(
+        "6e159da83817833a95e8e904ad41eb48",
+        "28cb08d84fdef8d22f8f5ed5f02efec2"
+      );
+      this.user.avatar.evolved = true;
+    },
+  },
 });
 
 export const route: RouteRecordRaw = { path: "/avatar", component };
