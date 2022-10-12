@@ -73,7 +73,6 @@ import PDialog from "primevue/dialog";
 import PInputText from "primevue/inputtext";
 
 import CFormLayout from "../../layout/Form.vue";
-import { route as Quests } from "../Quest/QuestOverview.vue";
 import { verifiedUser } from "./Verification.vue";
 
 const component = defineComponent({
@@ -118,7 +117,7 @@ const component = defineComponent({
       }
 
       selectAvatar(this.userId, { race: this.race.id }).then(
-        () => this.$router.push({ path: Quests.path }),
+        () => (window.location.href = window.location.origin),
         () =>
           this.$toast.add({
             severity: ToastSeverity.ERROR,
