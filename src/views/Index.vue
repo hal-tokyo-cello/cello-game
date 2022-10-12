@@ -4,9 +4,9 @@
       <h1 class="head">Hello !! Excel !!</h1>
       <h2 class="subHead">Celloを使えばゲーム感覚で楽しくExcelを学べるよ</h2>
       <h2 class="subHead2">さあ！Celloをはじめてみよう！</h2>
-      <router-link style="text-decoration: none" :to="SignUp.path">
+      <a href="/auth.html" style="text-decoration: none">
         <p-button label="はじめてみる" class="button" />
-      </router-link>
+      </a>
     </section>
 
     <section class="section2">
@@ -60,9 +60,9 @@
       <h1 class="section4Head">さっそくはじめてみよう</h1>
 
       <div class="btnWrap">
-        <router-link style="text-decoration: none" :to="SignUp.path">
+        <a href="/auth.html" style="text-decoration: none">
           <p-button label="はじめてみる" class="button2" />
-        </router-link>
+        </a>
       </div>
     </section>
   </main>
