@@ -17,7 +17,7 @@
     "mini-css-extract-plugin": "^2.6.1",
     "primeicons": "^5.0.0",
     "primevue": "^3.17.0",
-    "ts-loader": "^9.3.1",
+    "ts-loader": "^9.4.1",
     "validator": "^13.7.0",
     "vue": "^3.2.40",
     "vue-loader": "^17.0.0",
