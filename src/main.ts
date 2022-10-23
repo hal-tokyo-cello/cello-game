@@ -6,7 +6,6 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import "primeicons/primeicons.css";
 import "primevue/resources/primevue.min.css";
 import "./main.css";
-import "./theme.css";
 
 import App from "./App.vue";
 import { routes as Auth } from "./views/Auth";
