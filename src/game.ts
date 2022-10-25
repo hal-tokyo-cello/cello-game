@@ -4,7 +4,6 @@ import { createApp } from "vue";
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 
 import "./main.css";
-import "./theme.css";
 
 import App from "./App.vue";
 import { route as Avatar } from "./views/Avatar.vue";
