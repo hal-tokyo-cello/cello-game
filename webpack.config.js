@@ -7,28 +7,20 @@ const { EnvironmentPlugin } = require("webpack");
 
 module.exports = (env, argv) => ({
   entry: {
-    index: "./src/main.ts",
+    index: path.join(__dirname, "./src/game.ts"),
+    auth: path.join(__dirname, "./src/auth.ts"),
+    home: path.join(__dirname, "./src/home.ts"),
   },
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "https://cdn.cellolearn.net/",
+    publicPath: "http://localhost:5500/",
   },
   plugins: [
     new EnvironmentPlugin(["CELLO_API_SERVER"]),
-    new HtmlWebpackPlugin({
-      title: "CELLO",
-      filename: "[name].html",
-      template: "template.html",
-      scriptLoading: "defer",
-      favicon: "./favicon.ico",
-      meta: {
-        viewport: "width=device-width, initial-scale=1.0",
-        author: "hal-tokyo-cello",
-        description: "",
-        keywords: [].join(","),
-      },
-    }),
+    newHtml("index"),
+    newHtml("auth"),
+    newHtml("home"),
     new MiniCssExtractPlugin(),
     new VueLoaderPlugin(),
   ],
@@ -87,3 +79,19 @@ module.exports = (env, argv) => ({
     "vue-router": "VueRouter",
   },
 });
+
+const newHtml = (chunk) =>
+  new HtmlWebpackPlugin({
+    title: "CELLO",
+    filename: `${chunk}.html`,
+    template: "template.html",
+    scriptLoading: "defer",
+    favicon: "./favicon.ico",
+    meta: {
+      viewport: "width=device-width, initial-scale=1.0",
+      author: "hal-tokyo-cello",
+      description: "",
+      keywords: [].join(","),
+    },
+    chunks: [chunk],
+  });

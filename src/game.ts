@@ -3,20 +3,23 @@ import ToastService from "primevue/toastservice";
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 
-import "primeicons/primeicons.css";
-import "primevue/resources/primevue.min.css";
 import "./main.css";
 
 import App from "./App.vue";
-import { routes as Auth } from "./views/Auth";
 import { route as Avatar } from "./views/Avatar.vue";
-import { route as Home, default as Index } from "./views/Index.vue";
 import { routes as MyPage } from "./views/MyPage";
 import { routes as Quests } from "./views/Quest";
+import { route as Overview } from "./views/Quest/QuestOverview.vue";
+import { verifiedUser } from "./views/Auth/Verification.vue";
 
-const routes: RouteRecordRaw[] = [Auth, MyPage, Quests]
+// validate login state
+if (localStorage.getItem(verifiedUser) == null) {
+  window.location.href = `${window.location.origin}/auth.html`;
+}
+
+const routes: RouteRecordRaw[] = [MyPage, Quests]
   .flat()
-  .concat(Home, Avatar, { path: "/", component: Index });
+  .concat(Avatar, { path: "/", redirect: Overview.path });
 
 const router = createRouter({
   history: createWebHashHistory(),

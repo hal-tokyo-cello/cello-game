@@ -54,7 +54,6 @@ import PInputText from "primevue/inputtext";
 import PPassword from "primevue/password";
 
 import CFormLayout from "../../layout/Form.vue";
-import { route as Quests } from "../Quest/QuestOverview.vue";
 import { route as Forget } from "./Forget.vue";
 import { route as SignUp } from "./Signup.vue";
 import { verifiedUser } from "./Verification.vue";
@@ -124,7 +123,7 @@ const component = defineComponent({
         .then((userId) =>
           this.$emit("update:user", { accountId: userId } as User)
         )
-        .then(() => this.$router.push({ path: Quests.path }));
+        .then(() => (window.location.href = window.location.origin));
     },
   },
 });
