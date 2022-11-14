@@ -15,7 +15,7 @@
     "html-webpack-plugin": "^5.5.0",
     "ignore-loader": "^0.1.2",
     "mini-css-extract-plugin": "^2.6.1",
-    "primevue": "^3.17.0",
+    "primevue": "^3.18.0",
     "ts-loader": "^9.4.1",
     "validator": "^13.7.0",
     "vue": "^3.2.41",
