@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --declaration --emitDeclarationOnly && webpack --config webpack.config.js --mode production",
+    "prebuild": "vue-tsc --declaration --emitDeclarationOnly",
+    "build": "webpack --config webpack.config.js --mode production",
     "test": "jest --passWithNoTests",
     "preview": "vite preview"
   },

@@ -95,7 +95,7 @@ const component = defineComponent({
       this.race = option;
       this.selecting = false;
     },
-    submit(ev: SubmitEvent) {
+    submit() {
       if (this.race == undefined) {
         this.$toast.add({
           severity: ToastSeverity.ERROR,
