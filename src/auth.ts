@@ -4,7 +4,6 @@ import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import "./main.css";
-import "./theme.css";
 
 import App from "./App.vue";
 import { routes as Auth } from "./views/Auth";
