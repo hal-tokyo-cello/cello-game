@@ -1,5 +1,5 @@
 <template>
-  <c-form-layout title="ワンタイムパス入力画面" @submit.prevent="confirm">
+  <c-form-layout title="ワンタイムパス入力画面" @submit="confirm">
     <p style="margin-top: 50px; text-align: center">
       {{ `${email}に4桁の認証コードを送信しました。` }}
     </p>
@@ -84,7 +84,7 @@ const component = defineComponent({
           })
       );
     },
-    confirm(ev: SubmitEvent) {
+    confirm() {
       Promise.resolve(() => {
         this.canTry = false;
       })
